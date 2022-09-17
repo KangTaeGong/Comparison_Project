@@ -1,0 +1,50 @@
+.intro_bg{
+    background: skyblue;
+    width: 100%;
+    height: 280px;
+}
+
+.intro_text{
+    width: 100%;
+    margin: 70px auto 70px auto;
+    text-align: center;
+}
+
+.search_area{
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    margin-top: 150px;
+}
+
+.search_area > form{
+    display: flex;
+    justify-content: center;
+}
+
+.search_area > form > ul > li{
+    margin-bottom: 10px;
+}
+
+.search_area > form > ul > li > input{
+    border: 1px solid skyblue;
+    border-radius: 10px;
+    width: 400px;
+    height: 50px;
+    background: white;
+    color: black;
+    padding-left: 10px;
+}
+
+.search_btn{
+    width: 150px;
+    height: 45px;
+    background: rgb(32, 144, 189);
+    color: white;
+    font-size: 16px;
+    margin:auto;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 10px;
+    cursor: pointer;
+}

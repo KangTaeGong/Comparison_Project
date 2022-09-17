@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/*
+* 2022-09-14 생성
+* 게시판 글 관련 정보 Entity
+* */
 @Entity
 @Getter
 public class Posting {

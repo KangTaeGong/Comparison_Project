@@ -19,7 +19,6 @@ import javax.validation.constraints.Pattern;
 public class User {
 
     @Id @GeneratedValue
-    @Column(name = "user_id")
     private Long id;
 
     @NotBlank(message = "회원 이름은 필수 입력 값입니다.")
@@ -42,4 +41,10 @@ public class User {
             message = "비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자 조합으로 가능합니다.")
     private String check_password;  // 2차 비밀번호
 
+    public User(String userName, String userId, String password, String check_password) {
+        this.userName = userName;
+        this.userId = userId;
+        this.password = password;
+        this.check_password = check_password;
+    }
 }

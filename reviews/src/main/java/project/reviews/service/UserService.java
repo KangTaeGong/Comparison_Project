@@ -32,7 +32,7 @@ public class UserService {
     }
 
     private void validateDuplicateUser(User user) {
-        List<FindUserDto> findUser = userRepository.findByName(user.getUserName());
+        List<User> findUser = userRepository.findByUserId(user.getUserId());
         if(!findUser.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }

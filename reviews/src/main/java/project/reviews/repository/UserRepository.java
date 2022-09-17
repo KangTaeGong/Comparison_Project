@@ -2,6 +2,7 @@ package project.reviews.repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.reviews.domain.User;
 import project.reviews.dto.FindUserDto;
@@ -22,25 +23,27 @@ public class UserRepository {
     private final EntityManager em;
 
     // 회원을 저장하는 메소드
-    public User save(User user_info) {
+    public void save(User user_info) {
         em.persist(user_info);
-        return user_info;
     }
 
-    // 회원 정보 검색(패스워드 제외)
-    public Optional<FindUserDto> findById(Long id) {
-        FindUserDto findUser = em.find(FindUserDto.class, id);
+    /*
+    * DB ID값으로 회원 조회
+    * 테스트 코드에서 사용
+    * */
+    public Optional<User> findById(Long id) {
+        User findUser = em.find(User.class, id);
         return Optional.ofNullable(findUser);
     }
 
     /*
-    * 회원 이름으로 회원 검색(회원가입시 중복 확인으로 사용)
+    * 회원 아이디로 회원 검색(회원가입시 중복 확인으로 사용)
     * getSingleResult()는 결과가 없으면 예외가 발생하기 때문에 사용 X
     * getResultList()는 결과가 없으면 빈 컬렉션을 반환하기 때문에 사용
     * */
-    public List<FindUserDto> findByName(String userName) {
-        return em.createQuery("select u from User u where u.username = :username", FindUserDto.class)
-                .setParameter("username", userName)
+    public List<User> findByUserId(String userId) {
+        return em.createQuery("select u from User u where u.userId = :userId", User.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 }

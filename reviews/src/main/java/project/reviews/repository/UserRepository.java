@@ -37,13 +37,22 @@ public class UserRepository {
     }
 
     /*
-    * 회원 아이디로 회원 검색(회원가입시 중복 확인으로 사용)
-    * getSingleResult()는 결과가 없으면 예외가 발생하기 때문에 사용 X
-    * getResultList()는 결과가 없으면 빈 컬렉션을 반환하기 때문에 사용
+    * 회원 아이디로 회원 검색(회원가입 / 로그인시 확인용으로 사용)
     * */
-    public List<User> findByUserId(String userId) {
-        return em.createQuery("select u from User u where u.userId = :userId", User.class)
+    public Optional<User> findByUserId(String userId) {
+/*        return em.createQuery("select u from User u where u.userId = :userId", User.class)
                 .setParameter("userId", userId)
+                .getResultList();*/
+        return findAll().stream()
+                .filter(user -> user.getUserId().equals(userId))
+                .findFirst();
+    }
+
+    /*
+    * 전체 회원 조회
+    * */
+    public List<User> findAll() {
+        return em.createQuery("select u from User u", User.class)
                 .getResultList();
     }
 }

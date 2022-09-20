@@ -8,6 +8,7 @@ import project.reviews.dto.FindUserDto;
 import project.reviews.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
 * 2022-09-16 생성
@@ -32,7 +33,7 @@ public class UserService {
     }
 
     private void validateDuplicateUser(User user) {
-        List<User> findUser = userRepository.findByUserId(user.getUserId());
+        Optional<User> findUser = userRepository.findByUserId(user.getUserId());
         if(!findUser.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }

@@ -35,7 +35,9 @@ public class UserServiceTest {
         //when
         Long savedId = userService.join(user);
         //then
-        assertEquals(user, userRepository.findById(savedId).get());
+        assertEquals(user, userRepository.findById(savedId));
+        assertEquals(null, userRepository.findById(12L));
+//        assertEquals(user, userRepository.findById(savedId).get());
     }
 
     /*

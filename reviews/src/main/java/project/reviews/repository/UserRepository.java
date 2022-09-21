@@ -31,9 +31,14 @@ public class UserRepository {
     * DB ID값으로 회원 조회
     * 테스트 코드에서 사용
     * */
-    public Optional<User> findById(Long id) {
+/*    public Optional<User> findById(Long id) {
         User findUser = em.find(User.class, id);
         return Optional.ofNullable(findUser);
+    }*/
+
+    public User findById(Long id) {
+        User findUser = em.find(User.class, id);
+        return findUser != null ? findUser : null;
     }
 
     /*

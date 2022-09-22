@@ -11,11 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FindUserDto {
 
-    private String username;
     private String userId;
-
-    public FindUserDto(String username, String userId) {
-        this.username = username;
-        this.userId = userId;
-    }
+    private String password;
 }

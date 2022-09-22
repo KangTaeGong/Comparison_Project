@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import project.reviews.domain.User;
+import project.reviews.dto.FindUserDto;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class LoginController {
             return "login/loginPage";
         }
 
-        User loginUser = loginService.login(form.getLoginId(), form.getPassword());
+        FindUserDto loginUser = loginService.login(form.getLoginId(), form.getPassword());
 
         if(loginUser == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");

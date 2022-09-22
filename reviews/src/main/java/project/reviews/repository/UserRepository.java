@@ -2,7 +2,6 @@ package project.reviews.repository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.reviews.domain.User;
 import project.reviews.dto.FindUserDto;
@@ -21,6 +20,7 @@ import java.util.Optional;
 public class UserRepository {
 
     private final EntityManager em;
+//    private final JPAQueryFactory queryFactory;
 
     // 회원을 저장하는 메소드
     public void save(User user_info) {
@@ -31,11 +31,6 @@ public class UserRepository {
     * DB ID값으로 회원 조회
     * 테스트 코드에서 사용
     * */
-/*    public Optional<User> findById(Long id) {
-        User findUser = em.find(User.class, id);
-        return Optional.ofNullable(findUser);
-    }*/
-
     public User findById(Long id) {
         User findUser = em.find(User.class, id);
         return findUser != null ? findUser : null;
@@ -44,20 +39,19 @@ public class UserRepository {
     /*
     * 회원 아이디로 회원 검색(회원가입 / 로그인시 확인용으로 사용)
     * */
-    public Optional<User> findByUserId(String userId) {
-/*        return em.createQuery("select u from User u where u.userId = :userId", User.class)
-                .setParameter("userId", userId)
-                .getResultList();*/
+    public Optional<FindUserDto> findByUserId(String userId) {
         return findAll().stream()
-                .filter(user -> user.getUserId().equals(userId))
+                .filter(findUserDto -> findUserDto.getUserId().equals(userId))
                 .findFirst();
     }
 
     /*
     * 전체 회원 조회
     * */
-    public List<User> findAll() {
-        return em.createQuery("select u from User u", User.class)
+    public List<FindUserDto> findAll() {
+        return em.createQuery(
+                "select new project.reviews.dto.FindUserDto(u.userId, u.password)" +
+                " from User u", FindUserDto.class)
                 .getResultList();
     }
 }

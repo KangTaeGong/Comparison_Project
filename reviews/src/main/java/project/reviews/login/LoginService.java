@@ -2,7 +2,7 @@ package project.reviews.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.reviews.domain.User;
+import project.reviews.dto.FindUserDto;
 import project.reviews.repository.UserRepository;
 
 /*
@@ -18,11 +18,11 @@ public class LoginService {
     /*
     * return값이 null이면 로그인 실패
     * */
-    public User login(String userId, String password) {
+    public FindUserDto login(String userId, String password) {
+
         return userRepository.findByUserId(userId)
                 .filter(user -> user.getPassword().equals(password))
                 .orElse(null);
-
     }
     
 }

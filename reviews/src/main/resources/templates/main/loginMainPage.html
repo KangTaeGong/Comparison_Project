@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/main_style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+<body>
+<div class = "main">
+    <div class="intro_bg">
+        <div class = "header" id="category_header">
+            <div class="logo">
+                <span>LOGO</span>
+            </div>
+            <ul class="nav">
+                <li><a href="#" th:href="@{/}">HOME</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Service</a></li>
+                <li><a href="#">Community</a></li>
+                <li>
+                    <span th:text="|${user.username} 님|">사용자 이름</span>
+                </li>
+                <li><a th:href="@{/logout}">로그아웃</a></li>
+            </ul>
+        </div>
+        <div class = "intro_text">
+            <h1>시소별</h1>
+            <h3>각종 리뷰를 검색, 비교해 줍니다.</h3>
+        </div>
+    </div>
+    <!-- intro End -->
+    <div class="search_area">
+        <form>
+            <ul>
+                <li>
+                    <input type="search" placeholder="검색어를 입력하세요.">
+                </li>
+                <li>
+                    <input type="search" placeholder="검색어를 입력하세요.">
+                </li>
+                <li>
+                    <div class="search_btn">
+                        <a href="#">검색</a>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+</html>

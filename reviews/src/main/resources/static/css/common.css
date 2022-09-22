@@ -36,7 +36,11 @@
 }
 
 .nav > li > a{
-    color:white
+    color:white;
+}
+
+.nav > li > span{
+    color:white;
 }
 
 .login_btn > a{

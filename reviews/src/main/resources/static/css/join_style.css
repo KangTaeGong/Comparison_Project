@@ -25,20 +25,15 @@ html, body{
     width: 450px;
     height: 45px;
     margin-top: 7px;
-    margin-bottom: 20px;
     padding-left: 10px;
     font-size: 15px;
 }
 
-/* .join_form > form > ul > li > select{
-    width: 465px;
-    height: 45px;
-    margin-top: 7px;
-    margin-bottom: 20px;
-    font-size: 15px;
-} */
+.join_title {
+    margin-top: 25px;
+}
 
-.join_btn{
+.join_btn > input{
     width: 450px;
     height: 50px;
     text-align: center;

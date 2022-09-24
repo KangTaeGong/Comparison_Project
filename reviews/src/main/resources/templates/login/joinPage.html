@@ -1,41 +1,49 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
     <head>
         <link rel="stylesheet" type="text/css" href="/css/join_style.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
     </head>
     <body>
         <div class="join_page">
             <div class="join_form">
                 <div class="logo">LOGO</div>
-                <form>
+                <form action="mainPage.html" th:action th:object="${joinForm}" method="post">
                     <ul>
                         <li>
                             <div class = "join_title"><h4>이름</h4></div>
-                            <input type="text">
+                            <input type="text" class="form_input" th:field="*{userName}"
+                                    th:errorclass="field-error">
+                            <div class="field-error" th:errors="*{userName}"/>
                         </li>
-                        <!-- <li>
-                            <div class = "join_title"><h4>성별</h4></div>
-                            <select name="sex">
-                                <option value = 1 selected>성별
-                                <option value = 1>남자
-                                <option value = 1>여자
-                            </select>
-                        </li> -->
                         <li>
                             <div class = "join_title"><h4>아이디</h4></div>
-                            <input type="text"  placeholder="5 ~ 20자의 영문 소문자, 숫자 조합">
+                            <input type="text" class="form_input" placeholder="5 ~ 20자의 영문 소문자, 숫자 "
+                                   th:field="*{userId}" th:errorclass="field-error">
+                            <div class="field-error" th:errors="*{userId}"/>
                         </li>
                         <li>
                             <div class = "join_title"><h4>비밀번호</h4></div>
-                            <input type="password" placeholder="8 ~ 16자의 영문 소문자, 숫자, 특수문자 조합">
+                            <input type="password" class="form_input" placeholder="8 ~ 16자의 영문 소문자, 숫자, 특수문자 조합"
+                                   th:field="*{password}" th:errorclass="field-error">
+                            <div class="field-error" th:errors="*{password}"/>
                         </li>
                         <li>
                             <div class = "join_title"><h4>비밀번호 확인</h4></div>
-                            <input type="password">
+                            <input type="password" class="form_input" th:field="*{check_password}"
+                                   th:errorclass="field-error">
+                            <div class="field-error" th:errors="*{check_password}"/>
                         </li>
                         <li>
                             <div class = "join_btn">
-                                <a href="#">회원가입</a>
+                                <input type="submit" value="회원가입">
                             </div>
                         </li>
                     </ul>

@@ -41,7 +41,7 @@ html, body{
     font-size: 15px;
 }
 
-.login_btn{
+.login_btn > input{
     width: 400px;
     height: 52px;
     text-align: center;

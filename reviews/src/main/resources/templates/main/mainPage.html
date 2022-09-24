@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
     <head>
+        <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="/css/main_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
     </head>
@@ -13,13 +14,14 @@
                         <span>LOGO</span>
                     </div>
                     <ul class="nav">
-                        <li><a href="#">HOME</a></li>
+                        <li><a href="#" th:href="@{/}">HOME</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Service</a></li>
                         <li><a href="#">Community</a></li>
                         <li>
                             <div class="login_btn">
-                                <a href="#">로그인</a>
+                                <a href="#" th:href="@{/login}">로그인</a>
+
                             </div>
                         </li>
                     </ul>

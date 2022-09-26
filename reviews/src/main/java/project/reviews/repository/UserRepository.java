@@ -50,7 +50,7 @@ public class UserRepository {
     * */
     public List<FindUserDto> findAll() {
         return em.createQuery(
-                "select new project.reviews.dto.FindUserDto(u.userId, u.password)" +
+                "select new project.reviews.dto.FindUserDto(u.userId, u.userName, u.password)" +
                 " from User u", FindUserDto.class)
                 .getResultList();
     }

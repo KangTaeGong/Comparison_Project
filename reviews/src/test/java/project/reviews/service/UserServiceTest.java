@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.User;
+import project.reviews.login.JoinForm;
 import project.reviews.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.*;
@@ -24,6 +25,7 @@ public class UserServiceTest {
     @Autowired UserService userService;
     @Autowired UserRepository userRepository;
 
+
     /*
     * 2022-09-17
     * 회원 가입 save 테스트
@@ -31,11 +33,13 @@ public class UserServiceTest {
     @Test
     void user_join() {
         //given
-        User user = new User("홍기동", "aaa123", "olddogz222@", "olddogz222@");
+        JoinForm form = new JoinForm("홍기동", "aaa123", "aaabb111@", "aaabb111@");
+
         //when
-        Long savedId = userService.join(user);
+        Long savedId = userService.join(form);
+        User findUser = userRepository.findById(savedId);
         //then
-        assertEquals(user, userRepository.findById(savedId));
+        assertEquals(form.getUserId(), findUser.getUserId());
         assertEquals(null, userRepository.findById(12L));
 //        assertEquals(user, userRepository.findById(savedId).get());
     }
@@ -47,12 +51,12 @@ public class UserServiceTest {
     @Test
     void join_validate() {
         //given
-        User user1 = new User("홍기동", "aaa123", "olddogz222@", "olddogz222@");
-        User user2 = new User("이길동", "aaa123", "olddogz111@", "olddogz111@");
+        JoinForm form1 = new JoinForm("홍기동", "aaa123", "aaabb111@", "aaabb111@");
+        JoinForm form2 = new JoinForm("홍기동", "aaa123", "aaabb222@", "aaabb111@");
         //when
-        Long savedId1 = userService.join(user1);
+        Long savedId1 = userService.join(form1);
         //then
-        assertThatThrownBy(() -> userService.join(user2)).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> userService.join(form2)).isInstanceOf(IllegalStateException.class);
 
     }
 }

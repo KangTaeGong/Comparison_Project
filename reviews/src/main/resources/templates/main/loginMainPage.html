@@ -4,6 +4,19 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/main_style.css">
     <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+    <style>
+        .logout_btn{
+            background-color: #ffffff00;
+            padding: 5px;
+            color:white;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class = "main">
@@ -18,9 +31,13 @@
                 <li><a href="#">Service</a></li>
                 <li><a href="#">Community</a></li>
                 <li>
-                    <span th:text="|${user.username} 님|">사용자 이름</span>
+                    <span th:text="|${user.userName} 님|">사용자 이름</span>
                 </li>
-                <li><a th:href="@{/logout}">로그아웃</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="로그아웃" class="logout_btn">
+                    </form>
+                </li>
             </ul>
         </div>
         <div class = "intro_text">

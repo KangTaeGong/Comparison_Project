@@ -7,8 +7,8 @@
 
         <style>
             .field-error {
-                border-color: dc3545;
-                color: dc3545;
+                border-color: #dc3545;
+                color: #dc3545;
             }
         </style>
     </head>
@@ -24,9 +24,15 @@
                             <div class="field-error" th:errors="*{loginId}"/>
                         </li>
                         <li>
-                            <input type="text" placeholder="비밀번호" th:field="*{password}" class="form-info"
+                            <input type="password" placeholder="비밀번호" th:field="*{password}" class="form-info"
                                 th:errorclass="field-error">
                             <div class="field-error" th:errors="*{password}"/>
+                        </li>
+                        <li>
+                            <div th:if="${#fields.hasGlobalErrors()}">
+                                <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                                   th:text="${err}">오류 메시지</p>
+                            </div>
                         </li>
                         <li>
                             <div class = "login_btn">

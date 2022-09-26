@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 public class FindUserDto {
 
     private String userId;
+    private String userName;
     private String password;
 }

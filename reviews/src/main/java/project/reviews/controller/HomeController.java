@@ -1,6 +1,7 @@
 package project.reviews.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import project.reviews.login.SessionConst;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class HomeController {
 
     @GetMapping("/")
@@ -23,6 +25,7 @@ public class HomeController {
             return "main/mainPage";
         }
         
+        log.info("로그인 페이지로 이동");
         /*
         * 세션이 유지되면 로그인된 메인페이지로 이동
         * */

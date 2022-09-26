@@ -2,12 +2,9 @@ package project.reviews.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 /*
 * 2022-09-15 생성

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 * */
 @Entity
 @Getter
-public class User {
+public class User extends BaseTimeEntity{
 
     @Id @GeneratedValue
     private Long id;

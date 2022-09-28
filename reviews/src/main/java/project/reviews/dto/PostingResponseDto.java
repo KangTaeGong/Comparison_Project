@@ -3,7 +3,6 @@ package project.reviews.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /*
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 * */
 @Getter
 @NoArgsConstructor
-public class BoardResponseDto {
+public class PostingResponseDto {
     private Long id;
     private String title;
     private String content;
@@ -20,7 +19,7 @@ public class BoardResponseDto {
     private int hits;
     private LocalDateTime modifiedDate;
 
-    public BoardResponseDto(Long id, String title, String content, String writer, int hits, LocalDateTime modifiedDate) {
+    public PostingResponseDto(Long id, String title, String content, String writer, int hits, LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
         this.content = content;

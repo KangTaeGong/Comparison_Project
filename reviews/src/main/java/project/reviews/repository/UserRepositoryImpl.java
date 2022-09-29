@@ -17,12 +17,12 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
     private final EntityManager em;
-//    private final JPAQueryFactory queryFactory;
 
     // 회원을 저장하는 메소드
+    @Override
     public void save(User user_info) {
         em.persist(user_info);
     }
@@ -31,6 +31,7 @@ public class UserRepository {
     * DB ID값으로 회원 조회
     * 테스트 코드에서 사용
     * */
+    @Override
     public User findById(Long id) {
         User findUser = em.find(User.class, id);
         return findUser != null ? findUser : null;
@@ -39,6 +40,7 @@ public class UserRepository {
     /*
     * 회원 아이디로 회원 검색(회원가입 / 로그인시 확인용으로 사용)
     * */
+    @Override
     public Optional<FindUserDto> findByUserId(String userId) {
         return findAll().stream()
                 .filter(findUserDto -> findUserDto.getUserId().equals(userId))
@@ -48,6 +50,7 @@ public class UserRepository {
     /*
     * 전체 회원 조회
     * */
+    @Override
     public List<FindUserDto> findAll() {
         return em.createQuery(
                 "select new project.reviews.dto.FindUserDto(u.userId, u.userName, u.password)" +

@@ -19,12 +19,11 @@ public class PostingResponseDto {
     private int hits;
     private LocalDateTime modifiedDate;
 
-    public PostingResponseDto(Long id, String title, String content, String writer, int hits, LocalDateTime modifiedDate) {
+    public PostingResponseDto(Long id, String title, String content, String writer, int hits) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.hits = hits;
-        this.modifiedDate = modifiedDate;
     }
 }

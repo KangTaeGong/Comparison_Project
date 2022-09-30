@@ -8,7 +8,6 @@ import project.reviews.dto.FindUserDto;
 import project.reviews.login.JoinForm;
 import project.reviews.repository.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 /*
@@ -27,7 +26,6 @@ public class UserService {
     * 회원 가입시 중복 확인하고, 문제가 없다면 Repository에 넘겨서 DB에 저장.
     * User Entity를 반환하지 않고, User Entity의 id값만 반환해줌
     * */
-
     public Long join(JoinForm form) {
 
         validateDuplicateUser(form);    // 중복 회원 검증

@@ -2,7 +2,6 @@ package project.reviews.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import project.reviews.domain.Posting;
 import project.reviews.domain.QPosting;
@@ -15,13 +14,19 @@ import java.util.Optional;
 import static project.reviews.domain.QPosting.*;
 
 @Repository
-@RequiredArgsConstructor
-public class PostingRepository {
+public class PostingRepositoryImpl implements PostingRepository {
 
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
+
+    public PostingRepositoryImpl(EntityManager em) {
+        this.em = em;
+        this.queryFactory = new JPAQueryFactory(em);
+    }
+
     QPosting qPosting = posting;
 
+    @Override
     public void create(Posting posting) {
         em.persist(posting);
     }
@@ -30,6 +35,7 @@ public class PostingRepository {
     * 커뮤니티 글 전체 리스트 가져오는 메소드
     * 내림차순으로 나열
     * */
+    @Override
     public List<PostingResponseDto> getList() {
 
         return queryFactory
@@ -48,6 +54,7 @@ public class PostingRepository {
     * 하나의 글 조회시 글의 정보를 가져오는 메소드
     * getList() 리턴값에서 id 값을 이욯해 필요한 포스팅 정보만 필터링
     * */
+    @Override
     public Optional<PostingResponseDto> getPosting(Long postingId) {
         return getList().stream()
                 .filter(postingResponseDto -> postingResponseDto.getId().equals(postingId))

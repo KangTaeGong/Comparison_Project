@@ -13,6 +13,10 @@ import java.util.Optional;
 
 import static project.reviews.domain.QPosting.*;
 
+/*
+* 2022-09-30
+* 게시판 관련 Repository
+* */
 @Repository
 public class PostingRepositoryImpl implements PostingRepository {
 
@@ -27,8 +31,9 @@ public class PostingRepositoryImpl implements PostingRepository {
     QPosting qPosting = posting;
 
     @Override
-    public void create(Posting posting) {
+    public Long create(Posting posting) {
         em.persist(posting);
+        return posting.getId();
     }
 
     /*
@@ -37,7 +42,6 @@ public class PostingRepositoryImpl implements PostingRepository {
     * */
     @Override
     public List<PostingResponseDto> getList() {
-
         return queryFactory
                 .select(Projections.constructor(PostingResponseDto.class,
                         posting.id,
@@ -59,5 +63,24 @@ public class PostingRepositoryImpl implements PostingRepository {
         return getList().stream()
                 .filter(postingResponseDto -> postingResponseDto.getId().equals(postingId))
                 .findFirst();
+    }
+
+    /*
+    * Id로 조회하여 Entity 반환, 값이 없으면 null 반환
+    * 게시글 수정시에 사용
+    * Dirty Checking 용도
+    * */
+    public Posting findPostingById(Long postingId) {
+        Posting findPosting = em.find(Posting.class, postingId);
+        return findPosting != null ? findPosting : null;
+    }
+
+    // 게시글 삭제
+    @Override
+    public void delete_Posting(Long postingId) {
+        queryFactory
+                .delete(posting)
+                .where(posting.id.eq(postingId))
+                .execute();
     }
 }

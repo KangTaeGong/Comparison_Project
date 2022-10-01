@@ -9,7 +9,6 @@ import javax.persistence.Id;
 /*
 * 2022-09-15 생성
 * 회원 Entity
-* 회원가입 할 때 사용하기 위해 각각 조건을 달아둠
 * */
 @Entity
 @Getter

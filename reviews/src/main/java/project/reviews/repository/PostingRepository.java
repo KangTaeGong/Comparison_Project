@@ -8,9 +8,13 @@ import java.util.Optional;
 
 public interface PostingRepository {
 
-    void create(Posting posting);
+    Long create(Posting posting);
 
     List<PostingResponseDto> getList();
 
     Optional<PostingResponseDto> getPosting(Long postingId);
+
+    Posting findPostingById(Long postingId);
+
+    void delete_Posting(Long postingId);
 }

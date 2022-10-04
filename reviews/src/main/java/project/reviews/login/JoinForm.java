@@ -14,10 +14,6 @@ import javax.validation.constraints.Pattern;
 @Getter
 public class JoinForm {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @NotBlank
     @Pattern(regexp = "^[가-힣a-zA-Z]{2,10}$")
     private String userName;

@@ -35,4 +35,8 @@ public class Posting extends BaseTimeEntity {
         this.writer = writer;
         this.hits = hits;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }

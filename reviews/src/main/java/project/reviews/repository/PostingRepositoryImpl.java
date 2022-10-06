@@ -1,7 +1,11 @@
 package project.reviews.repository;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import project.reviews.domain.Posting;
 import project.reviews.domain.QPosting;
@@ -37,10 +41,34 @@ public class PostingRepositoryImpl implements PostingRepository {
     }
 
     /*
-    * 커뮤니티 글 전체 리스트 가져오는 메소드
-    * 내림차순으로 나열
+    * 커뮤니티 전체 글 페이징 추가해서 받아오기
     * */
     @Override
+    public Page<PostingResponseDto> getListPaging(Pageable pageable) {
+        List<PostingResponseDto> pagingList = queryFactory
+                .select(Projections.constructor(PostingResponseDto.class,
+                        posting.id,
+                        posting.title,
+                        posting.content,
+                        posting.writer,
+                        posting.password,
+                        posting.hits))
+                .from(posting)
+                .orderBy(posting.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Long> countQuery = queryFactory
+                .select(posting.count())
+                .from(posting);
+
+        return PageableExecutionUtils.getPage(pagingList, pageable, countQuery::fetchOne);
+    }
+
+    /*
+    * 커뮤니티 글 전체 리스트 가져오는 메소드
+    * */
     public List<PostingResponseDto> getList() {
         return queryFactory
                 .select(Projections.constructor(PostingResponseDto.class,
@@ -48,9 +76,9 @@ public class PostingRepositoryImpl implements PostingRepository {
                         posting.title,
                         posting.content,
                         posting.writer,
+                        posting.password,
                         posting.hits))
                 .from(posting)
-                .orderBy(posting.id.desc())
                 .fetch();
     }
     
@@ -58,7 +86,6 @@ public class PostingRepositoryImpl implements PostingRepository {
     * 하나의 글 조회시 글의 정보를 가져오는 메소드
     * getList() 리턴값에서 id 값을 이욯해 필요한 포스팅 정보만 필터링
     * */
-    @Override
     public Optional<PostingResponseDto> getPosting(Long postingId) {
         return getList().stream()
                 .filter(postingResponseDto -> postingResponseDto.getId().equals(postingId))

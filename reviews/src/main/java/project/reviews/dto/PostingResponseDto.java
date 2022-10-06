@@ -16,14 +16,16 @@ public class PostingResponseDto {
     private String title;
     private String content;
     private String writer;
+    private String password;
     private int hits;
     private LocalDateTime modifiedDate;
 
-    public PostingResponseDto(Long id, String title, String content, String writer, int hits) {
+    public PostingResponseDto(Long id, String title, String content, String writer, String password, int hits) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.password = password;
         this.hits = hits;
     }
 }

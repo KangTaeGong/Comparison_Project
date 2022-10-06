@@ -31,9 +31,9 @@ public class PostingServiceTest {
      * */
     @BeforeEach
     public void init() {
-        posting1 = new Posting("게시글1", "안녕하세요. 홍길동 입니다.", "홍길동", 1);
-        posting2 = new Posting("게시글2", "안녕하세요. 고길동 입니다.", "고길동", 1);
-        posting3 = new Posting("게시글3", "안녕하세요. 김길이 입니다.", "김길이", 1);
+        posting1 = new Posting("게시글1", "안녕하세요. 홍길동 입니다.", "홍길동","1234", 1);
+        posting2 = new Posting("게시글2", "안녕하세요. 고길동 입니다.", "고길동","1234", 1);
+        posting3 = new Posting("게시글3", "안녕하세요. 김길이 입니다.", "김길이","1234", 1);
 
         postingRepository.create(posting1);
         postingRepository.create(posting2);
@@ -46,7 +46,7 @@ public class PostingServiceTest {
     @Test
     void create_posting_Test() {
         //given
-        PostingForm form = new PostingForm("최초 생성 게시글", "안녕하세요.", "시금치");
+        PostingForm form = new PostingForm("최초 생성 게시글", "안녕하세요.", "시금치", "aaaa1234@");
         //when
         Long postingId = postingService.create_posting(form);
         //then

@@ -1,31 +1,18 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
     <head>
         <link rel="stylesheet" type="text/css" href="/css/community_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
     </head>
     <body>
-        <div class = "header" id="category_header">
-            <div class="logo">
-                <span>LOGO</span>
-            </div>
-            <ul class="nav">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Service</a></li>
-                <li><a href="#">Community</a></li>
-                <li>
-                    <div class="login_btn">
-                        <a href="#">로그인</a>
-                    </div>
-                </li>
-            </ul>
+        <div th:replace="~{header :: header}">
         </div>
         <div class = "community_page">
             <div class = "community_form">
                 <div class = "intro_text">게시판</div>
                 <div class = "create_btn">
-                    <a href="#">글 쓰기</a>
+                    <a th:href="@{/community/write}">글 쓰기</a>
                 </div>
                 <form>
                     <table>
@@ -38,15 +25,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><text>1</text></td>
-                                <td><a href="#"><text>예제파일</text></a></td>
-                                <td><text>홍길동</text></td>
-                                <td><text>1</text></td>
+                            <tr th:each="posting : ${postingList}">
+                                <td th:text="${posting.id}"></td>
+                                <td>
+                                    <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
+                                </td>
+                                <td th:text="${posting.writer}"></td>
+                                <td th:text="${posting.hits}"></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
+                <div class = "number">
+                    <th:block th:each="page:${#numbers.sequence(startPage, endPage)}">
+                        <a th:if="${page != currentPage}" th:href="@{/community/list(page=${page -1})}"
+                           th:text="${page}"></a>
+                        <strong th:if="${page == currentPage}" th:text="${page}" style="color:red"></strong>
+                    </th:block>
+                </div>
             </div>  
         </div>
     </body>

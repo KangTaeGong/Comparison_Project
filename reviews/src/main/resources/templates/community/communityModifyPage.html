@@ -1,25 +1,12 @@
 <!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
     <head>
         <link rel="stylesheet" type="text/css" href="/css/community_modify_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
     </head>
     <body>
-        <div class = "header" id="category_header">
-            <div class="logo">
-                <span>LOGO</span>
-            </div>
-            <ul class="nav">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Service</a></li>
-                <li><a href="#">Community</a></li>
-                <li>
-                    <div class="login_btn">
-                        <a href="#">로그인</a>
-                    </div>
-                </li>
-            </ul>
+        <div th:replace="~{header :: header}">
         </div>
         <div class = "modify_page">
             <div class = "modify_form">

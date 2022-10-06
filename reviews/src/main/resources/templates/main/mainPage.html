@@ -5,26 +5,25 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="/css/main_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+        .logout_btn{
+            background-color: #ffffff00;
+            padding: 5px;
+            color:white;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
     </head>
     <body>
         <div class = "main">
             <div class="intro_bg">
-                <div class = "header" id="category_header">
-                    <div class="logo">
-                        <span>LOGO</span>
-                    </div>
-                    <ul class="nav">
-                        <li><a href="#" th:href="@{/}">HOME</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Service</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li>
-                            <div class="login_btn">
-                                <a href="#" th:href="@{/login}">로그인</a>
+                <div th:replace="~{header :: header}">
 
-                            </div>
-                        </li>
-                    </ul>
                 </div>
                 <div class = "intro_text">
                     <h1>시소별</h1>

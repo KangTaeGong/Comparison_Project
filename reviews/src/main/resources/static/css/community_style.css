@@ -65,3 +65,13 @@ html, body{
     height: 35px;
     border-bottom: 1px solid gray;
 }
+
+.number{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.number > a, strong{
+    margin-right: 5px;
+}

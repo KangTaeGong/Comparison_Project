@@ -12,16 +12,37 @@
             <div class = "modify_form">
                 <div class = "intro_text">글 수정</div>
                 <form>
-                    <textarea></textarea>
+                    <table class = "contents">
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td class="read"><text>글 제목</text></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">글쓴이</th>
+                            <td class="read"><text>홍길동</text></td>
+                        </tr>
+                        <tr class="content">
+                            <th scope="row">내용</th>
+                            <td class="write"><textarea>안녕하세요</textarea></td>
+                        </tr>
+                    </table>
 
                     <div class = "btn_form">
                         <div class = "modify_btn">
                             <a href="#">수정 완료</a>
                         </div>
-    
+
+                        <div class = "delete_btn">
+                            <a href="#">삭제 하기</a>
+                        </div>
+
                         <div class = "cancel_btn">
                             <a href="#">취소</a>
                         </div>
+                    </div>
+
+                    <div class="check_password">
+                        비밀번호 : <input type="password" name="check_password">
                     </div>
                 </form>
             </div>

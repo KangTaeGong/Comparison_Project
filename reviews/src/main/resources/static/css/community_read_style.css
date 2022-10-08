@@ -65,13 +65,3 @@ table.contents td{
     margin-left: 5%;
     text-align: left;
 }
-
-.check_password{
-    margin-top: 50px;
-    font-size: 18px;
-}
-
-.check_password > input{
-    height: 20px;
-    line-height: 20px;
-}

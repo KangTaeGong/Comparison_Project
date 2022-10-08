@@ -10,42 +10,33 @@
         </div>
         <div class = "read_page">
             <div class = "read_form">
-                <table class = "contents">
-                    <tr>
-                        <th scope="row">제목</th>
-                        <td th:text="${posting.title}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">글쓴이</th>
-                        <td><text>홍길동</text></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">조회수</th>
-                        <td><text>1</text></td>
-                    </tr>
-                    <tr class="content">
-                        <th scope="row">내용</th>
-                        <td><text>안녕하세요</text></td>
-                    </tr>
-                </table>
+                    <table class = "contents">
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td th:text="${posting.title}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">글쓴이</th>
+                            <td><text>홍길동</text></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">조회수</th>
+                            <td><text>1</text></td>
+                        </tr>
+                        <tr class="content">
+                            <th scope="row">내용</th>
+                            <td><text>안녕하세요</text></td>
+                        </tr>
+                    </table>
                     <div class = "btn_form">
                         <div class = "modify_btn">
-                            <a href="#">수정 하기</a>
+                            <a href="#">수정/삭제 하기</a>
                         </div>
 
-                        <div class = "delete_btn">
-                            <a href="#">삭제 하기</a>
-                        </div>
-    
                         <div class = "back_btn">
                             <a th:href="@{/community/list}">뒤로 가기</a>
                         </div>
                     </div>
-
-                    <div class="check_password">
-                        비밀번호 : <input type="password">
-                    </div>
-                </form>
             </div>
         </div>
     </body>

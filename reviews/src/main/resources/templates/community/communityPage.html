@@ -14,28 +14,28 @@
                 <div class = "create_btn">
                     <a th:href="@{/community/write}">글 쓰기</a>
                 </div>
-                <form>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>제목</th>
-                                <th>글쓴이</th>
-                                <th>조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="posting : ${postingList}">
-                                <td th:text="${posting.id}"></td>
-                                <td>
-                                    <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
-                                </td>
-                                <td th:text="${posting.writer}"></td>
-                                <td th:text="${posting.hits}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+                <div class = "table_form">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>제목</th>
+                        <th>글쓴이</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="posting : ${postingList}">
+                        <td th:text="${posting.id}"></td>
+                        <td>
+                            <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
+                        </td>
+                        <td th:text="${posting.writer}"></td>
+                        <td th:text="${posting.hits}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
                 <div class = "number">
                     <th:block th:each="page:${#numbers.sequence(startPage, endPage)}">
                         <a th:if="${page != currentPage}" th:href="@{/community/list(page=${page -1})}"

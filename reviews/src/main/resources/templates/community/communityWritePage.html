@@ -4,6 +4,13 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/css/community_write_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
     </head>
     <body>
         <div th:replace="~{header :: header}">
@@ -12,11 +19,23 @@
             <div class = "write_form">
                 <div class = "intro_text">글 쓰기</div>
                 <form th:action th:object="${postingForm}" method="post">
-                    <div class = "title">
-                        <input type="text" placeholder="제목" th:field="*{title}">
-                    </div>
+                    <table class = "contents">
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td class="title_write">
+                                <input type="text" th:field="*{title}" class="form_info">
+                            </td>
+                        </tr>
+                        <tr class="content">
+                            <th scope="row">내용</th>
+                            <td id="write"><textarea th:field="*{content}" class="form_info"></textarea></td>
+                        </tr>
+                    </table>
 
-                    <textarea th:field="*{content}"></textarea>
+                    <div th:if="${#fields.hasErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.errors()}"
+                           th:text="${err}">오류 메시지</p>
+                    </div>
 
                     <div class="check_password">
                         비밀번호 : <input th:field="*{password}" type="password">

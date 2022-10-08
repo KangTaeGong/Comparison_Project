@@ -75,9 +75,11 @@ public class PostingController {
         // PostingForm에 Session에서 가져온 작성자 입력
         form.setWriter(userName);
 
-        postingService.create_posting(form);
+        Long postingId = postingService.create_posting(form);
 
-        return "redirect:/community/list";
+        // 글 생성이 완료되면 읽기 페이지로 이동
+        String redirectUrl = "/community/" + postingId + "/read";
+        return "redirect:" + redirectUrl;
     }
 
     /*

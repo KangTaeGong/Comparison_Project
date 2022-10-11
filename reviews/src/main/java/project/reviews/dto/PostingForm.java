@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 /*
 * 2022-10-01
 * 최초 게시판 글 작성시 필요한 정보 DTO
-* 글 수정, 삭제시에도 사용
 * */
 @Getter
 public class PostingForm {

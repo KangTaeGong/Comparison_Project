@@ -82,7 +82,20 @@ table.contents td{
     justify-content: center;
     margin-top: 40px;
 }
-.modify_btn, .delete_btn, .cancel_btn{
+
+.modify_btn > input{
+    width: 160px;
+    height: 45px;
+    background: #ffffff;
+    border: 1px solid gray;
+    border-radius: 10px;
+    line-height: 45px;
+    font-size: 18px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.delete_btn, .cancel_btn{
     width: 160px;
     height: 45px;
     border: 1px solid gray;
@@ -95,14 +108,4 @@ table.contents td{
 
 .delete_btn, .cancel_btn{
     margin-left: 30px;
-}
-
-.check_password{
-    margin-top: 50px;
-    font-size: 18px;
-}
-
-.check_password > input{
-    height: 20px;
-    line-height: 20px;
 }

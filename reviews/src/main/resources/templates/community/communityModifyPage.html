@@ -4,6 +4,13 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/css/community_modify_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
     </head>
     <body>
         <div th:replace="~{header :: header}">
@@ -11,38 +18,39 @@
         <div class = "modify_page">
             <div class = "modify_form">
                 <div class = "intro_text">글 수정</div>
-                <form>
+                <form th:action th:object="${postingModifyForm}" method="post">
                     <table class = "contents">
                         <tr>
                             <th scope="row">제목</th>
-                            <td class="read"><text>글 제목</text></td>
+                            <td class="read" th:text="${posting.title}"></td>
                         </tr>
                         <tr>
                             <th scope="row">글쓴이</th>
-                            <td class="read"><text>홍길동</text></td>
+                            <td class="read" th:text="${posting.writer}"></td>
                         </tr>
                         <tr class="content">
                             <th scope="row">내용</th>
-                            <td class="write"><textarea>안녕하세요</textarea></td>
+                            <td class="write"><textarea th:field="*{content}" class="info_form"></textarea></td>
                         </tr>
                     </table>
 
+                    <div th:if="${#fields.hasErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.errors()}"
+                           th:text="${err}">오류 메시지</p>
+                    </div>
+
                     <div class = "btn_form">
                         <div class = "modify_btn">
-                            <a href="#">수정 완료</a>
+                            <input type="submit" value="수정완료">
                         </div>
 
                         <div class = "delete_btn">
-                            <a href="#">삭제 하기</a>
+                            <a th:href="@{/community/{id}/delete (id=${posting.id})}">삭제 하기</a>
                         </div>
 
                         <div class = "cancel_btn">
-                            <a href="#">취소</a>
+                            <a th:href="@{/community/{id}/read (id=${posting.id})}">취소</a>
                         </div>
-                    </div>
-
-                    <div class="check_password">
-                        비밀번호 : <input type="password" name="check_password">
                     </div>
                 </form>
             </div>

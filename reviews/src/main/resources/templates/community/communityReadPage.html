@@ -4,12 +4,19 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/css/community_read_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+            .field-error {
+                color: #dc3545;
+            }
+        </style>
     </head>
     <body>
         <div th:replace="~{header :: header}">
         </div>
         <div class = "read_page">
             <div class = "read_form">
+                <form th:action th:object="${postingPasswordForm}" method="post">
                     <table class = "contents">
                         <tr>
                             <th scope="row">제목</th>
@@ -17,26 +24,39 @@
                         </tr>
                         <tr>
                             <th scope="row">글쓴이</th>
-                            <td><text>홍길동</text></td>
+                            <td th:text="${posting.writer}"></td>
                         </tr>
                         <tr>
                             <th scope="row">조회수</th>
-                            <td><text>1</text></td>
+                            <td th:text="${posting.hits}"></td>
                         </tr>
                         <tr class="content">
                             <th scope="row">내용</th>
-                            <td><text>안녕하세요</text></td>
+                            <td th:text="${posting.content}"></td>
                         </tr>
                     </table>
+
+                    <div class="check_password">
+                        비밀번호 : <input type="password" name="check_password" class="info_form" th:field="*{password}"
+                                th:errorclass="field-error">
+                        <div class="field-error" th:errors="*{password}"></div>
+                    </div>
+
+                    <div th:if="${#fields.hasGlobalErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                           th:text="${err}">오류 메시지</p>
+                    </div>
+
                     <div class = "btn_form">
                         <div class = "modify_btn">
-                            <a href="#">수정/삭제 하기</a>
+                            <input type="submit" value="수정/삭제">
                         </div>
 
                         <div class = "back_btn">
                             <a th:href="@{/community/list}">뒤로 가기</a>
                         </div>
                     </div>
+                </form>
             </div>
         </div>
     </body>

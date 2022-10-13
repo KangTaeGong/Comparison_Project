@@ -13,22 +13,12 @@ import javax.validation.constraints.NotBlank;
 public class PostingModifyForm {
 
     private Long id;
-    private String title;
-    private String writer;
+
     @NotBlank
     private String content;
 
-    /*
-     * 수정, 삭제를 위한 패스워드 입력
-     * */
-    @NotBlank
-    private String password;
-
-    public PostingModifyForm(Long id, String title, String writer, String content, String password) {
+    public PostingModifyForm(Long id, String content) {
         this.id = id;
-        this.title = title;
-        this.writer = writer;
         this.content = content;
-        this.password = password;
     }
 }

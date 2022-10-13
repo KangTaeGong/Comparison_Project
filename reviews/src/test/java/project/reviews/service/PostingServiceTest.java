@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
 import project.reviews.dto.PostingForm;
+import project.reviews.dto.PostingModifyForm;
 import project.reviews.dto.PostingRequestDto;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
@@ -65,6 +66,9 @@ public class PostingServiceTest {
         Assertions.assertEquals(3, postingList.size());
     }
 
+    /*
+     * 하나의 게시글 조회 테스트
+     * */
     @Test
     void get_posting_Test() {
         //when
@@ -75,19 +79,14 @@ public class PostingServiceTest {
     }
 
     /*
-    * 하나의 게시글 조회 테스트
-    * */
-
-    /*
      * 게시글 수정 테스트
      * */
     @Test
     void update_posting_Test() {
         //given
-        PostingRequestDto requestDto = new PostingRequestDto(posting3.getId(), posting3.getTitle(), "수정된 내용입니다.", posting3.getWriter());
-
+        PostingModifyForm modifyForm = new PostingModifyForm(posting3.getId(), "수정된 내용입니다.");
         //when
-        postingService.update_posting(requestDto);
+        postingService.update_posting(modifyForm);
 
         //then
         PostingResponseDto findPosting = postingRepository.getPosting(posting3.getId()).orElseThrow(PostingNotFoundException::new);

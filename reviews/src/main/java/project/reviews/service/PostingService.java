@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
 import project.reviews.dto.PostingForm;
+import project.reviews.dto.PostingModifyForm;
 import project.reviews.dto.PostingRequestDto;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
@@ -59,17 +60,31 @@ public class PostingService {
     }
 
     /*
-    * ID로 게시글을 조회해서 가져온 뒤 수정
+    * ID로 게시글 조회 후 입력한 패스워드와 비교
+    * 수정/삭제시 사용
+    * 패스워드가 일치하지 않으면 null 반환
     * */
-    public void update_posting(PostingRequestDto requestDto) {
-        Posting findPosting = postingRepository.findPostingById(requestDto.getId());
-        findPosting.updateContent(requestDto.getContent());
+    public PostingResponseDto getPosting_password(Long postingId, String password) {
+        PostingResponseDto findPosting = get_posting(postingId);
+        if (!findPosting.getPassword().equals(password)) {
+            return null;
+        }
+        return findPosting;
+    }
+
+    /*
+    * ID로 게시글을 조회해서 가져온 뒤 수정
+    * Dirty Checking
+    * */
+    public void update_posting(PostingModifyForm modifyForm) {
+        Posting findPosting = postingRepository.findPostingById(modifyForm.getId());
+        findPosting.updateContent(modifyForm.getContent());
     }
     
     /*
     * 게시글 삭제(PostingRequestDto)
     * */
-    public void delete_posting(PostingRequestDto requestDto) {
-        postingRepository.delete_Posting(requestDto.getId());
+    public void delete_posting(Long postingId) {
+        postingRepository.delete_Posting(postingId);
     }
 }

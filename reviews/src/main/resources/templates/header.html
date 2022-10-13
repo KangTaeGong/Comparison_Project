@@ -25,7 +25,7 @@
             </li>
             <li>
                 <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="로그아웃" class="logout_btn" th:if="${user != null}">
+                    <input type="submit" value="로그아웃" id="logout_btn" th:if="${user != null}">
                 </form>
             </li>
         </ul>

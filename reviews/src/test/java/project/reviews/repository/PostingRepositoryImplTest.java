@@ -8,18 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
-import project.reviews.dto.PostingRequestDto;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
-import project.reviews.service.PostingService;
 
 import java.util.List;
 
 /*
-* 20022-09-30
+* 2022-09-30
 * PostingRepositoryImpl TestCode
 * */
 @SpringBootTest
@@ -27,7 +24,6 @@ import java.util.List;
 @Transactional
 public class PostingRepositoryImplTest {
 
-    @Autowired PostingService postingService;
     @Autowired PostingRepository postingRepository;
 
     Posting posting1;

@@ -84,7 +84,7 @@ public class PostingRepositoryImpl implements PostingRepository {
     
     /*
     * 하나의 글 조회시 글의 정보를 가져오는 메소드
-    * getList() 리턴값에서 id 값을 이욯해 필요한 포스팅 정보만 필터링
+    * getList() 리턴값에서 id 값을 이용해 필요한 포스팅 정보만 필터링
     * */
     public Optional<PostingResponseDto> getPosting(Long postingId) {
         return getList().stream()

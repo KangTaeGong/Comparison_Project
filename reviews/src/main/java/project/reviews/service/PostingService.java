@@ -60,6 +60,16 @@ public class PostingService {
     }
 
     /*
+    * 사용자가 게시글 조회시 사용
+    * 조회수 +1
+    * */
+    public void update_hits(Long postingId) {
+        Posting findPosting = postingRepository.findPostingById(postingId);
+        int hits = findPosting.getHits() + 1;
+        findPosting.setHits(hits);
+    }
+
+    /*
     * ID로 게시글 조회 후 입력한 패스워드와 비교
     * 수정/삭제시 사용
     * 패스워드가 일치하지 않으면 null 반환

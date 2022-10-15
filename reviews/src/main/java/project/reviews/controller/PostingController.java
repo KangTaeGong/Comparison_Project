@@ -43,6 +43,10 @@ public class PostingController {
         int startPage = 1;
         int endPage = postingList.getTotalPages();
 
+        /*
+         * header.html에서 로그인 정보 유지하기 위해 작성
+         * 추후에 인터셉터로 변경 예정
+         * */
         User user = check_loginUser(request);
 
         model.addAttribute("postingList", postingList);
@@ -92,8 +96,13 @@ public class PostingController {
     * */
     @GetMapping("/{postingId}/read")
     public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, Model model) {
+
+        // postingId를 통해서 posting 조회 후 html에 posting 정보를 뿌려준다.
         PostingResponseDto posting = postingService.get_posting(postingId);
         model.addAttribute("posting", posting);
+
+        // 게시글 읽어올 때 조회수 + 1
+        postingService.update_hits(postingId);
 
         return "community/communityReadPage";
     }

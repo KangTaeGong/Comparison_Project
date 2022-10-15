@@ -39,6 +39,12 @@ public class Posting extends BaseTimeEntity {
         this.hits = hits;
     }
 
+    // 조회수 ++
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
+
+    // 게시글 수정시 사용
     public void updateContent(String content) {
         this.content = content;
     }

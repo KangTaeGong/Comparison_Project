@@ -9,13 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
 import project.reviews.dto.PostingForm;
 import project.reviews.dto.PostingModifyForm;
-import project.reviews.dto.PostingRequestDto;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
 import project.reviews.repository.PostingRepository;
 
 import java.util.List;
 
+/*
+* 2022-10-04
+* PostingService Test Code
+* */
 @SpringBootTest
 @Transactional
 public class PostingServiceTest {
@@ -91,5 +94,16 @@ public class PostingServiceTest {
         //then
         PostingResponseDto findPosting = postingRepository.getPosting(posting3.getId()).orElseThrow(PostingNotFoundException::new);
         Assertions.assertEquals("수정된 내용입니다.", findPosting.getContent());
+    }
+    
+    /*
+    * 게시글 조회수 추가 테스트
+    * */
+    @Test
+    void update_postingHits_Test() {
+        //when
+        postingService.update_hits(posting3.getId());
+        //then
+        Assertions.assertEquals(2, posting3.getHits());
     }
 }

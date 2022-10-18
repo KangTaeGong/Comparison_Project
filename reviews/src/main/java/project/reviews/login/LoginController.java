@@ -2,13 +2,17 @@ package project.reviews.login;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import project.reviews.domain.User;
 import project.reviews.dto.FindUserDto;
+import project.reviews.security.UserVo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +30,7 @@ public class LoginController {
     private final LoginService loginService;
 
 
-    @GetMapping("/login")
+    @GetMapping("/loginForm")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginPage";
     }
@@ -35,14 +39,15 @@ public class LoginController {
     public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
                         HttpServletRequest request) {
 
+        log.info("@PosMapping(/login) 실행");
         if(bindingResult.hasErrors()) {
             return "login/loginPage";
         }
 
         FindUserDto loginUser = loginService.login(form.getLoginId(), form.getPassword());
-        log.info("loginUser = {}", loginUser);
 
         if(loginUser == null) {
+            log.info("loginFail");
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
             return "login/loginPage";
         }

@@ -3,7 +3,6 @@ package project.reviews.login;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -53,7 +52,7 @@ public class JoinController {
          * */
         userService.join(form);
 
-        return "redirect:/login";
+        return "redirect:/loginForm";
     }
 
 }

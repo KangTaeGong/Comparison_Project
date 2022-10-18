@@ -1,9 +1,12 @@
 package project.reviews.login;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.dto.FindUserDto;
+import project.reviews.exception.UserNotFoundException;
 import project.reviews.repository.UserRepository;
 
 /*
@@ -13,6 +16,7 @@ import project.reviews.repository.UserRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class LoginService {
     
     private final UserRepository userRepository;
@@ -22,9 +26,18 @@ public class LoginService {
     * */
     public FindUserDto login(String userId, String password) {
 
-        return userRepository.findByUserId(userId)
+        FindUserDto findUser = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(encoder.matches(password, findUser.getPassword())) {
+            log.info("encoder FindUser = {}",findUser.getUserId());
+            return findUser;
+        } else {
+            return null;
+        }
+
+/*        return userRepository.findByUserId(userId)
                 .filter(user -> user.getPassword().equals(password))
-                .orElse(null);
+                .orElse(null);*/
     }
     
 }

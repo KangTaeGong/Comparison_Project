@@ -31,6 +31,7 @@ public class HomeController {
         /*
         * 세션이 유지되면 로그인된 메인페이지로 이동
         * */
+        log.info("Login UserName = {}", loginUser.getUserName());
         model.addAttribute("user", loginUser);
         return "main/mainPage";
     }

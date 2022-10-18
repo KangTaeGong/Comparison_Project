@@ -47,13 +47,13 @@ public class PostingController {
          * header.html에서 로그인 정보 유지하기 위해 작성
          * 추후에 인터셉터로 변경 예정
          * */
-        User user = check_loginUser(request);
+//        User user = check_loginUser(request);
 
         model.addAttribute("postingList", postingList);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-        model.addAttribute("user", user);
+//        model.addAttribute("user", user);
 
         return "community/communityPage";
     }

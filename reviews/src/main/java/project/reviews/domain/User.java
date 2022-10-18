@@ -1,10 +1,10 @@
 package project.reviews.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /*
 * 2022-09-15 생성
@@ -12,6 +12,7 @@ import javax.persistence.Id;
 * */
 @Entity
 @Getter
+@NoArgsConstructor
 public class User extends BaseTimeEntity{
 
     @Id @GeneratedValue
@@ -20,9 +21,20 @@ public class User extends BaseTimeEntity{
     private String userId;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Setter
+    private Role role;
+
     public User(String userName, String userId, String password) {
         this.userName = userName;
         this.userId = userId;
         this.password = password;
+    }
+
+    public User(String userName, String userId, String password, Role role) {
+        this.userName = userName;
+        this.userId = userId;
+        this.password = password;
+        this.role = role;
     }
 }

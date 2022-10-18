@@ -1,8 +1,11 @@
 package project.reviews.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.reviews.domain.Role;
 import project.reviews.domain.User;
 import project.reviews.dto.FindUserDto;
 import project.reviews.login.JoinForm;
@@ -18,8 +21,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
-    
+
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     
     /*
     * 회원 가입
@@ -32,8 +36,12 @@ public class UserService {
 
         /*
         * 중복 확인이 끝나면, User Entity로 변환해서 DB에 저장
+        * 회원으로 가입하기 때문에 ROLE_USER
+        * 패스워드 암호화
         * */
-        User user = new User(form.getUserName(), form.getUserId(), form.getPassword());
+        String encodePassword = bCryptPasswordEncoder.encode(form.getPassword());
+
+        User user = new User(form.getUserName(), form.getUserId(), encodePassword, Role.ROLE_USER);
         userRepository.save(user);
         return user.getId();
     }

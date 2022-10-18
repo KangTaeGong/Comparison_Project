@@ -38,6 +38,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     /*
+    * 회원 아이디로 회원 검색
+    * Security UserDetailService 에서 사용
+    * */
+    @Override
+    public User loadUserByUserId(String userId) {
+        User findUser = (User) em.createQuery("select u from User u where u.userId =: userId")
+                .setParameter("userId", userId)
+                .getSingleResult();
+
+        return findUser != null ? findUser : null;
+    }
+
+    /*
     * 회원 아이디로 회원 검색(회원가입 / 로그인시 확인용으로 사용)
     * */
     @Override

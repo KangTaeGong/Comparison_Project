@@ -16,15 +16,15 @@
         <div class = "login_page">
             <div class = "login_form">
                 <div class="logo">LOGO</div>
-                <form th:action th:object="${loginForm}" method="post">
+                <form th:action="@{/login}" th:object="${loginForm}" method="post">
                     <ul>
                         <li>
-                            <input type="text" placeholder="아이디" th:field="*{loginId}" class="form-info"
+                            <input type="text" name="loginId" placeholder="아이디" th:field="*{loginId}" class="form-info"
                                 th:errorclass="field-error">
                             <div class="field-error" th:errors="*{loginId}"/>
                         </li>
                         <li>
-                            <input type="password" placeholder="비밀번호" th:field="*{password}" class="form-info"
+                            <input type="password" name="password" placeholder="비밀번호" th:field="*{password}" class="form-info"
                                 th:errorclass="field-error">
                             <div class="field-error" th:errors="*{password}"/>
                         </li>

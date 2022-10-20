@@ -22,19 +22,16 @@ public class TestDataInit {
 
     /*
     * 테스트용 회원 아이디 저장
+    * 게시글 하나 미리 생성
     * */
     @PostConstruct
     public void init() {
         JoinForm form = new JoinForm("홍길동", "aaa123", "aaaa1234@", "aaaa1234@");
         userService.join(form);
-    }
-    
-    /*
-    * 게시글 하나 미리 생성
-    * */
-    @PostConstruct
-    public void init_posting() {
-        PostingForm form = new PostingForm("첫 번째 게시글", "안녕하세요", "홍길동", "aaaa1234@");
-        postingService.create_posting(form);
+
+        for(int i = 1; i <= 101; i++) {
+            PostingForm postingForm = new PostingForm(i+"번 게시글", "안녕하세요"+i, "홍길동"+i, "aaaa1234@");
+            postingService.create_posting(postingForm);
+        }
     }
 }

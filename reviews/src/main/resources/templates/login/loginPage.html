@@ -16,7 +16,7 @@
         <div class = "login_page">
             <div class = "login_form">
                 <div class="logo">LOGO</div>
-                <form th:action="@{/login}" th:object="${loginForm}" method="post">
+                <form th:action th:object="${loginForm}" method="post">
                     <ul>
                         <li>
                             <input type="text" name="loginId" placeholder="아이디" th:field="*{loginId}" class="form-info"

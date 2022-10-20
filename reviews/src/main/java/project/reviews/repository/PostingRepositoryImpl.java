@@ -66,6 +66,14 @@ public class PostingRepositoryImpl implements PostingRepository {
         return PageableExecutionUtils.getPage(pagingList, pageable, countQuery::fetchOne);
     }
 
+    // 게시글 개수 카운팅
+    public Long getPostingCount() {
+        return queryFactory
+                .select(posting.count())
+                .from(posting)
+                .fetchOne();
+    }
+
     /*
     * 커뮤니티 글 전체 리스트 가져오는 메소드
     * */

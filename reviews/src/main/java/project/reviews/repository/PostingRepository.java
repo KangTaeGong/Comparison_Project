@@ -18,6 +18,8 @@ public interface PostingRepository {
 
     Optional<PostingResponseDto> getPosting(Long postingId);
 
+    Long getPostingCount();
+
     Posting findPostingById(Long postingId);
 
     void delete_Posting(Long postingId);

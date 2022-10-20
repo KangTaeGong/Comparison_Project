@@ -52,7 +52,7 @@ public class JoinController {
          * */
         userService.join(form);
 
-        return "redirect:/loginForm";
+        return "redirect:/login";
     }
 
 }

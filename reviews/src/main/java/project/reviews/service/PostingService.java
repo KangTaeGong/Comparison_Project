@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
 import project.reviews.dto.PostingForm;
 import project.reviews.dto.PostingModifyForm;
-import project.reviews.dto.PostingRequestDto;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
 import project.reviews.repository.PostingRepository;
@@ -45,12 +44,20 @@ public class PostingService {
     
     /*
     * 전체 게시글 조회(페이징)
-    * 커뮤티니 메인 페이지에 정렬(최대 10개)
+    * 커뮤니티 메인 페이지에 정렬(최대 10개)
     * */
     public Page<PostingResponseDto> getPosting_paging(Pageable pageable) {
         return postingRepository.getListPaging(pageable);
     }
-    
+
+    /*
+    * 게시글 개수 조회
+    * 게시글 번호 지정시 사용
+    * */
+    public Long getPostingCount() {
+        return postingRepository.getPostingCount();
+    }
+
     /*
     * 하나의 게시글 조회
     * 게시글에 들어갈 때 사용

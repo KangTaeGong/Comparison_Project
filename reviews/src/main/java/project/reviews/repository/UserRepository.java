@@ -12,6 +12,8 @@ public interface UserRepository {
 
     User findById(Long id);
 
+    User loadUserByUserId(String userId);
+
     Optional<FindUserDto> findByUserId(String userId);
 
     List<FindUserDto> findAll();

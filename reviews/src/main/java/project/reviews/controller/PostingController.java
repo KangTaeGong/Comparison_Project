@@ -35,31 +35,41 @@ public class PostingController {
 
     @GetMapping("/list")
     public String postingList(Model model, HttpServletRequest request,
-                              @PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
+                              @PageableDefault(page = 0, size = 15)Pageable pageable) {
 
         Page<PostingResponseDto> postingList = postingService.getPosting_paging(pageable);
-
         int currentPage = postingList.getPageable().getPageNumber()+1;
         int startPage = 1;
         int endPage = postingList.getTotalPages();
+//        int postingCount;
+
+        Long totalPostingCount = postingService.getPostingCount();
+        log.info("totalPostingCount = {}", totalPostingCount);
+
+        /*if(totalPostingCount > currentPage) {
+            postingCount = (int) (totalPostingCount - (currentPage * 14));
+        } else {
+            postingCount = 1;
+        }*/
 
         /*
          * header.html에서 로그인 정보 유지하기 위해 작성
-         * 추후에 인터셉터로 변경 예정
          * */
-//        User user = check_loginUser(request);
+        LoginSessionCheck.check_loginUser(request, model);
 
         model.addAttribute("postingList", postingList);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-//        model.addAttribute("user", user);
+        model.addAttribute("totalPostingCount", totalPostingCount); // 전체 게시글 수
+//        model.addAttribute("postingCount", postingCount);   // 페이지당 게시글 No. 최소값
 
         return "community/communityPage";
     }
 
     @GetMapping("/write")
-    public String writePosting_form(@ModelAttribute("postingForm") PostingForm form) {
+    public String writePosting_form(@ModelAttribute("postingForm") PostingForm form, Model model, HttpServletRequest request) {
+        LoginSessionCheck.check_loginUser(request, model);
         return "community/communityWritePage";
     }
 
@@ -77,7 +87,7 @@ public class PostingController {
         /*
         * 문제 없을 시 request, session을 통해서 회원 이름을 조회하고 저장 메소드로 값을 넘겨줌
         * */
-        User session_user = check_loginUser(request);
+        User session_user = LoginSessionCheck.check_loginUser(request);
         String userName = session_user.getUserName();
         log.info("Find UserName = {}", userName);
 
@@ -95,7 +105,8 @@ public class PostingController {
     * 게시글 읽어오기
     * */
     @GetMapping("/{postingId}/read")
-    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, Model model) {
+    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, Model model
+                                    ,HttpServletRequest request) {
 
         // postingId를 통해서 posting 조회 후 html에 posting 정보를 뿌려준다.
         PostingResponseDto posting = postingService.get_posting(postingId);
@@ -104,6 +115,7 @@ public class PostingController {
         // 게시글 읽어올 때 조회수 + 1
         postingService.update_hits(postingId);
 
+        LoginSessionCheck.check_loginUser(request, model);
         return "community/communityReadPage";
     }
 
@@ -139,10 +151,10 @@ public class PostingController {
     * 수정 관련 로직
     * */
     @GetMapping("/{postingId}/modify")
-    public String modifyPostingForm(@PathVariable("postingId") Long postingId, Model model) {
+    public String modifyPostingForm(@PathVariable("postingId") Long postingId, Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
         model.addAttribute("posting", posting);
-
+        LoginSessionCheck.check_loginUser(request, model);
         /*
         * 글 내용만 model에 따로 담아서 전달
         * @PostMapping의 @ModelAttribute와 이름 동일
@@ -191,14 +203,5 @@ public class PostingController {
         model.addAttribute("data", new Message("게시글이 삭제되었습니다.", "/community/list"));
         // 삭제 후 리스트 화면으로 이동
         return "redirect:/community/list";
-    }
-
-    /*
-    * 현재 로그인한 상태인지 session에서 값 받아오기
-    * 로그인 후 페이지 이동시 상단 로그인 표시에 사용
-    * */
-    private User check_loginUser(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        return (User)session.getAttribute(SessionConst.LOGIN_USER);
     }
 }

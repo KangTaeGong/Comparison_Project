@@ -26,6 +26,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="posting : ${postingList}">
+<!--                        <th:block th:each="count : ${#numbers.sequence(postingCount, totalPostingCount)">
+                            <td th:text="${count}"></td>
+                        </th:block>-->
                         <td th:text="${posting.id}"></td>
                         <td>
                             <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>

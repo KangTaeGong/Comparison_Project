@@ -106,4 +106,16 @@ public class PostingRepositoryImplTest {
         //then
         Assertions.assertEquals(2, findList.size());
     }
+
+    /*
+    * 게시글 개수 카운팅 테스트
+    * */
+    @Test
+    void getPostingCount_Test() {
+
+        //when
+        Long postingCount = postingRepository.getPostingCount();
+        //then (@BeforeEach 3 + TestDataInit 100)
+        Assertions.assertEquals(103, postingCount);
+    }
 }

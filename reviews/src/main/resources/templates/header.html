@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,17 +16,23 @@
             <li><a href="#">Service</a></li>
             <li><a th:href="@{/community/list}">Community</a></li>
             <li>
-                <div class="login_btn">
-                    <a href="#" th:href="@{/login}" th:if="${user == null}">로그인</a>
-                </div>
+<!--                <div sec:authorize="isAnonymous()">-->
+                    <div class="login_btn">
+                        <a href="#" th:href="@{/login}" th:if="${user == null}">로그인</a> <!--th:if="${user == null}"-->
+                    </div>
+<!--                </div>-->
             </li>
             <li>
-                <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span>
+<!--                <div sec:authorize="isAuthenticated()">-->
+                    <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span> <!--th:if="${user != null}"-->
+<!--                </div>-->
             </li>
             <li>
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="로그아웃" id="logout_btn" th:if="${user != null}">
-                </form>
+<!--                <div sec:authorize="isAuthenticated()">-->
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="로그아웃" id="logout_btn" th:if="${user != null}"> <!-- th:if="${user != null}"-->
+                    </form>
+<!--                </div>-->
             </li>
         </ul>
     </div>

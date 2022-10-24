@@ -21,7 +21,10 @@ public class LoginSessionCheck {
 
     public static void check_loginUser(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-        model.addAttribute("user", sessionUser);
+
+        if (session != null) {
+            User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+            model.addAttribute("user", sessionUser);
+        }
     }
 }

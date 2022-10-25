@@ -24,7 +24,7 @@ html, body{
     font: weight 5px;
 }
 
-.function_form{
+.function_form > form{
     display: flex;
     width: 100%;
     height: 60px;

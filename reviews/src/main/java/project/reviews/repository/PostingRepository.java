@@ -12,7 +12,7 @@ public interface PostingRepository {
 
     Long create(Posting posting);
 
-    Page<PostingResponseDto> getListPaging(Pageable pageable);
+    Page<PostingResponseDto> getListPaging(Pageable pageable, String postingInfo);
 
     List<PostingResponseDto> getList();
 
@@ -24,3 +24,4 @@ public interface PostingRepository {
 
     void delete_Posting(Long postingId);
 }
+

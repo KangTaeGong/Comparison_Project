@@ -87,10 +87,25 @@ public class PostingRepositoryImplTest {
     void getListPaging_Test() {
         //when
         PageRequest pageRequest = PageRequest.of(0, 3);
-        Page<PostingResponseDto> listPaging = postingRepository.getListPaging(pageRequest);
+        Page<PostingResponseDto> listPaging = postingRepository.getListPaging(pageRequest, "");
 
         //then
         org.assertj.core.api.Assertions.assertThat(listPaging.getSize()).isEqualTo(3);
+    }
+    
+    /*
+    * 게시글 검색 테스트 + 페이징
+    * */
+    @Test
+    void searchPosting_Test() {
+        //when
+        PageRequest pageRequest = PageRequest.of(0, 5);
+        Page<PostingResponseDto> findPosting = postingRepository.getListPaging(pageRequest, "김길");
+        //then
+        for(PostingResponseDto find : findPosting) {
+            log.info("findPosting = {}", find.getContent());
+            Assertions.assertEquals(posting3.getTitle(), find.getTitle());
+        }
     }
 
     /*

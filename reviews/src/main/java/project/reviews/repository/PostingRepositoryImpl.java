@@ -1,12 +1,14 @@
 package project.reviews.repository;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 import project.reviews.domain.Posting;
 import project.reviews.domain.QPosting;
 import project.reviews.dto.PostingResponseDto;
@@ -44,7 +46,7 @@ public class PostingRepositoryImpl implements PostingRepository {
     * 커뮤니티 전체 글 페이징 추가해서 받아오기
     * */
     @Override
-    public Page<PostingResponseDto> getListPaging(Pageable pageable) {
+    public Page<PostingResponseDto> getListPaging(Pageable pageable, String postingSearch) {
         List<PostingResponseDto> pagingList = queryFactory
                 .select(Projections.constructor(PostingResponseDto.class,
                         posting.id,
@@ -54,6 +56,8 @@ public class PostingRepositoryImpl implements PostingRepository {
                         posting.password,
                         posting.hits))
                 .from(posting)
+                .where(
+                        postingInfoLike(postingSearch))
                 .orderBy(posting.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -64,6 +68,16 @@ public class PostingRepositoryImpl implements PostingRepository {
                 .from(posting);
 
         return PageableExecutionUtils.getPage(pagingList, pageable, countQuery::fetchOne);
+    }
+
+    /*게시글 검색시 넘겨받은 값을 통해 일치하는 값이 있는지 확인
+    * 해당 text를 포함하는 값이 있다면 where문에 넣어 반환
+    * 해당 값이 없다면 null 반환
+    * null을 반환하게 되면 where문은 자동으로 동작하지 않는다.
+    * */
+    private BooleanExpression postingInfoLike(String postingInfo) {
+        return StringUtils.hasText(postingInfo) ? posting.title.contains(postingInfo)
+                .or(posting.writer.contains(postingInfo)) : null;
     }
 
     // 게시글 개수 카운팅

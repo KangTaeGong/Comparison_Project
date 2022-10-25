@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import project.reviews.login.SessionConst;
 import project.reviews.service.PostingService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /*
@@ -35,9 +33,11 @@ public class PostingController {
 
     @GetMapping("/list")
     public String postingList(Model model, HttpServletRequest request,
-                              @PageableDefault(page = 0, size = 15)Pageable pageable) {
+                              @PageableDefault(page = 0, size = 15)Pageable pageable, String postingInfo) {
 
-        Page<PostingResponseDto> postingList = postingService.getPosting_paging(pageable);
+        // communityPage.html에서 name = postingInfo값을 넘겨주어 게시글 검색을 한다.
+        log.info("postingInfo = {}", postingInfo);
+        Page<PostingResponseDto> postingList = postingService.getPosting_paging(pageable, postingInfo);
         int currentPage = postingList.getPageable().getPageNumber()+1;
         int startPage = 1;
         int endPage = postingList.getTotalPages();

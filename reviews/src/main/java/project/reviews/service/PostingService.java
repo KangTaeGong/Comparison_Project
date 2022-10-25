@@ -44,10 +44,10 @@ public class PostingService {
     
     /*
     * 전체 게시글 조회(페이징)
-    * 커뮤니티 메인 페이지에 정렬(최대 10개)
+    * 커뮤니티 메인 페이지에 정렬(최대 15개)
     * */
-    public Page<PostingResponseDto> getPosting_paging(Pageable pageable) {
-        return postingRepository.getListPaging(pageable);
+    public Page<PostingResponseDto> getPosting_paging(Pageable pageable, String postingInfo) {
+        return postingRepository.getListPaging(pageable, postingInfo);
     }
 
     /*
@@ -97,7 +97,7 @@ public class PostingService {
         Posting findPosting = postingRepository.findPostingById(modifyForm.getId());
         findPosting.updateContent(modifyForm.getContent());
     }
-    
+
     /*
     * 게시글 삭제(PostingRequestDto)
     * */

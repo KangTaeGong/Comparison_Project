@@ -19,18 +19,16 @@
             </div>
             <!-- intro End -->
             <div class="search_area">
-                <form>
+                <form th:action method="post">
                     <ul>
                         <li>
-                            <input type="search" placeholder="검색어를 입력하세요.">
+                            <input type="search" name="searchItem1" placeholder="검색어를 입력하세요.">
                         </li>
                         <li>
-                            <input type="search" placeholder="검색어를 입력하세요.">
+                            <input type="search" name="searchItem2" placeholder="검색어를 입력하세요.">
                         </li>
                         <li>
-                            <div class="search_btn">
-                                <a href="#">검색</a>
-                            </div>
+                            <input type="submit" id="search_btn" value="검색">
                         </li>
                     </ul>
                 </form>

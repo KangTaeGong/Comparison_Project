@@ -26,7 +26,7 @@
     margin-bottom: 10px;
 }
 
-.search_area > form > ul > li > input{
+.search_area > form > ul > li > input:not(#search_btn){
     border: 1px solid skyblue;
     border-radius: 10px;
     width: 400px;
@@ -36,15 +36,13 @@
     padding-left: 10px;
 }
 
-.search_btn{
+#search_btn {
     width: 150px;
     height: 45px;
+    border: 1px solid skyblue;
     background: rgb(32, 144, 189);
     color: white;
     font-size: 16px;
-    margin:auto;
-    text-align: center;
-    line-height: 45px;
     border-radius: 10px;
     cursor: pointer;
 }

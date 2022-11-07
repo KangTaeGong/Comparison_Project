@@ -25,6 +25,7 @@
 .nav{
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     margin: auto;
     line-height: 60px;
     width:calc(100% - 300px);

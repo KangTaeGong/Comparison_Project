@@ -17,14 +17,13 @@
             <li><a th:href="@{/community/list}">Community</a></li>
             <li>
 <!--                <div sec:authorize="isAnonymous()">-->
-                    <div class="login_btn">
-                        <a href="#" th:href="@{/login}" th:if="${user == null}">로그인</a> <!--th:if="${user == null}"-->
-                    </div>
+                <a href="#" th:href="@{/login}" th:if="${user == null}">Login</a> <!--th:if="${user == null}"-->
 <!--                </div>-->
             </li>
             <li>
 <!--                <div sec:authorize="isAuthenticated()">-->
-                    <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span> <!--th:if="${user != null}"-->
+<!--                    <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span> &lt;!&ndash;th:if="${user != null}"&ndash;&gt;-->
+                <label th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름></label>
 <!--                </div>-->
             </li>
             <li>

@@ -25,10 +25,9 @@
 .nav{
     display: flex;
     justify-content: flex-end;
-    flex-wrap: wrap;
     margin: auto;
     line-height: 60px;
-    width:calc(100% - 300px);
+    /*width:calc(100% - 300px);*/
     font-size: 18px;
 }
 
@@ -40,15 +39,16 @@
     color:white;
 }
 
-.nav > li > span{
+.nav > li > label{
+    display:inline-block;
+    width:80px;
     color:white;
 }
 
-.login_btn > a{
+#login_btn {
     color:white;
     text-align: center;
     cursor: pointer;
-    
 }
 
 #logout_btn{

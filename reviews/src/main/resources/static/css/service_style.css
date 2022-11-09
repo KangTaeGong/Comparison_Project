@@ -70,8 +70,10 @@ html, body{
 
 .result_info > div {
     font-size: 17px;
-    padding: 0px 0px 10px 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
 }
+
 
 .review_area {
     margin-top: 20px;

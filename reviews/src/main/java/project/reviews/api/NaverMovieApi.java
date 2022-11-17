@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.util.Map;
 * 네이버 영화 검색 API
 * */
 @Slf4j
+@Service
 public class NaverMovieApi {
 
     final String baseUrl = "https://openapi.naver.com/v1/search/movie.json?query=";
@@ -33,10 +35,11 @@ public class NaverMovieApi {
     public String search(String clientId, String secret, String _url) {
         HttpURLConnection con = null;
         String result = "";
-
+        int display = 5; // 한번에 표시할 검색 결과의 수
+        
         try{
             // query 값을 받은 뒤 baseUrl과 연결
-            URL url = new URL(baseUrl + _url);
+            URL url = new URL(baseUrl + _url + "&display=" + display);
             con = (HttpURLConnection) url.openConnection();
 
             // GET방식으로 가져오며 지급받은 id, secret을 넘겨준다.

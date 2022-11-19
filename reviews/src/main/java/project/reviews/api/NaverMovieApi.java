@@ -32,7 +32,7 @@ public class NaverMovieApi {
     /*
     * 네이버 영화 검색 API를 통해서 검색어에 따른 결과 검색
     * */
-    public String search(String clientId, String secret, String _url) {
+    public String search(String _url) {
         HttpURLConnection con = null;
         String result = "";
         int display = 5; // 한번에 표시할 검색 결과의 수
@@ -44,8 +44,8 @@ public class NaverMovieApi {
 
             // GET방식으로 가져오며 지급받은 id, secret을 넘겨준다.
             con.setRequestMethod("GET");
-            con.setRequestProperty("X-Naver-Client-Id", clientId);
-            con.setRequestProperty("X-Naver-Client-Secret", secret);
+            con.setRequestProperty("X-Naver-Client-Id", NaverApiClientInfo.client_id);
+            con.setRequestProperty("X-Naver-Client-Secret", NaverApiClientInfo.client_secret);
 
             // 응답 코드가 200이면 값을 읽어오고, 아니라면 예외 발생
             int responseCode = con.getResponseCode();

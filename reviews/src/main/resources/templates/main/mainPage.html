@@ -38,15 +38,17 @@
             </div>
             <!-- intro End -->
             <div class="search_area">
-                <form th:action="@{/infoService}" method="post">
+                <form th:action="@{/mainService}" name="post_form" method="get">
                     <ul>
                         <li>
-                            <input type="text" id="autocompleteText" placeholder="검색어를 입력하세요."
+                            <input type="text" id="autocompleteText" name="searchItem1" placeholder="검색어를 입력하세요."
                                    aria-label="Search">
+                            <input type="hidden" name="itemLink1" value="">
                         </li>
                         <li>
-                            <input type="text" id="autocompleteText2" placeholder="검색어를 입력하세요."
+                            <input type="text" id="autocompleteText2" name="searchItem2" placeholder="검색어를 입력하세요."
                                    aria-label="Search">
+                            <input type="hidden" name="itemLink2" value="">
                         </li>
                         <li>
                             <input type="submit" id="search_btn" value="검색">
@@ -55,13 +57,14 @@
                 </form>
             </div>
 
+            <!--메인 화면의 첫번째 검색 창-->
             <script>
                 $(document).ready(function() {
                     $( "#autocompleteText" ).autocomplete({
                         source : function( request, response ) {
                             $.ajax({
                                 type : 'get',
-                                url: "infoService",
+                                url: "autoSearch",
                                 dataType: "json",
                                 data: {
                                   searchValue: request.term // 사용자가 입력하는 값
@@ -72,12 +75,63 @@
                                             return {
                                                 label: item.title, // 목록에 표시되는 값
                                                 value: item.title, // 선택 시 input창에 표시되는 값
-                                                avatar: item.img
+                                                avatar: item.img,
+                                                url_link: item.link
                                             }
                                         })
                                     );
                                 }
                             });
+                        },
+                        select : function(event, ui) {
+                            document.post_form.itemLink1.value = ui.item.url_link;
+                        },
+                        focus : function(event, ui) { // 포커스 시 이벤트
+                            return false; // 방향키로 바로 선택 방지(enter시 선택)
+                        },
+                        minLength: 1,
+                        delay : 1000, // 입력창에 글자가 써지고나서 autocomplete 이벤트 발생될 때 까지 지연 시간(ms)
+                        close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+                            console.log(event);
+                        }
+                    }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
+                        return $('<li>') //기본 tag가 li
+                        .append('<div>' +
+                                    '<img id="autocomplete-image" src="' + item.avatar + '"/>' +
+                                     '<span id="autocomplete-title">' + item.label + '</span>' + '</div>') // 원하는 모양의 HTML 만들면 됨
+                        .appendTo(ul);
+                    };
+                });
+            </script>
+
+            <!--메인 화면의 두번째 검색 창-->
+            <script>
+                $(document).ready(function() {
+                    $( "#autocompleteText2" ).autocomplete({
+                        source : function( request, response ) {
+                            $.ajax({
+                                type : 'get',
+                                url: "autoSearch",
+                                dataType: "json",
+                                data: {
+                                  searchValue: request.term // 사용자가 입력하는 값
+                                },
+                                success: function( data ) {
+                                    response(
+                                        $.map( data, function( item ) {
+                                            return {
+                                                label: item.title, // 목록에 표시되는 값
+                                                value: item.title, // 선택 시 input창에 표시되는 값
+                                                avatar: item.img,
+                                                url_link: item.link
+                                            }
+                                        })
+                                    );
+                                }
+                            });
+                        },
+                        select : function(event, ui) {
+                            document.post_form.itemLink2.value = ui.item.url_link;
                         },
                         focus : function(event, ui) { // 포커스 시 이벤트
                             return false; // 방향키로 바로 선택 방지(enter시 선택)

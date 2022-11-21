@@ -17,25 +17,25 @@
                             </div>
                         </form>
                     </div>
-                    <div class="title"><h1 th:text="">검색어 제목</h1></div>
+                    <div class="title"><h1 th:text="${movie.title}">검색어 제목</h1></div>
                     <div class = "info_area">
-                        <img class = "service_picture">
+                        <img id="service_picture" th:src="${movie.image}">
                         <div class = result_info>
                             <div class = "info_since">
                                 <span>개봉 연도: </span>
-                                <p th:text></p>
+                                <b><span th:text="${movie.pubDate}"></span></b>
                             </div>
                             <div class = "info_director">
                                 <span>감독: </span>
-                                <text></text>
+                                <b><span th:text="${movie.director}"></span></b>
                             </div>
                             <div class = "info_actor">
                                 <span>출연진: </span>
-                                <p th:text></p>
+                                <b><span th:text="${movie.actor}"></span></b>
                             </div>
                             <div class = "info_review">
                                 <span>평점: </span>
-                                <p th:text></p>
+                                <b><span th:text="${movie.userRating}"></span></b>
                             </div>
                         </div>
                     </div>

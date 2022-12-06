@@ -49,7 +49,7 @@
                         <li>
                             <input type="text" id="autocompleteText2" name="searchItem2" placeholder="검색어를 입력하세요."
                                    aria-label="Search">
-                            <input type="hidden" name="itemLink2" value="">
+                            <!--<input type="hidden" name="itemLink2" value="">-->
                         </li>
                         <li>
                             <input type="submit" id="search_btn" value="검색">
@@ -132,7 +132,7 @@
                             });
                         },
                         select : function(event, ui) { // 이벤트 선택시 위에서 선언한 hidden에 link값을 value에 넣어준다.
-                            document.post_form.itemLink2.value = ui.item.url_link;
+                            // document.post_form.itemLink2.value = ui.item.url_link;
                         },
                         focus : function(event, ui) { // 포커스 시 이벤트
                             return false; // 방향키로 바로 선택 방지(enter시 선택)

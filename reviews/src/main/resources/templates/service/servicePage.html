@@ -46,14 +46,14 @@
                                     <em class="blind">관람객 한줄평</em>
                                 </span>
                                 <span class="sp">|</span>
-                                <a th:href="${reviewLink}" class="link_more">더보기
+                                <a th:href="${mainServiceDto.reviewLink}" class="link_more">더보기
                                     <span class="ico_more"> ></span>
                                 </a>
                             </strong>
                         </div>
                         <div class="score_result">
                             <ul>
-                                <li th:each="review : ${reviewList}">
+                                <li th:each="review : ${mainServiceDto.reviewList}">
                                     <!--점수에 대한 별점 이미지와 실제 점수 text 출력-->
                                     <div class="star_score">
                                         <img class="star_image" th:src="@{img/} + ${review.score} + '.jpg'">
@@ -68,7 +68,7 @@
                             </ul>
                         </div>
 
-                        <!--기자, 평론과 관련 html-->
+                        <!--기자, 평론가 관련 html-->
                         <div class="score_board">
                             <Strong class="board">
                                 <span class="title">
@@ -78,24 +78,26 @@
                         </div>
                         <div class="reporter">
                             <script th:inline="javascript">
-                                document.write([[${reporter_html}]]);
+                                document.write([[${mainServiceDto.reporter_html}]]);
                             </script>
                         </div>
-                        <div th:if="${not #strings.isEmpty(oldReviewList)}">
+
+                        <!--기자, 평론가 사진X 리뷰-->
+                        <div th:if="${not #strings.isEmpty(mainServiceDto.noPic_reporterList)}">
                             <div class="score_result">
                                 <ul>
-                                    <li th:each="oldReview : ${oldReviewList}">
+                                    <li th:each="reporter_Review : ${mainServiceDto.noPic_reporterList}">
                                     <!--점수에 대한 별점 이미지와 실제 점수 text 출력-->
                                         <div class="star_score">
-                                            <img class="star_image" th:src="@{img/} + ${oldReview.score} + '.jpg'">
-                                            <em th:text="${oldReview.score}"></em>
+                                            <img class="star_image" th:src="@{img/} + ${reporter_Review.score} + '.jpg'">
+                                            <em th:text="${reporter_Review.score}"></em>
                                         </div>
 
                                         <!--관람객이 남긴 한줄평 출력-->
                                         <div class="score_reple">
-                                            <p th:text="${oldReview.reple_text}"></p>
+                                            <p th:text="${reporter_Review.reple_text}"></p>
                                             <dl>
-                                                <dt th:text="${oldReview.name}"></dt>
+                                                <dt th:text="${reporter_Review.name}"></dt>
                                             </dl>
                                         </div>
                                     </li>

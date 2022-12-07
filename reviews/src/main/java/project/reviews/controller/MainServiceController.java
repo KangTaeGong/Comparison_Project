@@ -3,21 +3,18 @@ package project.reviews.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import project.reviews.api.NaverMovieApi;
-
+import project.reviews.dto.MainServiceDto;
+import project.reviews.service.MainService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
-import java.util.Map;
+
 
 /*
  * 2022-11-09
@@ -28,7 +25,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MainServiceController {
 
-    private final NaverMovieApi naverMovieApi;
+    private final MainService mainService;
+
     /*
     * 검색어 입력에 따라 사용자가 원하는 정보를 가져오는 로직
     * NaverMovieApi의 search 메소드를 통해서 정보 검색
@@ -40,33 +38,9 @@ public class MainServiceController {
     public void searchItem(HttpServletRequest request, HttpServletResponse response) {
 
         String searchItem = request.getParameter("searchValue");
-        log.info("searchValue = {}", searchItem);
 
-        // 가져오고 싶은 정보
-        String[] fields = {"title", "image", "link"};
         try{
-            List<Map<String, Object>> items = getApiResult(searchItem, fields);
-
-            JSONArray jsonArray = new JSONArray();
-            JSONObject jsonObject = null;
-            // 메인화면에서 검색시 autocomplete에서 사용할 값 가공
-            for(Map<String, Object> item : items) {
-                jsonObject = new JSONObject();
-
-                /*
-                * 제목 값만 가져온 뒤 필요하지 않은 문자 제거
-                * 제목과 일치한 부분은 강조(<b>, </b>)표시가 같이 출력되기 때문에 제거
-                * */
-                String title = replace_Title(item);
-
-                // 수정된 제목과 이미지를 받아와서 jsonObject에 넣은 뒤 jsonArray에 추가
-                jsonObject.put("title", title);
-                jsonObject.put("img", item.get("image"));
-                jsonObject.put("link", item.get("link"));
-
-                jsonArray.add(jsonObject);
-                log.info("JsonArray = {}", jsonArray);
-            }
+            JSONArray jsonArray = mainService.autoSearchService(searchItem);
 
             response.setCharacterEncoding("UTF-8");
             PrintWriter pw = response.getWriter();
@@ -87,55 +61,33 @@ public class MainServiceController {
     @GetMapping("/mainService")
     public String mainService(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model) {
 
-        log.info("searchItem1 = {}", searchItem1);
-        log.info("searchItem2 = {}", searchItem2);
-
-        log.info("searchLink1 = {}", itemLink1);
-        log.info("searchLink2 = {}", itemLink2);
-
-        String[] fields = {"title", "link", "image", "pubDate", "director", "actor", "userRating"};
-
-        List<Map<String, Object>> items = getApiResult(searchItem1, fields);
-
-        for(Map<String, Object> item : items) {
-            if ((item.get("link")).equals(itemLink1)) {
-                String title = replace_Title(item);
-
-                item.put("title", title);
-                model.addAttribute("movie", item);
-                break;
-            }
+        if(searchItem1.equals("") && searchItem2.equals("")) {
+            // 오류페이지 리턴 필요(검색어가 없을 경우) --------------------------+
+        } else if (!searchItem1.equals("") && !searchItem2.equals("")) {
+            // 두개의 검색어로 검색했을 시 동작
         }
 
-        // 그 밖에 하나만 입력한 경우에는 정보 하나만 송출해주는 servicePage로 이동
+        /*
+        * 위 if문을 지나서 그밖에 조건
+        * 하나의 검색어만 입력할 시 동작
+        * searchItem1, searchItem2 중 어디로 들어올지 모르기 때문에 하나로 합쳐줌
+        * itemLink1, itemLink2도 마찬가지..
+        * 여기서 searchItem은 무조건 값이 들어가지만, itemLink는 autoSearch 사용 여부에 따라 값이 들어가지 않을 수도 있다.
+        * */
+        String searchItem, itemLink;
+        if(!searchItem1.equals("")) {
+            searchItem = searchItem1;
+            itemLink = itemLink1;
+        } else {
+            searchItem = searchItem2;
+            itemLink = itemLink2;
+        }
+
+        itemLink = mainService.movieSearchService(searchItem, itemLink, model);// 영화 검색 후 정보를 model에 넣는 로직
+        MainServiceDto mainServiceDto = mainService.reviewCrawlLogic(itemLink);
+
+        model.addAttribute("mainServiceDto", mainServiceDto);
+
         return "service/servicePage";
-    }
-
-    // 검색해온 제목에서 불필요한 문자 제거 후 반환
-    private String replace_Title(Map<String, Object> item) {
-        String title = String.valueOf(item.get("title"));
-        title = title.replaceAll("<b>", "");
-        title = title.replaceAll("</b>", "");
-        return title;
-    }
-
-    public List<Map<String, Object>> getApiResult(String searchItem, String[] fields) {
-
-        String url = null;
-        List<Map<String, Object>> items = null;
-        try {
-            url = URLEncoder.encode(searchItem, "UTF-8");
-
-            String result = naverMovieApi.search(url);
-
-            // 가져오고 싶은 정보 매핑
-            Map<String, Object> mappingResult = naverMovieApi.getResultMapping(result, fields);
-
-            items = (List<Map<String, Object>>) mappingResult.get("result");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return items;
     }
 }

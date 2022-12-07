@@ -25,7 +25,7 @@ import java.util.Map;
 * */
 @Slf4j
 @Service
-public class NaverMovieApi {
+public class NaverMovieApiService {
 
     final String baseUrl = "https://openapi.naver.com/v1/search/movie.json?query=";
 
@@ -35,7 +35,7 @@ public class NaverMovieApi {
     public String search(String _url) {
         HttpURLConnection con = null;
         String result = "";
-        int display = 5; // 한번에 표시할 검색 결과의 수
+        int display = 100; // 한번에 표시할 검색 결과의 수
         
         try{
             // query 값을 받은 뒤 baseUrl과 연결

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +68,7 @@ public class MainService {
     * itemLink : 검색한 영화에 대한 네이버 영화 link(autoSearch 여부에 따라 없을 수도 있음)
     * model : 검색 후 필요한 정보는 model을 통해 servicePage에 넘겨줌
     * */
-    public String movieSearchService(String searchItem, String itemLink, Model model) {
+    public Map<String, Object> movieSearchService(String searchItem, String itemLink) {
         String[] fields = {"title", "link", "image", "pubDate", "director", "actor", "userRating"};
 
         List<Map<String, Object>> movies = getApiResult(searchItem, fields);
@@ -83,23 +84,24 @@ public class MainService {
                 String title = replace_Title(movie); // 제목 정보를 가져올 때 <b></b>가 붙어있기 때문에 제거해주는 작업
 
                 movie.put("title", title);
-                model.addAttribute("movie", movie);
+//                model.addAttribute("movie", movie);
 
-                return itemLink;
+                return movie;
             } else if (!itemLink.equals("")) { // 검색 결과가 여러개가 나오지만, 링크를 가지고 있는 경우(autoSearch 사용)
                 if (String.valueOf(movie.get("link")).equals(itemLink)) { // item을 통해서 가져오는 link 정보와 autoSearch를 통해 넘겨받은 link 정보를 매치
                     String title = replace_Title(movie); // 제목 정보를 가져올 때 <b></b>가 붙어있기 때문에 제거해주는 작업
 
                     movie.put("title", title);
-                    model.addAttribute("movie", movie);
-                    break;
+//                    model.addAttribute("movie", movie);
+                    return movie;
                 }
             }
             // 검색 결과가 없을 시. 또는 검색 결과가 여러개 나오지만 관련 링크도 가지고 있지 않은 경우(autoSearch 미사용)
             // 오류페이지 리턴 필요 --------------------------+
         }
-        return itemLink;
+        return Collections.emptyMap();
     }
+
 
     /*
     * 사용자가 입력한 검색어에 대한 영화를 검색하고, 필요한 정보만 매핑해서 리턴해주는 로직
@@ -127,7 +129,7 @@ public class MainService {
     /*
      * 리뷰 크롤링 작업
      * 검색에 필요한 링크를 파라미터로 필요
-     * 사이트 URL을 통해서 필요한 정보를 뽑아서 model에 추가해주는 역할
+     * 사이트 URL을 통해서 필요한 정보를 뽑아서 Controller에 리턴 해주는 역할
      * */
     public MainServiceDto reviewCrawlLogic(String movieLink) {
 

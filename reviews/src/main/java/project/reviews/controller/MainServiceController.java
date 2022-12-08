@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 
 /*
@@ -65,6 +66,21 @@ public class MainServiceController {
             // 오류페이지 리턴 필요(검색어가 없을 경우) --------------------------+
         } else if (!searchItem1.equals("") && !searchItem2.equals("")) {
             // 두개의 검색어로 검색했을 시 동작
+            Map<String, Object> movieInfo1 = mainService.movieSearchService(searchItem1, itemLink1);
+            Map<String, Object> movieInfo2 = mainService.movieSearchService(searchItem2, itemLink2);
+
+            itemLink1 = String.valueOf(movieInfo1.get("link"));
+            itemLink2 = String.valueOf(movieInfo2.get("link"));
+
+            MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);
+            MainServiceDto movieInfoDto2 = mainService.reviewCrawlLogic(itemLink2);
+
+            model.addAttribute("movieInfo1", movieInfo1);
+            model.addAttribute("movieInfo2", movieInfo2);
+            model.addAttribute("movieInfoDto1", movieInfoDto1);
+            model.addAttribute("movieInfoDto2", movieInfoDto2);
+
+            return "service/compareServicePage";
         }
 
         /*
@@ -83,9 +99,11 @@ public class MainServiceController {
             itemLink = itemLink2;
         }
 
-        itemLink = mainService.movieSearchService(searchItem, itemLink, model);// 영화 검색 후 정보를 model에 넣는 로직
-        MainServiceDto mainServiceDto = mainService.reviewCrawlLogic(itemLink);
+        Map<String, Object> movieInfo = mainService.movieSearchService(searchItem, itemLink);// 영화 검색 후 정보를 model에 넣는 로직
+        itemLink = String.valueOf(movieInfo.get("link"));
+        MainServiceDto mainServiceDto = mainService.reviewCrawlLogic(itemLink); // 리뷰 정보를 크롤링 후 DTO에 넣어준 결과를 받음
 
+        model.addAttribute("movie", movieInfo);
         model.addAttribute("mainServiceDto", mainServiceDto);
 
         return "service/servicePage";

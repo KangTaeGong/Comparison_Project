@@ -3,11 +3,8 @@ html, body{
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
     background-image: url('/img/movieService_background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
 }
 
 .service_page{

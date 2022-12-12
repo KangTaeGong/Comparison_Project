@@ -4,21 +4,10 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/css/compareService_style.css">
         <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/footer_style.css">
     </head>
     <body>
-            <div class = "header" id="category_header">
-                <div class="logo">
-                    <span>LOGO</span>
-                </div>
-                <ul class="nav">
-                    <li><a href="#category_header">HOME</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Service</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#" id="login_btn">Login</a>
-                    </li>
-                </ul>
-            </div>
+        <div th:replace="~{header :: header}"></div>
             <div class = "service_page">
                 <div class = "service_form">
                     <!-- 검색 파트 -->
@@ -217,5 +206,6 @@
                     </div>
                 </div>
             </div>
+        <div th:replace="~{footer :: footer}"></div>
     </body>
 </html>

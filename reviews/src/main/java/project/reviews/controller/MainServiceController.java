@@ -62,15 +62,22 @@ public class MainServiceController {
     @GetMapping("/mainService")
     public String mainService(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model) {
 
+        String error; // MainService에서 넘겨준 에러 링크 확인용
+
         if(searchItem1.equals("") && searchItem2.equals("")) {
-            // 오류페이지 리턴 필요(검색어가 없을 경우) --------------------------+
+            return "error/notFoundError";
         } else if (!searchItem1.equals("") && !searchItem2.equals("")) {
             // 두개의 검색어로 검색했을 시 동작
             Map<String, Object> movieInfo1 = mainService.movieSearchService(searchItem1, itemLink1);
             Map<String, Object> movieInfo2 = mainService.movieSearchService(searchItem2, itemLink2);
 
             itemLink1 = String.valueOf(movieInfo1.get("link"));
+            error = check_serviceError(itemLink1); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+            if (error != null) return error;
+
             itemLink2 = String.valueOf(movieInfo2.get("link"));
+            error = check_serviceError(itemLink2); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+            if (error != null) return error;
 
             MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);
             MainServiceDto movieInfoDto2 = mainService.reviewCrawlLogic(itemLink2);
@@ -101,11 +108,26 @@ public class MainServiceController {
 
         Map<String, Object> movieInfo = mainService.movieSearchService(searchItem, itemLink);// 영화 검색 후 정보를 model에 넣는 로직
         itemLink = String.valueOf(movieInfo.get("link"));
+        error = check_serviceError(itemLink); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+        if (error != null) return error;
+
         MainServiceDto mainServiceDto = mainService.reviewCrawlLogic(itemLink); // 리뷰 정보를 크롤링 후 DTO에 넣어준 결과를 받음
 
         model.addAttribute("movie", movieInfo);
         model.addAttribute("mainServiceDto", mainServiceDto);
 
         return "service/servicePage";
+    }
+
+    /*
+    * MainService에서 넘겨준 에러를 확인하는 로직
+    * 검색결과에 따라 에러가 발생해야 한다면 link값에는 정상적인 값이 아닌 MainService에서 넘겨준 에러 메시지가 담겨져 있다.
+    * */
+    private String check_serviceError(String itemLink) {
+        if(itemLink.equals("notFoundError"))
+            return "error/notFoundError";
+        else if(itemLink.equals("tooManyResultsError"))
+            return "error/tooManyResultsError";
+        return null;
     }
 }

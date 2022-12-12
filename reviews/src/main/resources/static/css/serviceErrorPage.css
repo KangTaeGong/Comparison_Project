@@ -1,0 +1,62 @@
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body {
+    width: 100%;
+    height:100%;
+}
+
+body {
+    margin: 0;
+}
+
+.error_page {
+    width: 100%;
+    height: 100%;
+    background: #000000;
+}
+
+.image_area {
+    text-align: center;
+}
+
+#logo {
+    margin-top: 100px;
+    width: 800px;
+    height: 420px;
+}
+
+.contents {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.error_info {
+    color: #ffffff;;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 35px;
+    margin-top: 20px;
+}
+
+.button_area {
+    width: 140px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.button_area > a {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+}

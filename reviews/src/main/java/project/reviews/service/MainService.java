@@ -9,7 +9,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import project.reviews.api.NaverMovieApiService;
 import project.reviews.dto.MainServiceDto;
 import project.reviews.dto.MovieReviewDto;
@@ -18,10 +17,7 @@ import project.reviews.dto.ReporterReviewDto;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
 * 2022-12-07
@@ -84,7 +80,6 @@ public class MainService {
                 String title = replace_Title(movie); // 제목 정보를 가져올 때 <b></b>가 붙어있기 때문에 제거해주는 작업
 
                 movie.put("title", title);
-//                model.addAttribute("movie", movie);
 
                 return movie;
             } else if (!itemLink.equals("")) { // 검색 결과가 여러개가 나오지만, 링크를 가지고 있는 경우(autoSearch 사용)
@@ -92,14 +87,24 @@ public class MainService {
                     String title = replace_Title(movie); // 제목 정보를 가져올 때 <b></b>가 붙어있기 때문에 제거해주는 작업
 
                     movie.put("title", title);
-//                    model.addAttribute("movie", movie);
                     return movie;
                 }
             }
-            // 검색 결과가 없을 시. 또는 검색 결과가 여러개 나오지만 관련 링크도 가지고 있지 않은 경우(autoSearch 미사용)
-            // 오류페이지 리턴 필요 --------------------------+
+
+            /*
+            * 에러페이지 송출을 위한 로직
+            * MainServiceController에서 link값을 확인하기 때문에 에러 페이지 정보를 링크에 넣어서 리턴
+            * */
+            movie.put("link", "tooManyResultsError"); // 검색된 결과가 너무 많다면 link에 메시지를 적어서 controller에 전달
+
+            return movie;
         }
-        return Collections.emptyMap();
+        
+        // 모든 조건문에 걸리지 않았다면 결국 아무값도 찾지 못했다는 것이므로 map을 하나 따로 만들어서 위와 같이 link에 메시지를 넣고 리턴
+        Map<String, Object> errorMap = new HashMap<>();
+        errorMap.put("link", "notFoundError");
+        return errorMap;
+//        return Collections.emptyMap();
     }
 
 
@@ -200,7 +205,6 @@ public class MainService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // 오류페이지 리턴 필요 --------------------------+
         return null;
     }
 

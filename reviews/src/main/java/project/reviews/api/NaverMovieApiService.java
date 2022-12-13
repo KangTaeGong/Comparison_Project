@@ -5,6 +5,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,26 +24,28 @@ import java.util.Map;
 * 네이버 영화 검색 API
 * */
 @Slf4j
-public class NaverMovieApi {
+@Service
+public class NaverMovieApiService {
 
     final String baseUrl = "https://openapi.naver.com/v1/search/movie.json?query=";
 
     /*
     * 네이버 영화 검색 API를 통해서 검색어에 따른 결과 검색
     * */
-    public String search(String clientId, String secret, String _url) {
+    public String search(String _url) {
         HttpURLConnection con = null;
         String result = "";
-
+        int display = 100; // 한번에 표시할 검색 결과의 수
+        
         try{
             // query 값을 받은 뒤 baseUrl과 연결
-            URL url = new URL(baseUrl + _url);
+            URL url = new URL(baseUrl + _url + "&display=" + display);
             con = (HttpURLConnection) url.openConnection();
 
             // GET방식으로 가져오며 지급받은 id, secret을 넘겨준다.
             con.setRequestMethod("GET");
-            con.setRequestProperty("X-Naver-Client-Id", clientId);
-            con.setRequestProperty("X-Naver-Client-Secret", secret);
+            con.setRequestProperty("X-Naver-Client-Id", NaverApiClientInfo.client_id);
+            con.setRequestProperty("X-Naver-Client-Secret", NaverApiClientInfo.client_secret);
 
             // 응답 코드가 200이면 값을 읽어오고, 아니라면 예외 발생
             int responseCode = con.getResponseCode();

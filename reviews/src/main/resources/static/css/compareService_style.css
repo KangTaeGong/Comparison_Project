@@ -1,5 +1,4 @@
 html, body{
-
 }
 
 body {
@@ -15,14 +14,12 @@ body {
 }
 
 .service_form{
-    width: 60%;
-    height: 100%;
-    background: #ffffff;
+    width: 80%;
 }
 
 .search_area {
     margin-top: 10%;
-    height: 70px;
+    height: 100px;
 }
 
 .search_function{
@@ -43,31 +40,60 @@ body {
     padding: 8px;
 }
 
+.search_btn {
+    text-align: center;
+    margin-top: 10px;
+}
+
 #search_btn {
     width: 85px;
     height: 40px;
     border: 1px solid #d0d0d0;
     font-size: 16px;
     border-radius: 10px;
+    align-items: center;
     cursor: pointer;
 }
 
-.title{
-    width: 100%;
-    text-align: center;
-    margin-top: 70px;
-    margin-bottom: 60px;
+.service_left{
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    float: left;
+    box-sizing: border-box;
+    margin-top: 30px;
+    border-right: 3px solid gray;
 }
 
-#service_picture{
+.left_picture{
+    width: 100px;
+    height: 100px;
+    border: 1px solid gray;
+}
+
+.service_picture{
     width: 120px;
     height: 150px;
 }
 
+.service_right{
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    margin-top: 30px;
+    float: right;
+    box-sizing: border-box;
+
+}
+
 .info_area{
     display: flex;
-    padding: 10px 0px 30px 100px;
+    padding: 50px 0px 40px 30px;
     border-bottom: 1px solid gray;
+}
+
+.result_info{
+    margin-left: 20px;
 }
 
 .result_info > div {
@@ -77,16 +103,15 @@ body {
     margin-bottom: 10px;
 }
 
+.info_title{
+    font-size: 25px;
+}
 
 .review_area {
     background: #ffffff;
     margin-top: 20px;
     padding: 0px 25px 20px 25px;
 }
-
-/*
-관람객 한줄평 리뷰 관련 css
-*/
 
 .score_board {
     border-bottom: 1px solid #dddddd;
@@ -95,6 +120,13 @@ body {
 
 .board {
     font-size: 15px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
 }
 
 .sp {
@@ -113,6 +145,14 @@ body {
     color: #ff6633;
 }
 
+.score_result > ul > li {
+    position: relative;
+    float: none;
+    padding: 14px 0 13px 0;
+    margin: 10px 0px 20px 0px;
+    margin-bottom: 20px;
+}
+
 .star_score {
     font-size: 16px;
     color: #333;
@@ -123,12 +163,9 @@ body {
     margin-right: 12px;
 }
 
-.score_result > ul > li {
-    position: relative;
-    float: none;
-    padding: 14px 0 13px 0;
-    margin: 10px 0px 20px 0px;
-    margin-bottom: 20px;
+.star_image {
+    width: 80px;
+    height: 25px;
 }
 
 .star_score > em {
@@ -138,10 +175,6 @@ body {
     font-weight: bold;
     font-size: 18px;
     vertical-align: top;
-}
-.star_image {
-    width: 80px;
-    height: 25px;
 }
 
 .score_reple {
@@ -155,32 +188,9 @@ body {
     margin-top: -2px;
 }
 
-/*
-구 버전 기자, 평론과 관련 css
-*/
-.score_reple > dl {
-    margin: 8px 0px 10px;
-}
-
-.score_reple > dl > dt {
-    font-size: 13px;
-    color: #a1a1a1;
-}
-
-/*
-기자, 평론가 관련 css
-*/
-.reporter > ul {
-    list-style: none;
-}
-
 .reporter > ul > li {
     padding: 20px 0 15px 0;
     border-bottom: 1px dashed gray;
-}
-
-.reporter_line {
-    float: none;
 }
 
 .thumb {
@@ -191,7 +201,6 @@ body {
 }
 
 .thumb > a {
-    display: block;
     height: 38px;
 }
 
@@ -202,7 +211,6 @@ body {
 }
 
 .p_review > dt > a {
-    display: inline-block;
     margin-right: 5px;
     color: #333;
     font-weight: bold;
@@ -229,4 +237,9 @@ body {
     color: #333;
     line-height: 24px;
     margin-left: 58px;
+}
+
+.add_area {
+    height:100%;
+    background: #ffffff;
 }

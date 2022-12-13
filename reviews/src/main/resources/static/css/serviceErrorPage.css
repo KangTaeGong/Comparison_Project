@@ -35,17 +35,28 @@ body {
     margin-top: 50px;
 }
 
-.error_title {
-    color: #ff0000;
-    font-weight: bold;
-    font-size: 40px;
-
-}
-
 .error_info {
     color: #ffffff;;
-    font-weight: 550;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 23px;
     line-height: 35px;
     margin-top: 20px;
+}
+
+.button_area {
+    width: 140px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.button_area > a {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
 }

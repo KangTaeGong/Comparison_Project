@@ -178,7 +178,7 @@ public class MainService {
             Elements reporterHtmlElements = reviewDocument.select("div.reporter"); // 기자, 평론가 리뷰(사진 포함)
             String reporterHtml = reporterHtmlElements.html(); // 기자, 평론가 관련 리뷰를 html 형식으로 저장
 
-            // 구 버전 기자, 평론가 리뷰
+            // 사진 없는 기자, 평론가 리뷰
             Elements ReporterScoreElements = reviewDocument.select("div.score140 > div.score_result > ul > li > div.star_score > em"); // 점수
             Elements ReporterRepleElements = reviewDocument.select("div.score140 > div.score_result > ul > li > div.score_reple > p"); // 리뷰
             Elements ReporterNameElements = reviewDocument.select("div.score140 > div.score_result > ul > li > div.score_reple > dl"); // 이름

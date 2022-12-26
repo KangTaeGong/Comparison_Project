@@ -26,131 +26,155 @@
     </style>
     </head>
     <body>
-        <div class = "main">
-            <div class="intro_bg">
-                <div th:replace="~{header :: header}">
 
+        <div th:replace="~{header :: header}"></div>
+
+        <div class="banner">
+            <div class="left-column">
+                <div class="search_area">
+                    <form th:action="@{/mainService}" name="post_form" method="get">
+                        <ul>
+                            <li>
+                                <div class="search_box">
+                                    <img th:src="@{/img/search.png}">
+                                    <input type="text" id="autocompleteText" name="searchItem1" placeholder="검색어를 입력하세요."
+                                           aria-label="Search">
+                                    <!--hidden을 통해서 선택된 item의 link값을 넘겨줌-->
+                                    <input type="hidden" name="itemLink1" value="">
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="search_box">
+                                    <img th:src="@{/img/search.png}">
+                                    <input type="text" id="autocompleteText2" name="searchItem2" placeholder="검색어를 입력하세요."
+                                           aria-label="Search">
+                                    <input type="hidden" name="itemLink2" value="">
+                                </div>
+                            </li>
+<!--                            <li>-->
+<!--                                <input type="submit" id="search_btn" value="검색">-->
+<!--                            </li>-->
+                        </ul>
+                    </form>
                 </div>
-                <div class = "intro_text">
-                    <h1>시소별</h1>
-                    <h3>각종 리뷰를 검색, 비교해 줍니다.</h3>
-                </div>    
+                <h1>Lee<span>Search</span></h1>
+                <h3>Search all the movies <span>here!</span></h3>
+                <p>
+                    해당 페이지는 영화를 검색, 비교할 수 있는 기능을 이용할 수 있습니다.<br>
+                    현재 사이트는 수입이 전혀 없는 사이트임을 알려드립니다.
+                    <br>
+                    <br>
+                    This page has the ability to search for movies and compare them.<br>
+                    Inform you that the site currently has no income at all.
+                </p>
+                <div class="more_btn">
+                    <span class="learnMore_btn">
+                        <a href="#">Learn More</a>
+                    </span>
+                    <span class="service_btn">
+                        <a href="#">About Service</a>
+                    </span>
+                </div>
             </div>
-            <!-- intro End -->
-            <div class="search_area">
-                <form th:action="@{/mainService}" name="post_form" method="get">
-                    <ul>
-                        <li>
-                            <input type="text" id="autocompleteText" name="searchItem1" placeholder="검색어를 입력하세요."
-                                   aria-label="Search">
-                            <!--hidden을 통해서 선택된 item의 link값을 넘겨줌-->
-                            <input type="hidden" name="itemLink1" value="">
-                        </li>
-                        <li>
-                            <input type="text" id="autocompleteText2" name="searchItem2" placeholder="검색어를 입력하세요."
-                                   aria-label="Search">
-                            <input type="hidden" name="itemLink2" value="">
-                        </li>
-                        <li>
-                            <input type="submit" id="search_btn" value="검색">
-                        </li>
-                    </ul>
-                </form>
+            <div class="right-column">
+                <img th:src="@{/img/star_logo_white.png}">
             </div>
+        </div>
 
-            <!--메인 화면의 첫번째 검색 창-->
-            <script>
-                $(document).ready(function() {
-                    $( "#autocompleteText" ).autocomplete({
-                        source : function( request, response ) {
-                            $.ajax({
-                                type : 'get',
-                                url: "autoSearch",
-                                dataType: "json",
-                                data: {
-                                  searchValue: request.term // 사용자가 입력하는 값
-                                },
-                                success: function( data ) {
-                                    response(
-                                        $.map( data, function( item ) {
-                                            return {
-                                                label: item.title, // 목록에 표시되는 값
-                                                value: item.title, // 선택 시 input창에 표시되는 값
-                                                avatar: item.img,
-                                                url_link: item.link
-                                            }
-                                        })
-                                    );
-                                }
-                            });
-                        },
-                        select : function(event, ui) { // 이벤트 선택시 위에서 선언한 hidden에 link값을 value에 넣어준다.
-                            document.post_form.itemLink1.value = ui.item.url_link;
-                        },
-                        focus : function(event, ui) { // 포커스 시 이벤트
-                            return false; // 방향키로 바로 선택 방지(enter시 선택)
-                        },
-                        minLength: 1,
-                        delay : 1000, // 입력창에 글자가 써지고나서 autocomplete 이벤트 발생될 때 까지 지연 시간(ms)
-                        close : function(event) { // 자동완성 창 닫아질 때의 이벤트
-                            console.log(event);
-                        }
-                    }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
-                        return $('<li>') //기본 tag가 li
-                        .append('<div>' +
-                                    '<img id="autocomplete-image" src="' + item.avatar + '"/>' +
-                                     '<span id="autocomplete-title">' + item.label + '</span>' + '</div>') // 원하는 모양의 HTML 만들면 됨
-                        .appendTo(ul);
-                    };
-                });
-            </script>
 
-            <!--메인 화면의 두번째 검색 창-->
-            <script>
-                $(document).ready(function() {
-                    $( "#autocompleteText2" ).autocomplete({
-                        source : function( request, response ) {
-                            $.ajax({
-                                type : 'get',
-                                url: "autoSearch",
-                                dataType: "json",
-                                data: {
-                                  searchValue: request.term // 사용자가 입력하는 값
-                                },
-                                success: function( data ) {
-                                    response(
-                                        $.map( data, function( item ) {
-                                            return {
-                                                label: item.title, // 목록에 표시되는 값
-                                                value: item.title, // 선택 시 input창에 표시되는 값
-                                                avatar: item.img,
-                                                url_link: item.link
-                                            }
-                                        })
-                                    );
-                                }
-                            });
-                        },
-                        select : function(event, ui) { // 이벤트 선택시 위에서 선언한 hidden에 link값을 value에 넣어준다.
-                            document.post_form.itemLink2.value = ui.item.url_link;
-                        },
-                        focus : function(event, ui) { // 포커스 시 이벤트
-                            return false; // 방향키로 바로 선택 방지(enter시 선택)
-                        },
-                        minLength: 1,
-                        delay : 1000, // 입력창에 글자가 써지고나서 autocomplete 이벤트 발생될 때 까지 지연 시간(ms)
-                        close : function(event) { // 자동완성 창 닫아질 때의 이벤트
-                            console.log(event);
-                        }
-                    }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
-                        return $('<li>') //기본 tag가 li
-                        .append('<div>' +
-                                    '<img id="autocomplete-image" src="' + item.avatar + '"/>' +
-                                     '<span id="autocomplete-title">' + item.label + '</span>' + '</div>') // 원하는 모양의 HTML 만들면 됨
-                        .appendTo(ul);
-                    };
-                });
-            </script>
-        </div>    
+        <!--메인 화면의 첫번째 검색 창-->
+        <script>
+             $(document).ready(function() {
+                   $( "#autocompleteText" ).autocomplete({
+                       source : function( request, response ) {
+                           $.ajax({
+                               type : 'get',
+                               url: "autoSearch",
+                               dataType: "json",
+                               data: {
+                                 searchValue: request.term // 사용자가 입력하는 값
+                               },
+                               success: function( data ) {
+                                   response(
+                                       $.map( data, function( item ) {
+                                           return {
+                                               label: item.title, // 목록에 표시되는 값
+                                               value: item.title, // 선택 시 input창에 표시되는 값
+                                               avatar: item.img,
+                                               url_link: item.link
+                                           }
+                                       })
+                                   );
+                               }
+                           });
+                       },
+                       select : function(event, ui) { // 이벤트 선택시 위에서 선언한 hidden에 link값을 value에 넣어준다.
+                           document.post_form.itemLink1.value = ui.item.url_link;
+                       },
+                       focus : function(event, ui) { // 포커스 시 이벤트
+                           return false; // 방향키로 바로 선택 방지(enter시 선택)
+                       },
+                       minLength: 1,
+                       delay : 1000, // 입력창에 글자가 써지고나서 autocomplete 이벤트 발생될 때 까지 지연 시간(ms)
+                       close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+                           console.log(event);
+                       }
+                   }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
+                       return $('<li>') //기본 tag가 li
+                       .append('<div>' +
+                                   '<img id="autocomplete-image" src="' + item.avatar + '"/>' +
+                                    '<span id="autocomplete-title">' + item.label + '</span>' + '</div>') // 원하는 모양의 HTML 만들면 됨
+                       .appendTo(ul);
+                   };
+             });
+        </script>
+
+        <!--메인 화면의 두번째 검색 창-->
+        <script>
+            $(document).ready(function() {
+                $( "#autocompleteText2" ).autocomplete({
+                    source : function( request, response ) {
+                        $.ajax({
+                            type : 'get',
+                            url: "autoSearch",
+                            dataType: "json",
+                            data: {
+                              searchValue: request.term // 사용자가 입력하는 값
+                            },
+                            success: function( data ) {
+                                response(
+                                    $.map( data, function( item ) {
+                                        return {
+                                            label: item.title, // 목록에 표시되는 값
+                                            value: item.title, // 선택 시 input창에 표시되는 값
+                                            avatar: item.img,
+                                            url_link: item.link
+                                        }
+                                    })
+                                );
+                            }
+                        });
+                    },
+                    select : function(event, ui) { // 이벤트 선택시 위에서 선언한 hidden에 link값을 value에 넣어준다.
+                        document.post_form.itemLink2.value = ui.item.url_link;
+                    },
+                    focus : function(event, ui) { // 포커스 시 이벤트
+                        return false; // 방향키로 바로 선택 방지(enter시 선택)
+                    },
+                    minLength: 1,
+                    delay : 1000, // 입력창에 글자가 써지고나서 autocomplete 이벤트 발생될 때 까지 지연 시간(ms)
+                    close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+                        console.log(event);
+                    }
+                }).autocomplete('instance')._renderItem = function(ul, item) { // UI 변경 부
+                    return $('<li>') //기본 tag가 li
+                    .append('<div>' +
+                                '<img id="autocomplete-image" src="' + item.avatar + '"/>' +
+                                 '<span id="autocomplete-title">' + item.label + '</span>' + '</div>') // 원하는 모양의 HTML 만들면 됨
+                    .appendTo(ul);
+                };
+            });
+        </script>
     </body>
 </html>

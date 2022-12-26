@@ -10,24 +10,23 @@
 .header{
     display: flex;
     width: 100%;
-    height: 60px;
-    margin: auto;
-    background: #202020;
+    height: 100px;
+    border-bottom: 1px solid rgba(226, 226, 226, 0.363);
 }
 
 .logo{
+    margin-left: 80px;
+    padding-top: 10px;
+}
+
+#logo_image {
     width: 150px;
-    height: 60px;
-    margin:auto;
-    background: red;
+    height: 80px;
 }
 
 .nav{
     display: flex;
-    justify-content: flex-end;
     margin: auto;
-    line-height: 60px;
-    /*width:calc(100% - 300px);*/
     font-size: 18px;
 }
 
@@ -36,7 +35,40 @@
 }
 
 .nav > li > a{
-    color:white;
+    color:black;
+}
+
+.text_end {
+    margin-right: 120px;
+}
+
+.text_end > div {
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.login_btn, .sign-up_btn{
+    width: 95px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 37px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: rgb(208, 240, 240);
+}
+
+.login_btn > a{
+    color:black;
+}
+
+.sign-up_btn{
+    margin-left: 30px;
+    background-color: rgb(241, 200, 241);
+}
+
+.sign-up_btn > a{
+    color:black;
 }
 
 .nav > li > label{

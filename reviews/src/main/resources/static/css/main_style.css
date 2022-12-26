@@ -1,50 +1,82 @@
-.intro_bg{
-    background: skyblue;
-    width: 100%;
-    height: 280px;
+.banner {
+    display: flex;
+    margin-top: 80px;
+    padding: 0 0 0 200px;
 }
 
-.intro_text{
-    width: 100%;
-    margin: 70px auto 70px auto;
-    text-align: center;
+.right-column {
+    flex-basis: 55%;
+    padding-top: 50px;
+}
+
+.left-column {
+    padding: 10px 0 0 50px;
+    flex-basis: 43%;
 }
 
 .search_area{
-    width: 100%;
-    height: 200px;
-    background-color: white;
-    margin-top: 150px;
+    width: 65%;
+    padding-bottom: 3px;
+    margin: 10px 0 30px;
 }
 
-.search_area > form{
+.search_box{
+    margin-bottom: 30px;
     display: flex;
-    justify-content: center;
+    border-bottom: 1px solid #ddd;
 }
 
-.search_area > form > ul > li{
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.search_area > form > ul > li > input:not(#search_btn){
-    border: 1px solid skyblue;
-    border-radius: 10px;
-    width: 400px;
-    height: 50px;
-    background: white;
-    color: black;
-    padding-left: 10px;
-}
-
-#search_btn {
-    width: 150px;
-    height: 45px;
-    border: 1px solid skyblue;
-    background: rgb(32, 144, 189);
-    color: white;
-    font-size: 16px;
-    border-radius: 10px;
+.search_box > img {
+    width: 35px;
+    height: 35px;
     cursor: pointer;
+}
+
+.search_box > input {
+    width: 100%;
+    margin-left: 15px;
+    font-size: 20px;
+    border: 0;
+    outline: none;
+}
+
+.left-column > h1 {
+    font-size: 100px;
+}
+
+.left-column > h3 {
+    font-size: 35px;
+}
+
+.left-column > h1 > span, .left-column > h3 > span {
+    color: #c188da;
+}
+
+.left-column > p {
+    font-size: 14px;
+    color: #999;
+    margin: 50px 0;
+}
+
+.more_btn > span{
+    padding: 7px 30px;
+    margin-right: 15px;
+    outline: none;
+    border: 1px solid #c188da;
+    border-radius: 20px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.more_btn > .service_btn > a {
+    color: #c188da;
+}
+
+.more_btn > .learnMore_btn {
+    background: linear-gradient(#e7acec, #df7dd7);
+    box-shadow: 0 2px 15px rgba(233, 71, 184, 0.26);
+}
+
+.learnMore_btn > a {
+    color: #fff;
 }

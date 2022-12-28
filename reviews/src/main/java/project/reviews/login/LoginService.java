@@ -24,7 +24,7 @@ public class LoginService {
     /*
     * return값이 null이면 로그인 실패
     * */
-    public FindUserDto login(String userId, String password) {
+    public FindUserDto login(String userId, String password) throws UserNotFoundException {
 
         FindUserDto findUser = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

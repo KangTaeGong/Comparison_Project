@@ -13,42 +13,37 @@
         </style>
     </head>
     <body>
-        <div class = "login_page">
-            <div class = "login_form">
-                <div class="logo">LOGO</div>
-                <form th:action th:object="${loginForm}" method="post">
-                    <ul>
-                        <li>
-                            <input type="text" name="loginId" placeholder="아이디" th:field="*{loginId}" class="form-info"
-                                th:errorclass="field-error">
-                            <div class="field-error" th:errors="*{loginId}"/>
-                        </li>
-                        <li>
-                            <input type="password" name="password" placeholder="비밀번호" th:field="*{password}" class="form-info"
-                                th:errorclass="field-error">
-                            <div class="field-error" th:errors="*{password}"/>
-                        </li>
-                        <li>
-                            <div th:if="${#fields.hasGlobalErrors()}">
-                                <p class="field-error" th:each="err : ${#fields.globalErrors()}"
-                                   th:text="${err}">오류 메시지</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class = "login_btn">
-                                <input type="submit" value="로그인">
-                            </div>
-                        </li>
-                    </ul>
-                </form>
-                <div class="additional">
-                    <span><a href="joinPage.html" th:href="@{/join}">회원가입</a></span>
-                    <span>|</span>
-                    <span><a href="#">아이디 찾기</a></span>
-                    <span>|</span>
-                    <span><a href="#">비밀번호 찾기</a></span>
-                </div>
+        <div class="center">
+            <div class="image_box">
+                <img src="/img/main_logo.png" class="logo_img">
             </div>
+
+            <form th:action th:object="${loginForm}" method="post">
+                <div class="txt_field">
+                    <input type="text" name="loginId" th:field="*{loginId}" class="form-info"
+                           th:errorclass="field-error" required>
+                    <div class="field-error" th:errors="*{loginId}"/>
+                    <span></span>
+                    <label>ID</label>
+                </div>
+                <div class="txt_field">
+                    <input type="password" name="password" th:field="*{password}" class="form-info"
+                           th:errorclass="field-error" required>
+                    <div class="field-error" th:errors="*{password}"/>
+                    <span></span>
+                    <label>Password</label>
+                </div>
+
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                       th:text="${err}"></p>
+                </div>
+
+                <input type="submit" value="Login">
+                <div class="signup_link">
+                    Not a member? <a th:href="@{/join}">SignUp</a>
+                </div>
+            </form>
         </div>
     </body>
 </html>

@@ -10,7 +10,7 @@
         </div>
         <div class = "community_page">
             <div class = "community_form">
-                <div class = "intro_text">게시판</div>
+                <div class = "intro_text">자유게시판</div>
                 <div class = "function_form">
                     <form th:action method="get">
                         <div class = "create_btn">
@@ -24,11 +24,20 @@
                 </div>
                 <div class = "table_form">
                 <table>
+                    <colgroup>
+                        <col style="width:5%">
+                        <col style="width:40%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:5%">
+                    </colgroup>
+
                     <thead>
                     <tr>
                         <th>No.</th>
                         <th>제목</th>
                         <th>글쓴이</th>
+                        <th>작성일</th>
                         <th>조회수</th>
                     </tr>
                     </thead>
@@ -38,10 +47,11 @@
                             <td th:text="${count}"></td>
                         </th:block>-->
                         <td th:text="${posting.id}"></td>
-                        <td>
+                        <td class="table_title">
                             <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
                         </td>
                         <td th:text="${posting.writer}"></td>
+                        <td th:text="2011-02-01"></td>
                         <td th:text="${posting.hits}"></td>
                     </tr>
                     </tbody>

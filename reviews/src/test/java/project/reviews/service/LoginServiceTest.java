@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.dto.FindUserDto;
+import project.reviews.exception.UserNotFoundException;
 import project.reviews.login.JoinForm;
 import project.reviews.login.LoginService;
 import project.reviews.repository.UserRepository;
@@ -24,10 +25,25 @@ public class LoginServiceTest {
         JoinForm form = new JoinForm("홍기동", "aaa1234", "aaabb111@", "aaabb111@");
         Long savedId = userService.join(form);
 
+        FindUserDto findUser = null;
         //when
-        FindUserDto findUser = loginService.login("aaa1234", "aaabb111@");
-
+        try {
+            findUser = loginService.login("aaa1234", "aaabb111@");
+        } catch(UserNotFoundException e) {
+            e.printStackTrace();
+        }
         //then
         Assertions.assertEquals(form.getUserName(), findUser.getUserName());
+    }
+
+    @Test
+    void loginException_Test() {
+        //given
+        JoinForm form = new JoinForm("홍기동", "aaa1234", "aaabb111@", "aaabb111@");
+        Long savedId = userService.join(form);
+
+        Assertions.assertThrows(UserNotFoundException.class, () -> {
+            loginService.login("aaa34", "aaa1@");
+        });
     }
 }

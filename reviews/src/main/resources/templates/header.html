@@ -8,32 +8,36 @@
 <body>
     <div th:fragment="header" class = "header" id="category_header">
         <div class="logo">
-            <span>LOGO</span>
+            <img id="logo_image" src="/img/main_logo.png">
         </div>
         <ul class="nav">
             <li><a th:href="@{/}">HOME</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Service</a></li>
+            <li><a th:href="@{/aboutPage}">About</a></li>
+            <li><a th:href="@{/servicePage}">Service</a></li>
             <li><a th:href="@{/community/list}">Community</a></li>
-            <li>
-<!--                <div sec:authorize="isAnonymous()">-->
-                <a href="#" th:href="@{/login}" th:if="${user == null}">Login</a> <!--th:if="${user == null}"-->
-<!--                </div>-->
-            </li>
-            <li>
-<!--                <div sec:authorize="isAuthenticated()">-->
-<!--                    <span th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름</span> &lt;!&ndash;th:if="${user != null}"&ndash;&gt;-->
-                <label th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름></label>
-<!--                </div>-->
-            </li>
-            <li>
-<!--                <div sec:authorize="isAuthenticated()">-->
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="로그아웃" id="logout_btn" th:if="${user != null}"> <!-- th:if="${user != null}"-->
-                    </form>
-<!--                </div>-->
-            </li>
         </ul>
+
+        <div class="text_end">
+            <div class="login_btn" th:if="${user == null}">
+                <a href="#" th:href="@{/login}">Login</a> <!--th:if="${user == null}"-->
+            </div>
+
+            <div class="sign-up_btn" th:if="${user == null}">
+                <a href="#" th:href="@{/join}">Sign-up</a>
+            </div>
+
+            <div>
+                <label th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름></label>
+            </div>
+
+            <div>
+                <form th:action="@{/logout}" method="post" th:if="${user != null}">
+                    <input type="submit" value="로그아웃" id="logout_btn"> <!-- th:if="${user != null}"-->
+                </form>
+            </div>
+
+            </li>
+        </div>
     </div>
 </body>
 </html>

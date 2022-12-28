@@ -30,9 +30,7 @@ public class MainServiceController {
 
     /*
     * 검색어 입력에 따라 사용자가 원하는 정보를 가져오는 로직
-    * NaverMovieApi의 search 메소드를 통해서 정보 검색
-    * readBody를 통해서 검색된 정보를 모두 가져온다.
-    * getResultMapping을 통해서 그중 원하는 정보만(fields) Map의 key를 통해서 가져온다.
+    * MainService에서 NaverMovieApiService의 search 메소드를 통해서 정보를 검색한다.
     * */
     @GetMapping(value = "/autoSearch", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -106,7 +104,7 @@ public class MainServiceController {
             itemLink = itemLink2;
         }
 
-        Map<String, Object> movieInfo = mainService.movieSearchService(searchItem, itemLink);// 영화 검색 후 정보를 model에 넣는 로직
+        Map<String, Object> movieInfo = mainService.movieSearchService(searchItem, itemLink);// 영화 정보 검색
         itemLink = String.valueOf(movieInfo.get("link"));
         error = check_serviceError(itemLink); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
         if (error != null) return error;

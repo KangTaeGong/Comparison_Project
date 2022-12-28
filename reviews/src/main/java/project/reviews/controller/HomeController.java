@@ -35,4 +35,14 @@ public class HomeController {
         model.addAttribute("user", loginUser);
         return "main/mainPage";
     }
+
+    @GetMapping("/aboutPage")
+    public String aboutPage() {
+        return "main/aboutPage";
+    }
+
+    @GetMapping("/servicePage")
+    public String servicePage() {
+        return "main/servicePage";
+    }
 }

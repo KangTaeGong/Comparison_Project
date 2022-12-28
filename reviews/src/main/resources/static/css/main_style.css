@@ -29,7 +29,6 @@
 .search_box > img {
     width: 35px;
     height: 35px;
-    cursor: pointer;
 }
 
 .search_box > input {
@@ -38,6 +37,19 @@
     font-size: 20px;
     border: 0;
     outline: none;
+}
+
+#search_btn {
+    width: 170px;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(120deg, #eb93f3, #f763ea);
+    box-shadow: 0 2px 15px rgba(243, 57, 187, 0.26);
+    color: #fff;
+    font-size: 19px;
+    float:right;
+    cursor: pointer;
 }
 
 .left-column > h1 {
@@ -68,7 +80,7 @@
     background: transparent;
 }
 
-.more_btn > .service_btn > a {
+.more_btn > .about_btn > a {
     color: #c188da;
 }
 

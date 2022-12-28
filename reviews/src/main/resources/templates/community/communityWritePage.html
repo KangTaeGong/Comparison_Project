@@ -17,7 +17,7 @@
         </div>
         <div class = "write_page">
             <div class = "write_form">
-                <div class = "intro_text">글 쓰기</div>
+                <div class = "intro_text">게시글 작성</div>
                 <form th:action th:object="${postingForm}" method="post">
                     <table class = "contents">
                         <tr>
@@ -42,10 +42,8 @@
                     </div>
 
                     <div class = "btn_form">
-                        <div class = "write_btn">
-                            <input type="submit" value="저장">
-                        </div>
-    
+                        <input type="submit" value="저장" class="write_btn">
+
                         <div class = "cancel_btn">
                             <a th:href="@{/community/list}">취소</a>
                         </div>

@@ -90,18 +90,21 @@ public class MainService {
                     return movie;
                 }
             }
+        }
 
-            /*
-            * 에러페이지 송출을 위한 로직
-            * MainServiceController에서 link값을 확인하기 때문에 에러 페이지 정보를 링크에 넣어서 리턴
-            * */
-            movie.put("link", "tooManyResultsError"); // 검색된 결과가 너무 많다면 link에 메시지를 적어서 controller에 전달
+        Map<String, Object> errorMap = new HashMap<>();
 
-            return movie;
+        /*
+         * 에러페이지 송출을 위한 로직
+         * MainServiceController에서 link값을 확인하기 때문에 에러 페이지 정보를 링크에 넣어서 리턴
+         * */
+        if (!movies.isEmpty()) {
+            errorMap.put("link", "tooManyResultsError"); // 검색된 결과가 너무 많다면 link에 메시지를 적어서 controller에 전달
+
+            return errorMap;
         }
         
         // 모든 조건문에 걸리지 않았다면 결국 아무값도 찾지 못했다는 것이므로 map을 하나 따로 만들어서 위와 같이 link에 메시지를 넣고 리턴
-        Map<String, Object> errorMap = new HashMap<>();
         errorMap.put("link", "notFoundError");
         return errorMap;
 //        return Collections.emptyMap();

@@ -3,12 +3,14 @@ package project.reviews.login;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import project.reviews.service.UserService;
+import project.reviews.validation.ValidationSequence;
 
 import javax.validation.Valid;
 
@@ -41,7 +43,7 @@ public class JoinController {
     }
 
     @PostMapping("/join")
-    public String join(@Valid @ModelAttribute("joinForm") JoinForm form, BindingResult bindingResult) {
+    public String join(@Validated(ValidationSequence.class) @ModelAttribute("joinForm") JoinForm form, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             return "login/joinPage";

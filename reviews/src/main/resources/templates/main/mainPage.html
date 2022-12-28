@@ -36,7 +36,7 @@
                         <ul>
                             <li>
                                 <div class="search_box">
-                                    <img th:src="@{/img/search.png}">
+                                    <img src="/img/search.png">
                                     <input type="text" id="autocompleteText" name="searchItem1" placeholder="검색어를 입력하세요."
                                            aria-label="Search">
                                     <!--hidden을 통해서 선택된 item의 link값을 넘겨줌-->
@@ -46,15 +46,15 @@
                             </li>
                             <li>
                                 <div class="search_box">
-                                    <img th:src="@{/img/search.png}">
+                                    <img src="/img/search.png">
                                     <input type="text" id="autocompleteText2" name="searchItem2" placeholder="검색어를 입력하세요."
                                            aria-label="Search">
                                     <input type="hidden" name="itemLink2" value="">
                                 </div>
                             </li>
-<!--                            <li>-->
-<!--                                <input type="submit" id="search_btn" value="검색">-->
-<!--                            </li>-->
+                            <li>
+                                <input type="submit" id="search_btn" value="검색">
+                            </li>
                         </ul>
                     </form>
                 </div>
@@ -70,15 +70,15 @@
                 </p>
                 <div class="more_btn">
                     <span class="learnMore_btn">
-                        <a href="#">Learn More</a>
+                        <a th:href="@{/servicePage}">Learn More</a>
                     </span>
-                    <span class="service_btn">
-                        <a href="#">About Service</a>
+                    <span class="about_btn">
+                        <a th:href="@{/aboutPage}">About Service</a>
                     </span>
                 </div>
             </div>
             <div class="right-column">
-                <img th:src="@{/img/star_logo_white.png}">
+                <img src="/img/star_logo_white.png">
             </div>
         </div>
 

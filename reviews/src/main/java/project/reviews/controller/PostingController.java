@@ -36,7 +36,6 @@ public class PostingController {
                               @PageableDefault(page = 0, size = 15)Pageable pageable, String postingInfo) {
 
         // communityPage.html에서 name = postingInfo값을 넘겨주어 게시글 검색을 한다.
-        log.info("postingInfo = {}", postingInfo);
         Page<PostingResponseDto> postingList = postingService.getPosting_paging(pageable, postingInfo);
         int currentPage = postingList.getPageable().getPageNumber()+1;
         int startPage = 1;

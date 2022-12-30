@@ -30,7 +30,6 @@ public class Posting extends BaseTimeEntity {
     private int hits; // 조회수
     
     private String password; // 수정, 삭제시 사용할 패스워드
-
     public Posting(String title, String content, String writer, String password, int hits) {
         this.title = title;
         this.content = content;

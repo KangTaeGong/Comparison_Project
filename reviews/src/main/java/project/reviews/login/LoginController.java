@@ -2,10 +2,7 @@ package project.reviews.login;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,13 +37,14 @@ public class LoginController {
     public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURI, HttpServletRequest request) {
 
+        log.info("@PosMapping(/login) 실행");
         if(bindingResult.hasErrors()) {
             return "login/loginPage";
         }
 
         FindUserDto loginUser;
 
-        try{
+        try {
             loginUser = loginService.login(form.getLoginId(), form.getPassword());
         } catch(UserNotFoundException e) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -63,6 +61,7 @@ public class LoginController {
         // 세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_USER, loginUser_entity);
 
+        log.info("redirectURI = {}", redirectURI);
         return "redirect:" + redirectURI;
     }
 

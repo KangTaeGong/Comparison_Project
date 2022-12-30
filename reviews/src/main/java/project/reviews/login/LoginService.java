@@ -32,7 +32,7 @@ public class LoginService {
             log.info("encoder FindUser = {}",findUser.getUserId());
             return findUser;
         } else {
-            return null;
+            throw new UserNotFoundException("비밀번호가 일치하지 않습니다.");
         }
 
 /*        return userRepository.findByUserId(userId)

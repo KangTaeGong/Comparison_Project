@@ -91,6 +91,10 @@ public class PostingRepositoryImplTest {
 
         //then
         org.assertj.core.api.Assertions.assertThat(listPaging.getSize()).isEqualTo(3);
+
+        for(PostingResponseDto dto : listPaging) {
+            log.info("createdDate = {}",dto.getCreatedDate());
+        }
     }
     
     /*

@@ -54,7 +54,8 @@ public class PostingRepositoryImpl implements PostingRepository {
                         posting.content,
                         posting.writer,
                         posting.password,
-                        posting.hits))
+                        posting.hits,
+                        posting.createdDate))
                 .from(posting)
                 .where(
                         postingInfoLike(postingSearch))

@@ -51,7 +51,7 @@
                             <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
                         </td>
                         <td th:text="${posting.writer}"></td>
-                        <td th:text="2011-02-01"></td>
+                        <td th:text="${posting.createdDate}"></td>
                         <td th:text="${posting.hits}"></td>
                     </tr>
                     </tbody>

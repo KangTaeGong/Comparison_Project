@@ -18,8 +18,20 @@ public class PostingResponseDto {
     private String writer;
     private String password;
     private int hits;
-    private LocalDateTime modifiedDate;
+    private String createdDate;
 
+    // paging 포함 조회시 사용(전체 게시글 송출)
+    public PostingResponseDto(Long id, String title, String content, String writer, String password, int hits, String createdDate) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.password = password;
+        this.hits = hits;
+        this.createdDate = createdDate;
+    }
+
+    // paging없이 단순 조회(게시글 조회 등)
     public PostingResponseDto(Long id, String title, String content, String writer, String password, int hits) {
         this.id = id;
         this.title = title;

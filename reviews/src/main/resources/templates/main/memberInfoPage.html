@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/member_info_style.css">
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+<body>
+<div class="center">
+    <div class="image_box">
+        <img class="logo_img" th:src="@{/img/memberInfo_logo.png}">
+    </div>
+
+    <div class="title">
+        회원 정보
+    </div>
+
+    <form method="post">
+        <div class="txt_field">
+            <div class="info_tag">
+                이름
+            </div>
+            <div class="info_txt">
+                <p th:text="${user.userName}"></p>
+            </div>
+        </div>
+
+        <div class="txt_field">
+            <div class="info_tag">
+                ID
+            </div>
+            <div class="info_txt">
+                <p th:text="${user.userId}">
+            </div>
+        </div>
+
+        <input type="submit" value="회원탈퇴">
+    </form>
+</div>
+
+<div class="user_record">
+    <div class="community_record">
+        <div class="record_title">
+            <p>게시글 작성 목록</p>
+        </div>
+
+        <div class="record_contents">
+            <a href="#"></a>
+        </div>
+    </div>
+
+    <div class="search_record">
+        <div class="record_title">
+            <p>검색 목록</p>
+        </div>
+
+        <div class="record_contents">
+            <a href="#"></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

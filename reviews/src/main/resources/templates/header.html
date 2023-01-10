@@ -27,7 +27,9 @@
             </div>
 
             <div>
-                <label th:text="|${user.userName} 님|" th:if="${user != null}">사용자 이름></label>
+                <a th:href="@{memberInfo}">
+                    <label th:text="|${user.userName} 님|" th:if="${user != null}" id="userName">사용자 이름></label>
+                </a>
             </div>
 
             <div>

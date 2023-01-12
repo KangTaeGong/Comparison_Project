@@ -23,7 +23,7 @@ public class JoinValidator implements Validator {
     public void validate(Object target, Errors errors) {
         JoinForm joinForm = (JoinForm) target;
 
-        if(joinForm.getPassword().equals(joinForm.getCheck_password()) == false) {
+        if(!joinForm.getPassword().equals(joinForm.getCheck_password())) {
             errors.rejectValue("password", "NotEquals");
             errors.rejectValue("check_password", "NotEquals");
         }

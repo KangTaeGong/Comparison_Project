@@ -120,7 +120,7 @@ public class PostingController {
 
     @PostMapping("/{postingId}/read")
     public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, BindingResult bindingResult
-                                , Model model) {
+                                , Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
 
         if(bindingResult.hasErrors()) {
@@ -138,6 +138,7 @@ public class PostingController {
         if(check_posting == null) {
             bindingResult.reject("modifyFail", "비밀번호가 일치하지 않습니다.");
             model.addAttribute("posting", posting);
+            LoginSessionCheck.check_loginUser(request, model);
             return "community/communityReadPage";
         }
         
@@ -201,6 +202,6 @@ public class PostingController {
 
         model.addAttribute("data", new Message("게시글이 삭제되었습니다.", "/community/list"));
         // 삭제 후 리스트 화면으로 이동
-        return "redirect:/community/list";
+        return "alert/message";
     }
 }

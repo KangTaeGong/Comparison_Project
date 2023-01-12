@@ -2,6 +2,7 @@ package project.reviews.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import project.reviews.domain.Message;
+import project.reviews.exception.JoinFailException;
 import project.reviews.service.UserService;
 import project.reviews.validation.ValidationSequence;
 
@@ -27,7 +30,7 @@ public class JoinController {
     /*
      * WebDataBinder - 스프링의 파라미터 바인딩의 역할을 해주고 검증 기능도 내부에 포함
      */
-    @InitBinder
+//    @InitBinder
     public void init(WebDataBinder dataBinder) {
         JoinValidator joinValidator = new JoinValidator();
         dataBinder.addValidators(joinValidator);
@@ -43,7 +46,14 @@ public class JoinController {
     }
 
     @PostMapping("/join")
-    public String join(@Validated(ValidationSequence.class) @ModelAttribute("joinForm") JoinForm form, BindingResult bindingResult) {
+    public String join(@Validated(ValidationSequence.class) @ModelAttribute("joinForm") JoinForm form, BindingResult bindingResult,
+                       Model model) {
+
+        if(!form.getPassword().equals(form.getCheck_password())) {
+            bindingResult.rejectValue("password", "NotEquals");
+            bindingResult.rejectValue("check_password", "NotEquals");
+            return "login/joinPage";
+        }
 
         if(bindingResult.hasErrors()) {
             return "login/joinPage";
@@ -52,7 +62,13 @@ public class JoinController {
         /*
          * 회원 가입
          * */
-        userService.join(form);
+        try {
+            userService.join(form);
+        } catch(JoinFailException e) {
+            model.addAttribute("data", new Message("이미 존재하는 회원입니다.", "/join"));
+            return "alert/message";
+        }
+
 
         return "redirect:/login";
     }

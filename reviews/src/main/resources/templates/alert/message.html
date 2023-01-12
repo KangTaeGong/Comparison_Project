@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        var message = [[${data.message}]]
+        alert(message);
+        location.replace([[${data.href}]]);
+    /*]]>*/
+</script>
+</head>
+</html>

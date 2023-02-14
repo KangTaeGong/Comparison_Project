@@ -1,16 +1,19 @@
 package project.reviews.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
+import project.reviews.domain.User;
 import project.reviews.dto.PostingForm;
 import project.reviews.dto.PostingModifyForm;
 import project.reviews.dto.PostingResponseDto;
 import project.reviews.exception.PostingNotFoundException;
 import project.reviews.repository.PostingRepository;
+import project.reviews.repository.UserRepository;
 
 import java.util.List;
 
@@ -19,20 +22,21 @@ import java.util.List;
 * 게시판 비즈니스 로직
 * */
 @Service
+@Slf4j
 @Transactional
 @RequiredArgsConstructor
 public class PostingService {
 
     private final PostingRepository postingRepository;
+    private final UserRepository userRepository;
 
     /*
     * 게시글 최초 저장
     * 생성된 id를 Controller로 반환
     * */
-    public Long create_posting(PostingForm form) {
-        Posting posting = new Posting(form.getTitle(), form.getContent(), form.getWriter(), form.getPassword(), 1);
-        Long posting_id = postingRepository.create(posting);
-        return posting_id;
+    public Long create_posting(PostingForm form, String userId) {
+        Posting posting = new Posting(form.getTitle(), form.getContent(), form.getWriter(), form.getPassword(), 1, userRepository.loadUserByUserId(userId));
+        return postingRepository.create(posting);
     }
 
     /*

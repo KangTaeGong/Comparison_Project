@@ -45,4 +45,12 @@ public class HomeController {
     public String servicePage() {
         return "main/servicePage";
     }
+
+    @GetMapping("/memberInfo")
+    public String memberInfoPage(@SessionAttribute(name = SessionConst.LOGIN_USER, required = false)
+                                             User loginUser, Model model) {
+
+        model.addAttribute("user", loginUser);
+        return "main/memberInfoPage";
+    }
 }

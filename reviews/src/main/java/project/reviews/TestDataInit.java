@@ -29,9 +29,9 @@ public class TestDataInit {
         JoinForm form = new JoinForm("홍길동", "aaa123", "aaaa1234@", "aaaa1234@");
         userService.join(form);
 
-        for(int i = 1; i <= 101; i++) {
+        for(int i = 1; i < 51; i++) {
             PostingForm postingForm = new PostingForm(i+"번 게시글", "안녕하세요"+i, "홍길동"+i, "aaaa1234@");
-            postingService.create_posting(postingForm);
+            postingService.create_posting(postingForm, "aaa123");
         }
     }
 }

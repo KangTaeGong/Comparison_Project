@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import project.reviews.domain.Message;
 import project.reviews.domain.User;
 import project.reviews.dto.*;
-import project.reviews.login.SessionConst;
 import project.reviews.service.PostingService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,12 +87,11 @@ public class PostingController {
         * */
         User session_user = LoginSessionCheck.check_loginUser(request);
         String userName = session_user.getUserName();
-        log.info("Find UserName = {}", userName);
 
         // PostingForm에 Session에서 가져온 작성자 입력
         form.setWriter(userName);
 
-        Long postingId = postingService.create_posting(form);
+        Long postingId = postingService.create_posting(form, session_user.getUserId());
 
         // 글 생성이 완료되면 읽기 페이지로 이동
         String redirectUrl = "/community/" + postingId + "/read";

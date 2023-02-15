@@ -8,8 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import project.reviews.domain.User;
 import project.reviews.dto.MainServiceDto;
+import project.reviews.login.SessionConst;
 import project.reviews.service.MainService;
+import project.reviews.service.RecordService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,6 +32,7 @@ import java.util.Map;
 public class MainServiceController {
 
     private final MainService mainService;
+    private final RecordService recordService;
 
     /*
     * 검색어 입력에 따라 사용자가 원하는 정보를 가져오는 로직
@@ -58,9 +64,13 @@ public class MainServiceController {
     * 확인되면 개수에 따라 필요한 화면 출력
     * */
     @GetMapping("/mainService")
-    public String mainService(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model) {
+    public String mainService(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model,
+                              HttpServletRequest request) {
 
         String error; // MainService에서 넘겨준 에러 링크 확인용
+
+        // 로그인된 회원의 정보를 세션에서 받아옴
+        User loginUser = LoginSessionCheck.check_loginUser(request);
 
         if(searchItem1.equals("") && searchItem2.equals("")) {
             return "error/notFoundError";
@@ -79,6 +89,17 @@ public class MainServiceController {
 
             MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);
             MainServiceDto movieInfoDto2 = mainService.reviewCrawlLogic(itemLink2);
+            
+            /*
+            * 검색한 영화의 제목과 사용자 정보를 같이 저장
+            * 회원 정보 조회시 최근 검색어에서 사용
+            * */
+            if (loginUser != null) {
+                String searchItem = (searchItem1 + ", " + searchItem2); // 두 개인 검색 결과를 하나의 문자열로 합쳐서 저장
+                recordService.saveMovie(searchItem, loginUser);
+            }
+
+            LoginSessionCheck.check_loginUser(request, model);
 
             model.addAttribute("movieInfo1", movieInfo1);
             model.addAttribute("movieInfo2", movieInfo2);
@@ -110,6 +131,16 @@ public class MainServiceController {
         if (error != null) return error;
 
         MainServiceDto mainServiceDto = mainService.reviewCrawlLogic(itemLink); // 리뷰 정보를 크롤링 후 DTO에 넣어준 결과를 받음
+
+        /*
+         * 검색한 영화의 제목과 사용자 정보를 같이 저장
+         * 회원 정보 조회시 최근 검색어에서 사용
+         * */
+        if (loginUser != null) {
+            recordService.saveMovie(searchItem, loginUser);
+        }
+
+        LoginSessionCheck.check_loginUser(request, model);
 
         model.addAttribute("movie", movieInfo);
         model.addAttribute("mainServiceDto", mainServiceDto);

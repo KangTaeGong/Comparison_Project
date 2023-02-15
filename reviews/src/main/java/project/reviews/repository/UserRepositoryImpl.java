@@ -33,21 +33,19 @@ public class UserRepositoryImpl implements UserRepository {
     * */
     @Override
     public User findById(Long id) {
-        User findUser = em.find(User.class, id);
-        return findUser != null ? findUser : null;
+        return em.find(User.class, id);
     }
 
     /*
-    * 회원 아이디로 회원 검색
-    * Security UserDetailService 에서 사용
+    /*
+    * 회원 아이디로 회원 엔티티 조회
+    * Session을 통해 유저 정보를 가져올 때 id값이 없기 때문에 새로 조회하기 위해 사용
     * */
     @Override
     public User loadUserByUserId(String userId) {
-        User findUser = (User) em.createQuery("select u from User u where u.userId =: userId")
+        return (User) em.createQuery("select u from User u where u.userId =: userId")
                 .setParameter("userId", userId)
                 .getSingleResult();
-
-        return findUser != null ? findUser : null;
     }
 
     /*

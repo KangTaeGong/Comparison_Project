@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.reviews.domain.Posting;
-import project.reviews.domain.User;
 import project.reviews.dto.PostingForm;
 import project.reviews.dto.PostingModifyForm;
 import project.reviews.dto.PostingResponseDto;

@@ -14,7 +14,7 @@ public class Movie {
     private Long id;
     private String movie_title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_PK")
     private User user;
 

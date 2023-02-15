@@ -28,7 +28,7 @@ public class Posting extends BaseTimeEntity {
 
     private String password; // 수정, 삭제시 사용할 패스워드
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_PK")
     private User user;
 

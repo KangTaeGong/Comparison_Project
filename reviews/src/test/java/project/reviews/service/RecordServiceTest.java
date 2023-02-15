@@ -40,8 +40,8 @@ public class RecordServiceTest {
         userRepository.save(user2);
 
         //when
-        recordService.save("공조2", user1);
-        recordService.save("공조1", user2);
+        recordService.saveMovie("공조2", user1);
+        recordService.saveMovie("공조1", user2);
 
         List<Movie> findMovie = recordRepository.findAll();
         //then
@@ -58,8 +58,8 @@ public class RecordServiceTest {
         userRepository.save(user2);
 
         //when
-        Long saved_movie1 = recordService.save("공조2", user1);
-        recordService.save("공조1", user2);
+        Long saved_movie1 = recordService.saveMovie("공조2", user1);
+        recordService.saveMovie("공조1", user2);
 
         //then
         Movie search_Movie = recordRepository.findById(saved_movie1).get();

@@ -15,7 +15,6 @@ import project.reviews.service.RecordService;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 /*
 * 2023-02-15
@@ -28,7 +27,6 @@ public class RecordRepositoryCustomImplTest {
 
     @Autowired UserRepositoryImpl userRepository;
     @Autowired RecordService recordService;
-//    @Autowired RecordRepositoryCustom recordRepositoryCustom;
     @Autowired RecordRepository recordRepositoryCustom;
     @Autowired PostingRepository postingRepository;
     /*
@@ -51,12 +49,14 @@ public class RecordRepositoryCustomImplTest {
         recordService.saveMovie("터미네이터3", user2);
 
         //when
-        List<Movie> movies = recordRepositoryCustom.searchMovieList(user2.getId());
+        List<Movie> movies = recordRepositoryCustom.searchMovieList(user2.getId(), 0, 3);
 
         //then
         assertThat(movies)
                 .extracting("movie_title")
-                .containsExactly("터미네이터1", "터미네이터2", "터미네이터3");
+                .containsExactly("터미네이터3", "터미네이터2", "터미네이터1");
+
+        Assertions.assertEquals(3, movies.size());
     }
 
     /*
@@ -85,11 +85,13 @@ public class RecordRepositoryCustomImplTest {
         postingRepository.create(posting5);
 
         //when
-        List<Posting> postings = recordRepositoryCustom.searchPostingList(user2.getId());
+        List<Posting> postings = recordRepositoryCustom.searchPostingList(user2.getId(), 0, 3);
 
         //then
         assertThat(postings)
                 .extracting("title")
-                .containsExactly("테스트 게시글3","테스트 게시글4", "테스트 게시글5");
+                .containsExactly("테스트 게시글5","테스트 게시글4", "테스트 게시글3");
+
+        Assertions.assertEquals(3, postings.size());
     }
 }

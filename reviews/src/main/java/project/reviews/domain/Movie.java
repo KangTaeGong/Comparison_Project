@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Movie {
+public class Movie extends CreatedTimeEntity {
 
     @Id @GeneratedValue
     private Long id;

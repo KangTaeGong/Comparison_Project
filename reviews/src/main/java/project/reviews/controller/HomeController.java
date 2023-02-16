@@ -5,13 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import project.reviews.domain.User;
+import project.reviews.dto.RecordPostingDto;
+import project.reviews.service.RecordService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class HomeController {
+
+    private final RecordService recordService;
 
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request) {
@@ -38,7 +44,14 @@ public class HomeController {
     @GetMapping("/memberInfo")
     public String memberInfoPage(Model model, HttpServletRequest request) {
 
-        LoginSessionCheck.check_loginUser(request, model);
+        User session_user = LoginSessionCheck.check_loginUser(request);
+
+        List<String> movieList = recordService.getMovieList(session_user);
+        List<RecordPostingDto> postingList = recordService.getPostingList(session_user);
+
+        model.addAttribute("user", session_user);
+        model.addAttribute("movies", movieList);
+        model.addAttribute("postings", postingList);
 
         return "main/memberInfoPage";
     }

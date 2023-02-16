@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecordRepositoryCustom {
 
-    List<Movie> searchMovieList(Long userId);
+    List<Movie> searchMovieList(Long userId, int offset, int limit);
 
-    List<Posting> searchPostingList(Long userId);
+    List<Posting> searchPostingList(Long userId, int offset, int limit);
 }

@@ -44,8 +44,8 @@
             <p>게시글 작성 목록</p>
         </div>
 
-        <div class="record_contents">
-            <a href="#"></a>
+        <div class="record_contents" th:if="${not #lists.isEmpty(postings)}" th:each="posting : ${postings}">
+            <a th:text="${posting.postingTitle}" th:href="@{/community/{postingId}/read (postingId = ${posting.postingId})}"></a>
         </div>
     </div>
 
@@ -54,8 +54,8 @@
             <p>검색 목록</p>
         </div>
 
-        <div class="record_contents">
-            <a href="#"></a>
+        <div class="record_contents" th:if="${not #lists.isEmpty(movies)}" th:each="movie : ${movies}">
+            <p th:text=${movie}></p>
         </div>
     </div>
 </div>

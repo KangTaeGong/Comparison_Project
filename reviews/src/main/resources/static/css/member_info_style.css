@@ -122,10 +122,15 @@ input[type="submit"]:hover {
 }
 
 .record_contents {
-    padding: 15px 0;
+    padding: 6px 0;
 }
-.record_title > p, .record_contents > p {
+.record_title > p {
     font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.record_contents > p, .record_contents > a {
+    font-size: 16px;
 }
 
 .community_record > span, .search_record > span {

@@ -45,14 +45,18 @@ public class RecordService {
     public List<String> getMovieList(User user) {
 
         User findUser = userRepository.loadUserByUserId(user.getUserId());
-
-        List<Movie> movies = recordRepository.searchMovieList(findUser.getId(), 0, 5);
+        List<Movie> movies = recordRepository.searchMovieList(findUser.getId(), 0, 10);
         
         List<String> list = new ArrayList<>();
+        // 검색 목록에서 중복되는 영화 제목은 하나만 출력
+        for (Movie movie : movies) {
+            if (!list.contains(movie.getMovie_title()))
+                list.add(movie.getMovie_title());
 
-        for(Movie movie : movies) {
-            list.add(movie.getMovie_title());
+            if (list.size() > 4)
+                break;
         }
+
         return list;
     }
 

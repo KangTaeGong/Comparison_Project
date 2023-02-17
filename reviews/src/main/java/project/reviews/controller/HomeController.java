@@ -41,6 +41,13 @@ public class HomeController {
         return "main/servicePage";
     }
 
+    /*
+    * 회원 정보 화면
+    * 넘겨주는 model 값
+    *   - Session에서 가져온 회원 정보
+    *   - 사용자가 검색한 영화 제목 List
+    *   - 사용자가 작성한 게시글 List
+    * */
     @GetMapping("/memberInfo")
     public String memberInfoPage(Model model, HttpServletRequest request) {
 

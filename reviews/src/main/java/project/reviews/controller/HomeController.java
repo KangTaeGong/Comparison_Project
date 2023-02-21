@@ -5,19 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import project.reviews.domain.User;
-import project.reviews.dto.RecordPostingDto;
-import project.reviews.service.RecordService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
+/*
+* 2022-09-20
+* 메인 페이지 컨트롤러
+* */
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class HomeController {
-
-    private final RecordService recordService;
 
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request) {
@@ -39,27 +37,5 @@ public class HomeController {
     @GetMapping("/servicePage")
     public String servicePage() {
         return "main/servicePage";
-    }
-
-    /*
-    * 회원 정보 화면
-    * 넘겨주는 model 값
-    *   - Session에서 가져온 회원 정보
-    *   - 사용자가 검색한 영화 제목 List
-    *   - 사용자가 작성한 게시글 List
-    * */
-    @GetMapping("/memberInfo")
-    public String memberInfoPage(Model model, HttpServletRequest request) {
-
-        User session_user = LoginSessionCheck.check_loginUser(request);
-
-        List<String> movieList = recordService.getMovieList(session_user);
-        List<RecordPostingDto> postingList = recordService.getPostingList(session_user);
-
-        model.addAttribute("user", session_user);
-        model.addAttribute("movies", movieList);
-        model.addAttribute("postings", postingList);
-
-        return "main/memberInfoPage";
     }
 }

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/deleteMember_popUp_style.css">
+    </head>
+    <body>
+        <div class="center">
+            <div class="image_box">
+                <img th:src="@{/img/main_logo.png}" class="logo_img">
+            </div>
+
+            <div class="title">
+                <text>회원 탈퇴</text>
+            </div>
+            <form method="post">
+                <div class="txt_field">
+                    <input type="text" required>
+                    <span></span>
+                    <label>패스워드</label>
+                </div>
+                <input type="submit" value="탈퇴하기">
+            </form>
+        </div> 
+    </body>
+</html>
+

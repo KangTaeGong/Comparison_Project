@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;  /*스크롤바 숨기기*/
+}
+
+.center {
+    width: 400px;
+    background: #ffffff; /*그라데이션*/
+    border-radius: 10px;
+}
+
+.image_box {
+    text-align: center;
+    padding: 15px 0 15px 0;
+    border-bottom: 1px solid silver;
+}
+
+.logo_img {
+    width: 150px;
+    height: 80px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.title > text {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.center > form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form > .txt_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.txt_field > input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.txt_field > label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s; /*input foucs로 인해 label의 위치가 변경될 때 변화가 일어나는 시간*/
+}
+
+.txt_field > span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #aa1deb;
+    transition: .5s;
+}
+
+.txt_field > input:focus ~ label,
+.txt_field > input:valid ~ label {
+    top: -5px;
+    color: #cb4bd6;
+}
+
+.txt_field > input:focus ~ span::before,
+.txt_field > input:valid ~ span::before {
+    width: 100%;
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: linear-gradient(30deg, #424141, #929292);
+    border-radius: 25px;
+    font-size: 19px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    margin: 30px 0;
+}
+
+input[type="submit"]:hover {
+    border-color: #646464;
+    transition: .5s;
+}

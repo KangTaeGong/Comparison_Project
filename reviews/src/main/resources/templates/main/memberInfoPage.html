@@ -15,27 +15,38 @@
         회원 정보
     </div>
 
-    <form method="post">
-        <div class="txt_field">
-            <div class="info_tag">
-                이름
-            </div>
-            <div class="info_txt">
-                <p th:text="${user.userName}"></p>
-            </div>
+    <div class="txt_field">
+        <div class="info_tag">
+            이름
         </div>
-
-        <div class="txt_field">
-            <div class="info_tag">
-                ID
-            </div>
-            <div class="info_txt">
-                <p th:text="${user.userId}">
-            </div>
+        <div class="info_txt">
+            <p th:text="${user.userName}"></p>
         </div>
+    </div>
 
-        <input type="submit" value="회원탈퇴">
-    </form>
+    <div class="txt_field">
+        <div class="info_tag">
+            ID
+        </div>
+        <div class="info_txt">
+            <p th:text="${user.userId}">
+        </div>
+    </div>
+
+    <button class="button" onclick="button_click();">회원탈퇴</button>
+
+    <script>
+        let popupWidth = 400;
+        let popupHeight = 450;
+
+        let popupX = (window.screen.width / 2) - (popupWidth / 2);
+        let popupY = (window.screen.height / 2) - (popupHeight / 2) - 200;
+
+        function button_click() {
+            window.open('/memberInfo/popup', '회원탈퇴', 'width=' + popupWidth + ', height=' + popupHeight +
+            ', left=' + popupX + ', top=' + popupY);
+        }
+    </script>
 </div>
 
 <div class="user_record">

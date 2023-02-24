@@ -18,12 +18,13 @@
         </ul>
 
         <div class="text_end">
-            <div class="login_btn" th:if="${user == null}">
-                <a href="#" th:href="@{/login}">Login</a> <!--th:if="${user == null}"-->
+
+            <div class="login_btn" th:if="${user == null}" th:onclick="|location.href = '@{/login}'|" >
+                Login
             </div>
 
-            <div class="sign-up_btn" th:if="${user == null}">
-                <a href="#" th:href="@{/join}">Sign-up</a>
+            <div class="sign-up_btn" th:if="${user == null}" th:onclick="|location.href = '@{/join}'|">
+                Sign-up
             </div>
 
             <div>

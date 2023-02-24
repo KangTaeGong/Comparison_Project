@@ -55,17 +55,9 @@
     background-color: rgb(208, 240, 240);
 }
 
-.login_btn > a{
-    color:black;
-}
-
 .sign-up_btn{
     margin-left: 30px;
     background-color: rgb(241, 200, 241);
-}
-
-.sign-up_btn > a{
-    color:black;
 }
 
 #userName {

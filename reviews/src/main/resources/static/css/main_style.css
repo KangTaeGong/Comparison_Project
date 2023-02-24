@@ -80,15 +80,12 @@
     background: transparent;
 }
 
-.more_btn > .about_btn > a {
+.more_btn > .about_btn {
     color: #c188da;
 }
 
 .more_btn > .learnMore_btn {
     background: linear-gradient(#e7acec, #df7dd7);
     box-shadow: 0 2px 15px rgba(233, 71, 184, 0.26);
-}
-
-.learnMore_btn > a {
     color: #fff;
 }

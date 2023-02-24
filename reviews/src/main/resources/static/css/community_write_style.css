@@ -111,9 +111,6 @@ table.contents td{
     font-size: 18px;
     margin-right: 30px;
     cursor: pointer;
-}
-
-.write_btn, .cancel_btn > a {
     color: #fff;
 }
 

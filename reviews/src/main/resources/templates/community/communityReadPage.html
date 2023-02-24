@@ -51,8 +51,8 @@
                     <div class = "btn_form">
                         <input type="submit" value="수정/삭제 하기" class = "modify_btn">
 
-                        <div class = "back_btn">
-                            <a th:href="@{/community/list}">뒤로 가기</a>
+                        <div class = "back_btn" th:onclick="|location.href = '@{/community/list}'|">
+                            뒤로 가기
                         </div>
                     </div>
                 </form>

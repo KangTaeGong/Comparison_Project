@@ -69,14 +69,11 @@ table.contents td{
     margin-right: 30px;
     cursor: pointer;
     background: rgb(125, 164, 236);
+    color: #fff;
 }
 
 .modify_btn {
     line-height: 48px;
-}
-
-.modify_btn, .back_btn > a {
-    color: #fff;
 }
 
 .check_password{

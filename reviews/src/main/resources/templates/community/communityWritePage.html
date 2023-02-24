@@ -44,8 +44,8 @@
                     <div class = "btn_form">
                         <input type="submit" value="저장" class="write_btn">
 
-                        <div class = "cancel_btn">
-                            <a th:href="@{/community/list}">취소</a>
+                        <div class = "cancel_btn" th:onclick="|location.href = '@{/community/list}'|">
+                            취소
                         </div>
                     </div>
                 </form>

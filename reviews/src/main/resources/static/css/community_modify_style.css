@@ -94,12 +94,9 @@ table.contents td{
     margin-right: 30px;
     cursor: pointer;
     background: rgb(125, 164, 236);
+    color: #fff;
 }
 
 .delete_btn, .cancel_btn{
     margin-left: 30px;
-}
-
-.modify_btn, .delete_btn a, .cancel_btn a {
-    color: #fff;
 }

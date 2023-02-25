@@ -13,7 +13,8 @@ import javax.validation.constraints.NotBlank;
 public class PostingPassword {
 
     /*
-     * 수정, 삭제를 위한 패스워드 입력
+     * 포스팅 수정, 삭제를 위한 패스워드 입력
+     * 회원 탈퇴시 인증을 위한 패스워드 입력
      * */
     @NotBlank
     private String password;

@@ -68,4 +68,9 @@ public class UserRepositoryImpl implements UserRepository {
                 " from User u", FindUserDto.class)
                 .getResultList();
     }
+
+    @Override
+    public void deleteUser(User user) {
+        em.remove(user);
+    }
 }

@@ -17,4 +17,6 @@ public interface UserRepository {
     Optional<FindUserDto> findByUserId(String userId);
 
     List<FindUserDto> findAll();
+
+    void deleteUser(User user);
 }

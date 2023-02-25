@@ -2,6 +2,13 @@
 <html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <link rel="stylesheet" type="text/css" href="/css/deleteMember_popUp_style.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
     </head>
     <body>
         <div class="center">
@@ -12,12 +19,18 @@
             <div class="title">
                 <text>회원 탈퇴</text>
             </div>
-            <form method="post">
+            <form th:action="@{/memberInfo/withdrawal_member}" th:object="${checkPassword}" method="post">
                 <div class="txt_field">
-                    <input type="text" required>
+                    <input type="password" required th:field="*{password}" th:errorclass="field-error">
                     <span></span>
                     <label>패스워드</label>
                 </div>
+
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                       th:text="${err}"></p>
+                </div>
+
                 <input type="submit" value="탈퇴하기">
             </form>
         </div> 

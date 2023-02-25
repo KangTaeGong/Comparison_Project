@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 * @GetMapping("/{postingId}/read")
 * */
 @Getter
-public class PostingPassword {
+public class CheckPasswordDto {
 
     /*
      * 포스팅 수정, 삭제를 위한 패스워드 입력
@@ -19,7 +19,7 @@ public class PostingPassword {
     @NotBlank
     private String password;
 
-    public PostingPassword(String password) {
+    public CheckPasswordDto(String password) {
         this.password = password;
     }
 }

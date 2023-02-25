@@ -37,7 +37,6 @@ public class LoginController {
     public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURI, HttpServletRequest request) {
 
-        log.info("@PosMapping(/login) 실행");
         if(bindingResult.hasErrors()) {
             return "login/loginPage";
         }

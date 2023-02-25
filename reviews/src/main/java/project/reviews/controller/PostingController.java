@@ -102,8 +102,8 @@ public class PostingController {
     * 게시글 읽어오기
     * */
     @GetMapping("/{postingId}/read")
-    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, Model model
-                                    ,HttpServletRequest request) {
+    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, Model model
+                                    , HttpServletRequest request) {
 
         // postingId를 통해서 posting 조회 후 html에 posting 정보를 뿌려준다.
         PostingResponseDto posting = postingService.get_posting(postingId);
@@ -117,7 +117,7 @@ public class PostingController {
     }
 
     @PostMapping("/{postingId}/read")
-    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, BindingResult bindingResult
+    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, BindingResult bindingResult
                                 , Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
 
@@ -132,7 +132,7 @@ public class PostingController {
          * getPosting_password()에 패스워드를 보내서 Service 로직에서 비교 후 결과 반환
          * */
         log.info("패스워드 확인 getPosting_password");
-        PostingResponseDto check_posting = postingService.getPosting_password(postingId, postingPassword.getPassword());
+        PostingResponseDto check_posting = postingService.getPosting_password(postingId, checkPasswordDto.getPassword());
         if(check_posting == null) {
             bindingResult.reject("modifyFail", "비밀번호가 일치하지 않습니다.");
             model.addAttribute("posting", posting);

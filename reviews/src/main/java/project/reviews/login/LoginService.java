@@ -27,9 +27,9 @@ public class LoginService {
     public FindUserDto login(String userId, String password) throws UserNotFoundException {
 
         FindUserDto findUser = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if(encoder.matches(password, findUser.getPassword())) {
-            log.info("encoder FindUser = {}",findUser.getUserId());
             return findUser;
         } else {
             throw new UserNotFoundException("비밀번호가 일치하지 않습니다.");

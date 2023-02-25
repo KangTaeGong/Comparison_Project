@@ -1,6 +1,7 @@
 package project.reviews.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -55,5 +57,34 @@ public class UserService {
         if(!findUser.isEmpty()) {
             throw new JoinFailException("이미 존재하는 회원입니다.");
         }
+    }
+    
+    /*
+    * 회원 탈퇴시 패스워드 확인 로직
+    * */
+    public Boolean membership_withdrawal_pass(User sessionUser, String input_password) {
+
+        log.info("sessionUser_password = {}", sessionUser.getPassword());
+        log.info("input_password = {}", input_password);
+
+        if(bCryptPasswordEncoder.matches(input_password, sessionUser.getPassword())) {
+            /*
+             * session에서 찾은 sessionUser는 id(PK)값이 없다.
+             * 그래서 sessionUser.getUserId()를 통해서 다시 값을 조회해서 PK값이 포함된 완전한 user의 값을 가져온다.
+             * */
+            User user = userRepository.loadUserByUserId(sessionUser.getUserId());
+            userRepository.deleteUser(user);
+            return true;
+        }
+
+/*        if(input_password.equals(sessionUser.getPassword())) {
+
+
+            User user = userRepository.loadUserByUserId(sessionUser.getUserId());
+            userRepository.deleteUser(user);
+            return true;
+        }*/
+
+        return false;
     }
 }

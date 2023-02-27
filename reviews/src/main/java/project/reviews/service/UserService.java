@@ -60,12 +60,10 @@ public class UserService {
     }
     
     /*
-    * 회원 탈퇴시 패스워드 확인 로직
+    * 회원 탈퇴시 패스워드 확인 - 인코딩된 패스워드가 입력한 패스워드와 일치하는지 확인
+    *
     * */
     public Boolean membership_withdrawal_pass(User sessionUser, String input_password) {
-
-        log.info("sessionUser_password = {}", sessionUser.getPassword());
-        log.info("input_password = {}", input_password);
 
         if(bCryptPasswordEncoder.matches(input_password, sessionUser.getPassword())) {
             /*

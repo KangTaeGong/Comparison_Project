@@ -28,10 +28,14 @@ public class User extends BaseTimeEntity{
     @Setter
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    /*
+    * 회원 정보가 삭제되면 작성한 게시글과 영화 정보도 같이 삭제
+    * orphanRemoval = true
+    * */
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     List<Movie> movies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     List<Posting> postings = new ArrayList<>();
 
     public User(String userName, String userId, String password) {

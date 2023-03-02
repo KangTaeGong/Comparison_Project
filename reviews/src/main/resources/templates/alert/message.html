@@ -5,6 +5,12 @@
     /*<![CDATA[*/
         var message = [[${data.message}]]
         alert(message);
+
+        if(message == "회원 탈퇴가 완료되었습니다."){
+
+            window.self.close();
+            window.opener.location.replace([[${data.href}]]);
+        }
         location.replace([[${data.href}]]);
     /*]]>*/
 </script>

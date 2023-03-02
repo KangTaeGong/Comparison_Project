@@ -9,6 +9,7 @@ body {
     width: 400px;
     background: #ffffff; /*그라데이션*/
     border-radius: 10px;
+    margin: 30px auto;
 }
 
 .image_box {

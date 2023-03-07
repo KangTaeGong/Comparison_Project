@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Posting extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "posting_id")
     private Long id;
 

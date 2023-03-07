@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends BaseTimeEntity{
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_PK")
     private Long id;
     private String userName;

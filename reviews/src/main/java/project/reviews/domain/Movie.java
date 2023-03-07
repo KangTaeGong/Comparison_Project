@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Movie extends CreatedTimeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String movie_title;
 

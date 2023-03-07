@@ -69,8 +69,8 @@ public class JoinController {
             return "alert/message";
         }
 
-
-        return "redirect:/login";
+        model.addAttribute("data", new Message("회원 가입이 완료되었습니다.", "/login"));
+        return "alert/message";
     }
 
 }

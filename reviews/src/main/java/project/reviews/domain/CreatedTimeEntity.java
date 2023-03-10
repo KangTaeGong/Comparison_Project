@@ -23,5 +23,5 @@ public abstract class CreatedTimeEntity {
 
     // Entity가 생성되서 저장될 때 시간이 자동 저장
     @CreatedDate
-    private String createdDate;
+    private LocalDateTime createdDate;
 }

@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 * 2022-09-30
 * 테스트용 아이디 저장
 * */
-@Component
+//@Component
 @RequiredArgsConstructor
 public class TestDataInit {
 

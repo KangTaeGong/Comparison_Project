@@ -59,7 +59,7 @@ public class BatchConfig {
 
                     if(limitedMovies.size() > 0) {
                         for(Movie movie : limitedMovies) {
-                            recordService.deleteMovieRecord(movie.getId());
+                            recordService.deleteMovieRecord(movie);
                         }
                     }
                     return RepeatStatus.FINISHED;

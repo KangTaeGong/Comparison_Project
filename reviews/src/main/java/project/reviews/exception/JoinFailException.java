@@ -1,5 +1,9 @@
 package project.reviews.exception;
 
+/*
+* 2023-01-12
+* 회원가입 실패시 예외
+* */
 public class JoinFailException extends RuntimeException{
 
     public JoinFailException() {

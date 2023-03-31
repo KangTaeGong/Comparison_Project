@@ -1,4 +1,4 @@
-package project.reviews.login;
+package project.reviews.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +21,6 @@ public class LoginService {
     
     private final UserRepository userRepository;
 
-    /*
-    * return값이 null이면 로그인 실패
-    * */
     public FindUserDto login(String userId, String password) throws UserNotFoundException {
 
         FindUserDto findUser = userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
@@ -34,10 +31,6 @@ public class LoginService {
         } else {
             throw new UserNotFoundException("비밀번호가 일치하지 않습니다.");
         }
-
-/*        return userRepository.findByUserId(userId)
-                .filter(user -> user.getPassword().equals(password))
-                .orElse(null);*/
     }
     
 }

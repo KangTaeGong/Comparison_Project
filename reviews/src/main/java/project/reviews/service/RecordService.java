@@ -75,9 +75,6 @@ public class RecordService {
 
     }
 
-    /*
-    * 업데이트 날짜를 기준으로 일주일이 넘은 영화 검색 목록은 삭제.
-    * */
     public void deleteMovieRecord(Movie movie) {
         recordRepository.delete(movie);
     }

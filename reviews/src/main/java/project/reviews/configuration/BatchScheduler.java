@@ -23,9 +23,11 @@ import java.util.Map;
 @Component
 public class BatchScheduler {
 
-    @Autowired JobLauncher jobLauncher;
+    @Autowired
+    private JobLauncher jobLauncher;
 
-    @Autowired BatchConfig batchConfig;
+    @Autowired
+    private BatchConfig batchConfig;
 
     /*
     * Seconds / Minutes / Hours / Day of Month 1-31 / Month / Day of Week / Year
@@ -41,10 +43,7 @@ public class BatchScheduler {
         JobParameters jobParameters = new JobParameters(config_map);
 
         try {
-            /*
-            * 첫번째 파라미터로 Job, 두번째 파라미터로 Job Parameter를 받는다.
-            * Job Paramter의 역할은 반복해서 실행되는 Job의 유일한 ID.
-            * */
+            // Job Paramter의 역할은 반복해서 실행되는 Job의 유일한 ID.
             jobLauncher.run(batchConfig.job(), jobParameters);
         } catch (JobInstanceAlreadyCompleteException | JobExecutionAlreadyRunningException
                 | JobParametersInvalidException | JobRestartException e) {

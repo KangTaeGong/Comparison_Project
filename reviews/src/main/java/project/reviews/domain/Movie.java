@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/*
+* 2023-02-13
+* 영화 검색어를 관리하기 위한 Entity
+* */
 @Entity
 @Getter
 @NoArgsConstructor

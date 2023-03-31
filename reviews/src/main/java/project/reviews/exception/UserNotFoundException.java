@@ -1,5 +1,9 @@
 package project.reviews.exception;
 
+/*
+* 2022-10-18
+* 회원 검색에 관한 예외
+* */
 public class UserNotFoundException extends Exception{
 
     public UserNotFoundException() {

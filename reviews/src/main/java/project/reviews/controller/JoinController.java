@@ -1,4 +1,4 @@
-package project.reviews.login;
+package project.reviews.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import project.reviews.domain.Message;
 import project.reviews.exception.JoinFailException;
+import project.reviews.login.JoinForm;
 import project.reviews.service.UserService;
 import project.reviews.validation.ValidationSequence;
 
@@ -26,15 +27,6 @@ import javax.validation.Valid;
 public class JoinController {
 
     private final UserService userService;
-
-    /*
-     * WebDataBinder - 스프링의 파라미터 바인딩의 역할을 해주고 검증 기능도 내부에 포함
-     */
-//    @InitBinder
-    public void init(WebDataBinder dataBinder) {
-        JoinValidator joinValidator = new JoinValidator();
-        dataBinder.addValidators(joinValidator);
-    }
 
     /*
      * 2022-09-23
@@ -59,9 +51,7 @@ public class JoinController {
             return "login/joinPage";
         }
 
-        /*
-         * 회원 가입
-         * */
+        // 회원 가입
         try {
             userService.join(form);
         } catch(JoinFailException e) {

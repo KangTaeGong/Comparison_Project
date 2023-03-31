@@ -64,7 +64,7 @@ public class UserServiceTest {
         userRepository.save(user);
 
         //when
-        Boolean delete_result = userService.membership_withdrawal_pass(user, "abcd1234@");
+        Boolean delete_result = userService.membership_withdrawal_checkPw(user, "abcd1234@");
 
         //then
         Assertions.assertEquals(true, delete_result);

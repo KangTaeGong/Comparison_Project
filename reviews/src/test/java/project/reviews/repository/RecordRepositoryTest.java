@@ -33,13 +33,13 @@ public class RecordRepositoryTest {
     void searchMovie_lessThan_Test() {
         //given
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime aWeekAgo = now.minusMinutes(5);
+        LocalDateTime aWeekAgo = now.minusDays(7);
 
         //when
         List<Movie> limitedMovies = recordRepository.findByCreatedDateLessThan(aWeekAgo);
 
         //then
-        assertEquals(5, limitedMovies.size());
+        assertEquals(3, limitedMovies.size());
     }
 
     @Test

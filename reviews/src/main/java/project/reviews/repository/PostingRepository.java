@@ -8,6 +8,9 @@ import project.reviews.dto.PostingResponseDto;
 import java.util.List;
 import java.util.Optional;
 
+/*
+* 2022-09-30
+* */
 public interface PostingRepository {
 
     Long create(Posting posting);

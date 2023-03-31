@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /*
 * 2022-12-03
-* 네이버 영화 사이트에서 한줄평을 받아오기 위한 DTO
+* 네이버 영화 사이트에서 관람객 한줄평을 받아오기 위한 DTO
 * */
 @Getter
 public class MovieReviewDto {

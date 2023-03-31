@@ -51,7 +51,6 @@ public class BatchConfig {
     public Step step() {
         return stepBuilderFactory.get("step")
                 .tasklet((contribution, chunkContext) -> {
-                    log.info("Step!!!!");
                     // 업데이트 날짜가 일주일 이전인 문서 목록을 가져옴
                     LocalDateTime now = LocalDateTime.now();
                     LocalDateTime aWeekAgo = now.minusDays(7);

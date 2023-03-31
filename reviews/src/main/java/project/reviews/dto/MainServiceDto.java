@@ -5,8 +5,7 @@ import java.util.List;
 
 /*
 * 2022-12-07
-* 필요한 정보들을 모두 모아서 한꺼번에 넘길 DTO
-* compareMainService에서 값을 두번 받고, 두번 넘겨줘야 하기 때문에 따로 관리
+* 네이버 영화 API를 통해 가져온 정보들을 넣는 DTO
 * */
 @Getter
 public class MainServiceDto {

@@ -31,7 +31,6 @@ public class UserService {
     /*
     * 회원 가입
     * 회원 가입시 중복 확인하고, 문제가 없다면 Repository에 넘겨서 DB에 저장.
-    * User Entity를 반환하지 않고, User Entity의 id값만 반환해줌
     * */
     public Long join(JoinForm form) throws JoinFailException{
 
@@ -49,9 +48,7 @@ public class UserService {
         return user.getId();
     }
 
-    /*
-    * 회원가입시 입력한 아이디와 DB에 입력된 아이디 값을 비교해서 중복 회원가입인지 확인
-    * */
+    // 회원가입시 입력한 아이디와 DB에 입력된 아이디 값을 비교해서 중복 회원가입인지 확인
     private void validateDuplicateUser(JoinForm form) throws JoinFailException {
         Optional<FindUserDto> findUser = userRepository.findByUserId(form.getUserId());
         if(!findUser.isEmpty()) {
@@ -59,11 +56,9 @@ public class UserService {
         }
     }
     
-    /*
-    * 회원 탈퇴시 패스워드 확인 - 인코딩된 패스워드가 입력한 패스워드와 일치하는지 확인
-    *
-    * */
-    public Boolean membership_withdrawal_pass(User sessionUser, String input_password) {
+
+    // 회원 탈퇴시 패스워드 확인 - 인코딩된 패스워드가 입력한 패스워드와 일치하는지 확인
+    public Boolean membership_withdrawal_checkPw(User sessionUser, String input_password) {
 
         if(bCryptPasswordEncoder.matches(input_password, sessionUser.getPassword())) {
             /*
@@ -74,15 +69,6 @@ public class UserService {
             userRepository.deleteUser(user);
             return true;
         }
-
-/*        if(input_password.equals(sessionUser.getPassword())) {
-
-
-            User user = userRepository.loadUserByUserId(sessionUser.getUserId());
-            userRepository.deleteUser(user);
-            return true;
-        }*/
-
         return false;
     }
 }

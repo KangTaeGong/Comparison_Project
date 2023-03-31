@@ -66,12 +66,9 @@ public class MemberInfoController {
                                         BindingResult bindingResult, Model model) {
         User session_user = LoginSessionCheck.check_loginUser(request);
 
-        /*
-        * 회원 탈퇴 로직
-        * 성공하면 true
-        * 실패하면 false
-        * */
-        Boolean check_password = userService.membership_withdrawal_pass(session_user, passwordDto.getPassword());
+
+        // 회원 탈퇴 로직(성공 여부 : true/false)
+        Boolean check_password = userService.membership_withdrawal_checkPw(session_user, passwordDto.getPassword());
 
         if (check_password) {
             HttpSession session = request.getSession(false);

@@ -38,9 +38,7 @@ public class PostingService {
         return postingRepository.create(posting);
     }
 
-    /*
-    * 전체 게시글 조회
-    * */
+    // 전체 게시글 조회
     public List<PostingResponseDto> get_postingList() {
         return postingRepository.getList();
     }
@@ -101,9 +99,7 @@ public class PostingService {
         findPosting.updateContent(modifyForm.getContent());
     }
 
-    /*
-    * 게시글 삭제(PostingRequestDto)
-    * */
+    // 게시글 삭제(PostingRequestDto)
     public void delete_posting(Long postingId) {
         postingRepository.delete_Posting(postingId);
     }

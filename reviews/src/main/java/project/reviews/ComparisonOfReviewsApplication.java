@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableScheduling
 public class ComparisonOfReviewsApplication {
 
-	// Spring Security는 비밀번호 보안 때문에 BCryptPasswordEncoder를 반드시 사용해야 한다.
+	// 비밀번호 보안으로 사용.
 	@Bean
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();

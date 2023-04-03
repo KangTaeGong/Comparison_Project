@@ -42,9 +42,7 @@ public class PostingRepositoryImpl implements PostingRepository {
         return posting.getId();
     }
 
-    /*
-    * 커뮤니티 전체 글 페이징 추가해서 받아오기
-    * */
+    // 커뮤니티 전체 글 페이징 추가해서 받아오기
     @Override
     public Page<PostingResponseDto> getListPaging(Pageable pageable, String postingSearch) {
         List<PostingResponseDto> pagingList = queryFactory
@@ -71,7 +69,8 @@ public class PostingRepositoryImpl implements PostingRepository {
         return PageableExecutionUtils.getPage(pagingList, pageable, countQuery::fetchOne);
     }
 
-    /*게시글 검색시 넘겨받은 값을 통해 일치하는 값이 있는지 확인
+    /*
+    * 게시글 검색시 넘겨받은 값을 통해 일치하는 값이 있는지 확인
     * 해당 text를 포함하는 값이 있다면 where문에 넣어 반환
     * 해당 값이 없다면 null 반환
     * null을 반환하게 되면 where문은 자동으로 동작하지 않는다.
@@ -89,9 +88,8 @@ public class PostingRepositoryImpl implements PostingRepository {
                 .fetchOne();
     }
 
-    /*
-    * 커뮤니티 글 전체 리스트 가져오는 메소드
-    * */
+
+    // 커뮤니티 글 전체 리스트 가져오는 메소드
     public List<PostingResponseDto> getList() {
         return queryFactory
                 .select(Projections.constructor(PostingResponseDto.class,
@@ -121,8 +119,7 @@ public class PostingRepositoryImpl implements PostingRepository {
     * Dirty Checking 용도
     * */
     public Posting findPostingById(Long postingId) {
-        Posting findPosting = em.find(Posting.class, postingId);
-        return findPosting != null ? findPosting : null;
+        return em.find(Posting.class, postingId);
     }
 
     // 게시글 삭제

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 /*
  *  2022-10-21
  *  현재 로그인한 상태인지 session에서 값 받아오기
- *  로그인 후 페이지 이동시 상단 로그인 표시에 사용
  * */
 public class LoginSessionCheck {
 

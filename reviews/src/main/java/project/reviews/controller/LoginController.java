@@ -1,4 +1,4 @@
-package project.reviews.login;
+package project.reviews.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.reviews.domain.User;
 import project.reviews.dto.FindUserDto;
 import project.reviews.exception.UserNotFoundException;
+import project.reviews.login.LoginForm;
+import project.reviews.service.LoginService;
+import project.reviews.login.SessionConst;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +30,6 @@ public class LoginController {
 
     private final LoginService loginService;
 
-
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginPage";
@@ -37,7 +39,6 @@ public class LoginController {
     public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURI, HttpServletRequest request) {
 
-        log.info("@PosMapping(/login) 실행");
         if(bindingResult.hasErrors()) {
             return "login/loginPage";
         }
@@ -65,9 +66,6 @@ public class LoginController {
         return "redirect:" + redirectURI;
     }
 
-    /*
-    * 로그아웃 로직
-    * */
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

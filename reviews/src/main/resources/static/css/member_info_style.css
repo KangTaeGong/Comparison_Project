@@ -1,0 +1,138 @@
+*{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background: rgb(245, 244, 244);
+    height: 100vh;
+    overflow: hidden;  /*스크롤바 숨기기*/
+    min-width: 800px;
+    min-height: 800px;
+}
+
+.center {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: rgb(245, 244, 244);
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.image_box {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid silver;
+}
+
+.logo_img {
+    width: 200px;
+    height: 100px;
+}
+
+.center > form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.txt_field {
+    position: relative;
+    border: 1px solid #adadad;
+    background: rgb(231, 230, 230);
+    margin: 30px 0;
+    border-radius: 5px;;
+    height: 40px;
+}
+
+.txt_field > div{
+    float: left;
+}
+
+.info_tag, .info_txt {
+    height: 100%;
+    padding: 0 10px;
+    line-height: 40px;
+    font-weight: 540;
+    font-size: 17px;
+}
+
+.info_tag {
+    border-right: 1px solid #adadad;
+}
+
+
+button {
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: linear-gradient(30deg, #909092, #383838);
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    margin: 30px 0;
+}
+
+button:hover {
+    border-color: #908e91;
+    transition: .5s;
+}
+
+.user_record {
+    position: relative;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    background: rgb(245, 244, 244);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.community_record {
+    width: 400px;
+    border: 1px solid #adadad;
+    margin-right: 200px;
+    padding: 15px 30px;
+}
+
+.search_record {
+    width: 400px;
+    border: 1px solid #adadad;
+    padding: 15px 30px;
+}
+
+.record_title {
+    border-bottom: 2px solid #adadad;
+}
+
+.record_contents {
+    padding: 6px 0;
+}
+.record_title > p {
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+.record_contents > p, .record_contents > a {
+    font-size: 16px;
+}
+
+.community_record > span, .search_record > span {
+    border-bottom: 1px solid #adadad;
+}

@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import project.reviews.dto.FindUserDto;
 import project.reviews.exception.UserNotFoundException;
 import project.reviews.login.JoinForm;
-import project.reviews.login.LoginService;
 import project.reviews.repository.UserRepository;
 
 @Transactional

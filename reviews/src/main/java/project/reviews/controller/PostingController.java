@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import project.reviews.domain.Message;
 import project.reviews.domain.User;
 import project.reviews.dto.*;
-import project.reviews.login.SessionConst;
 import project.reviews.service.PostingService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,29 +30,22 @@ public class PostingController {
 
     private final PostingService postingService;
 
+    /*
+    * 게시판 메인 리스트 화면
+    * postingInfo : 사용자가 입력한 검색어
+    * */
     @GetMapping("/list")
     public String postingList(Model model, HttpServletRequest request,
                               @PageableDefault(page = 0, size = 15)Pageable pageable, String postingInfo) {
 
-        // communityPage.html에서 name = postingInfo값을 넘겨주어 게시글 검색을 한다.
         Page<PostingResponseDto> postingList = postingService.getPosting_paging(pageable, postingInfo);
         int currentPage = postingList.getPageable().getPageNumber()+1;
         int startPage = 1;
         int endPage = postingList.getTotalPages();
-//        int postingCount;
 
         Long totalPostingCount = postingService.getPostingCount();
-        log.info("totalPostingCount = {}", totalPostingCount);
 
-        /*if(totalPostingCount > currentPage) {
-            postingCount = (int) (totalPostingCount - (currentPage * 14));
-        } else {
-            postingCount = 1;
-        }*/
-
-        /*
-         * header.html에서 로그인 정보 유지하기 위해 작성
-         * */
+        // header.html 로그인 정보 유지
         LoginSessionCheck.check_loginUser(request, model);
 
         model.addAttribute("postingList", postingList);
@@ -61,7 +53,6 @@ public class PostingController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("totalPostingCount", totalPostingCount); // 전체 게시글 수
-//        model.addAttribute("postingCount", postingCount);   // 페이지당 게시글 No. 최소값
 
         return "community/communityPage";
     }
@@ -76,24 +67,19 @@ public class PostingController {
     public String writePosting(@Valid @ModelAttribute("postingForm") PostingForm form, BindingResult bindingResult,
                                HttpServletRequest request){
 
-        /*
-        * 글 작성시에 문제가 있을 시 팝업을 띄우고, 다시 글 작성 창 띄워주기
-        * */
         if(bindingResult.hasErrors()) {
             return "community/communityWritePage";
         }
         
-        /*
-        * 문제 없을 시 request, session을 통해서 회원 이름을 조회하고 저장 메소드로 값을 넘겨줌
-        * */
+
+        // 문제 없을 시 request, session을 통해서 회원 이름을 조회하고 저장 메소드로 값을 넘겨줌
         User session_user = LoginSessionCheck.check_loginUser(request);
         String userName = session_user.getUserName();
-        log.info("Find UserName = {}", userName);
 
         // PostingForm에 Session에서 가져온 작성자 입력
         form.setWriter(userName);
 
-        Long postingId = postingService.create_posting(form);
+        Long postingId = postingService.create_posting(form, session_user.getUserId());
 
         // 글 생성이 완료되면 읽기 페이지로 이동
         String redirectUrl = "/community/" + postingId + "/read";
@@ -104,8 +90,8 @@ public class PostingController {
     * 게시글 읽어오기
     * */
     @GetMapping("/{postingId}/read")
-    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, Model model
-                                    ,HttpServletRequest request) {
+    public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, Model model
+                                    , HttpServletRequest request) {
 
         // postingId를 통해서 posting 조회 후 html에 posting 정보를 뿌려준다.
         PostingResponseDto posting = postingService.get_posting(postingId);
@@ -118,26 +104,26 @@ public class PostingController {
         return "community/communityReadPage";
     }
 
+    // 글 수정 및 삭제 시 동작하는 로직
     @PostMapping("/{postingId}/read")
-    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") PostingPassword postingPassword, BindingResult bindingResult
-                                , Model model) {
+    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, BindingResult bindingResult
+                                , Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
 
         if(bindingResult.hasErrors()) {
-            log.info("readPosting-post bindingResult() 실행");
             model.addAttribute("posting", posting);
             return "community/communityReadPage";
         }
 
         /*
          * 필드에 오류가 없을 시
-         * getPosting_password()에 패스워드를 보내서 Service 로직에서 비교 후 결과 반환
+         * getPosting_password()에 패스워드를 보내서 Service 로직에서 비교 후 게시글 정보 결과 반환
          * */
-        log.info("패스워드 확인 getPosting_password");
-        PostingResponseDto check_posting = postingService.getPosting_password(postingId, postingPassword.getPassword());
+        PostingResponseDto check_posting = postingService.getPosting_password(postingId, checkPasswordDto.getPassword());
         if(check_posting == null) {
             bindingResult.reject("modifyFail", "비밀번호가 일치하지 않습니다.");
             model.addAttribute("posting", posting);
+            LoginSessionCheck.check_loginUser(request, model);
             return "community/communityReadPage";
         }
         
@@ -168,13 +154,12 @@ public class PostingController {
     public String modifyPosting(@PathVariable("postingId") Long postingId, @Valid @ModelAttribute("postingModifyForm") PostingModifyForm postingModifyForm,
                                 BindingResult bindingResult, Model model) {
         /*
-         * 수정 시 문제 발생 시 오류 코드를 출력하고, 다시 입력
+         * 수정 중에 문제 발생 시 오류 코드를 출력하고, 다시 입력
          * get_posting()을 통해서 posting정보를 가져와 model에 담아서 다시 수정 페이지로 보내준다.
-         * 기존 작성되어 있던 제목, 작성자를 유지하기 위해
+         * (기존 작성되어 있던 제목, 작성자를 유지하기 위해)
          * */
         if(bindingResult.hasErrors()) {
             PostingResponseDto posting = postingService.get_posting(postingId);
-            log.info("modify bindingResult() 실행");
             model.addAttribute("posting", posting);
             return "community/communityModifyPage";
         }
@@ -191,16 +176,15 @@ public class PostingController {
         return "redirect:" + redirectUrl;
     }
 
-    /*
-    * 게시글 삭제
-    * */
+    // 게시글 삭제
     @GetMapping("/{postingId}/delete")
     public String deletePosting(@PathVariable("postingId") Long postingId, Model model) {
 
         postingService.delete_posting(postingId);
 
         model.addAttribute("data", new Message("게시글이 삭제되었습니다.", "/community/list"));
-        // 삭제 후 리스트 화면으로 이동
-        return "redirect:/community/list";
+
+        // 삭제 후 alert를 통해 사용자에게 완료 알림
+        return "alert/message";
     }
 }

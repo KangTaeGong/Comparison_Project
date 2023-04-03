@@ -34,7 +34,7 @@ public class MainService {
         // 가져오고 싶은 정보
         String[] fields = {"title", "image", "link"};
 
-        List<Map<String, Object>> items = getApiResult(searchItem, fields);
+        List<Map<String, Object>> items = getMovieApiResult(searchItem, fields);
 
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = null;
@@ -60,14 +60,14 @@ public class MainService {
 
     /*
     * 사용자가 입력한 검색어에 대한 영화를 검색하는 로직
+    * 반환 받은 결과에 따른 출력(정상 결과 / 에러 페이지)
     * searchItem : 사용자가 입력한 영화 제목
     * itemLink : 검색한 영화에 대한 네이버 영화 link(autoSearch 여부에 따라 없을 수도 있음)
-    * model : 검색 후 필요한 정보는 model을 통해 servicePage에 넘겨줌
     * */
     public Map<String, Object> movieSearchService(String searchItem, String itemLink) {
         String[] fields = {"title", "link", "image", "pubDate", "director", "actor", "userRating"};
 
-        List<Map<String, Object>> movies = getApiResult(searchItem, fields);
+        List<Map<String, Object>> movies = getMovieApiResult(searchItem, fields);
 
         /*
          * 검색어에 대한 정보를 가져온 뒤 필요한 값만 넘겨주는 작업
@@ -75,8 +75,8 @@ public class MainService {
          * 검색어를 찾을 수 없거나 검색어가 많을 경우 오류 페이지 송출
          * */
         for(Map<String, Object> movie : movies) {
-            if (movies.size() == 1) { // 검색 결과가 하나만 나온 경우
-                itemLink = String.valueOf(movie.get("link")); // 리뷰 정보를 가져오기 위해 필요한 링크 받기
+            if (movies.size() == 1) { 
+                itemLink = String.valueOf(movie.get("link"));
                 String title = replace_Title(movie); // 제목 정보를 가져올 때 <b></b>가 붙어있기 때문에 제거해주는 작업
 
                 movie.put("title", title);
@@ -94,35 +94,31 @@ public class MainService {
 
         Map<String, Object> errorMap = new HashMap<>();
 
-        /*
-         * 에러페이지 송출을 위한 로직
-         * MainServiceController에서 link값을 확인하기 때문에 에러 페이지 정보를 링크에 넣어서 리턴
-         * */
+        // MainServiceController에서 link값을 확인하기 때문에 에러 페이지 정보를 링크에 넣어서 리턴
         if (!movies.isEmpty()) {
             errorMap.put("link", "tooManyResultsError"); // 검색된 결과가 너무 많다면 link에 메시지를 적어서 controller에 전달
 
             return errorMap;
         }
         
-        // 모든 조건문에 걸리지 않았다면 결국 아무값도 찾지 못했다는 것이므로 map을 하나 따로 만들어서 위와 같이 link에 메시지를 넣고 리턴
+        // 모든 조건문에 걸리지 않았다면 에러 리턴
         errorMap.put("link", "notFoundError");
         return errorMap;
-//        return Collections.emptyMap();
     }
 
 
     /*
-    * 사용자가 입력한 검색어에 대한 영화를 검색하고, 필요한 정보만 매핑해서 리턴해주는 로직
+    * 사용자가 입력한 검색어에 대해 NaverMovieApiService에서 영화를 검색하고, 그 결과를 필요한 정보만 매핑해서 리턴
     * searchItem : 사용자가 입력한 검색어
     * fields : 필요한 정보를 매핑할 때 사용할 key값
     * */
-    private List<Map<String, Object>> getApiResult(String searchItem, String[] fields) {
+    private List<Map<String, Object>> getMovieApiResult(String searchItem, String[] fields) {
 
-        String url = null;
+        String url;
         List<Map<String, Object>> items = null;
         try {
             url = URLEncoder.encode(searchItem, "UTF-8");
-            String result = naverMovieApiService.search(url);
+            String result = naverMovieApiService.searchNaverMovie(url);
             // 가져오고 싶은 정보 매핑
             Map<String, Object> mappingResult = naverMovieApiService.getResultMapping(result, fields);
 
@@ -135,23 +131,19 @@ public class MainService {
     }
 
     /*
-     * 리뷰 크롤링 작업
-     * 검색에 필요한 링크를 파라미터로 필요
-     * 사이트 URL을 통해서 필요한 정보를 뽑아서 Controller에 리턴 해주는 역할
+     * 리뷰 화면 크롤링 작업
+     * 검색에 필요한 링크(Url)를 파라미터로 필요
+     * 필요한 정보를 뽑아서 Controller에 리턴 해주는 역할
      * */
     public MainServiceDto reviewCrawlLogic(String movieLink) {
 
-        log.info("reviewCrawlLogic movieLink= {}", movieLink);
         /*
          * 링크에 대한 커넥션 받기
          * 관람객 한줄평을 받아올 때 사용
          * */
         Connection basicConn = Jsoup.connect(movieLink);
 
-        /*
-         * 기본 링크에서 부분만 수정하여 리뷰 페이지에 대한 URL을 만들고 커넥션 받기
-         * 평점 더보기를 클릭할 시 실제 네이버 사이트로 이동시켜야 하기 때문에 해당 링크를 model을 통해 넘겨줌1
-         * */
+        // 기본 링크에서 basic -> point로 바꿔 상세 리뷰 페이지 링크 생성
         String reviewLink = movieLink.replace("basic", "point");
         Connection reviewConn = Jsoup.connect(reviewLink);
 
@@ -165,7 +157,7 @@ public class MainService {
              * 관람객의 한줄평 리뷰에 대한 정보
              * */
             Elements citizenReviewElements = basicDocument.select("div.score_reple > p"); // 관람객 한줄평 텍스트
-            Elements citizenScoreElements = basicDocument.select("div.score_result > ul > li > div.star_score > em"); // 관람객 한줄평 텍스트
+            Elements citizenScoreElements = basicDocument.select("div.score_result > ul > li > div.star_score > em"); // 관람객 평점
 
             for(int i = 0; i < citizenReviewElements.size(); i++) {
                 String review = citizenReviewElements.get(i).text(); // 관람객 한줄평
@@ -175,7 +167,7 @@ public class MainService {
             }
 
             /*
-             * 기자, 평론가의 리뷰에 대한 정보를 html로 가져와서 그대로 model을 통해 넘겨줌
+             * 기자, 평론가의 리뷰에 대한 정보를 html로 가져온다.
              * 사진이 없는 기자, 평론가에 대한 리뷰는 html이 다르기 때문에 둘 다 가져와서 뿌려줘야 함
              * */
             Elements reporterHtmlElements = reviewDocument.select("div.reporter"); // 기자, 평론가 리뷰(사진 포함)

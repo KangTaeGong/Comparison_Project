@@ -69,11 +69,11 @@
                     Inform you that the site currently has no income at all.
                 </p>
                 <div class="more_btn">
-                    <span class="learnMore_btn">
-                        <a th:href="@{/servicePage}">Learn More</a>
+                    <span class="learnMore_btn" th:onclick="|location.href = '@{/servicePage}'|">
+                        Learn More
                     </span>
-                    <span class="about_btn">
-                        <a th:href="@{/aboutPage}">About Service</a>
+                    <span class="about_btn" th:onclick="|location.href = '@{/aboutPage}'|">
+                        About Service
                     </span>
                 </div>
             </div>

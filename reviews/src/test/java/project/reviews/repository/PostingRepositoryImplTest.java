@@ -134,7 +134,7 @@ public class PostingRepositoryImplTest {
 
         //when
         Long postingCount = postingRepository.getPostingCount();
-        //then (@BeforeEach 3 + TestDataInit 100)
-        Assertions.assertEquals(103, postingCount);
+        //then (@BeforeEach 3 + TestDataInit 50)
+        Assertions.assertEquals(53, postingCount);
     }
 }

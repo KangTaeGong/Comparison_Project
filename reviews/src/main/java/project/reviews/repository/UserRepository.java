@@ -6,6 +6,9 @@ import project.reviews.dto.FindUserDto;
 import java.util.List;
 import java.util.Optional;
 
+/*
+* 2022-09-16
+* */
 public interface UserRepository {
 
     void save(User user_info);
@@ -17,4 +20,6 @@ public interface UserRepository {
     Optional<FindUserDto> findByUserId(String userId);
 
     List<FindUserDto> findAll();
+
+    void deleteUser(User user);
 }

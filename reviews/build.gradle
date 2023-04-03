@@ -35,9 +35,14 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.15.3' // 크롤링을 위해 필요한 라이브러리
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	// batch + scheduler
+	implementation("org.springframework.boot:spring-boot-starter-batch")
+	implementation("org.springframework.boot:spring-boot-starter-quartz")
+
+	implementation 'mysql:mysql-connector-java'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

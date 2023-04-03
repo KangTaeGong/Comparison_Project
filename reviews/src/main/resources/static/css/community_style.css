@@ -69,9 +69,6 @@ html, body{
     cursor: pointer;
     margin-top: 12px;
     background: rgb(125, 164, 236);
-}
-
-.create_btn > a {
     color: #fff;
 }
 

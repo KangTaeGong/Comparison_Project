@@ -1,5 +1,6 @@
 package project.reviews.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,6 @@ public class UserServiceTest {
     @Autowired UserService userService;
     @Autowired UserRepository userRepository;
 
-
     /*
     * 2022-09-17
     * 회원 가입 save 테스트
@@ -35,6 +35,7 @@ public class UserServiceTest {
         //when
         Long savedId = userService.join(form);
         User findUser = userRepository.findById(savedId);
+
         //then
         assertEquals(form.getUserId(), findUser.getUserId());
         assertNull(userRepository.findById(12L));
@@ -54,5 +55,18 @@ public class UserServiceTest {
         //then
         assertThatThrownBy(() -> userService.join(form2)).isInstanceOf(IllegalStateException.class);
 
+    }
+
+    @Test
+    void membership_withdrawal_pass_Test() {
+        //given
+        User user = new User("김길이", "kingill4223", "abcd1234@");
+        userRepository.save(user);
+
+        //when
+        Boolean delete_result = userService.membership_withdrawal_checkPw(user, "abcd1234@");
+
+        //then
+        Assertions.assertEquals(true, delete_result);
     }
 }

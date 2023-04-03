@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /*
@@ -20,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Posting extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "posting_id")
     private Long id;
 
@@ -28,14 +25,28 @@ public class Posting extends BaseTimeEntity {
     private String content; // 내용
     private String writer; //글쓴이
     private int hits; // 조회수
-    
+
     private String password; // 수정, 삭제시 사용할 패스워드
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_PK")
+    private User user;
+
     public Posting(String title, String content, String writer, String password, int hits) {
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.password = password;
         this.hits = hits;
+    }
+
+    public Posting(String title, String content, String writer, String password, int hits, User user) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.password = password;
+        this.hits = hits;
+        this.user = user;
     }
 
     // 조회수 ++

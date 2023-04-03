@@ -13,8 +13,8 @@
                 <div class = "intro_text">자유게시판</div>
                 <div class = "function_form">
                     <form th:action method="get">
-                        <div class = "create_btn">
-                            <a th:href="@{/community/write}">글 쓰기</a>
+                        <div class = "create_btn" th:onclick="|location.href = '@{/community/write}'|">
+                            글 쓰기
                         </div>
                         <ul class="function">
                             <li><input type="text" id="search_text" name="postingInfo"></li>

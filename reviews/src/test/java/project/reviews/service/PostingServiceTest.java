@@ -52,7 +52,7 @@ public class PostingServiceTest {
         //given
         PostingForm form = new PostingForm("최초 생성 게시글", "안녕하세요.", "시금치", "aaaa1234@");
         //when
-        Long postingId = postingService.create_posting(form);
+        Long postingId = postingService.create_posting(form, "aaa123");
         //then
         PostingResponseDto findPosting = postingRepository.getPosting(postingId).orElseThrow(PostingNotFoundException::new);
         Assertions.assertEquals("시금치", findPosting.getWriter());
@@ -66,7 +66,11 @@ public class PostingServiceTest {
         //when
         List<PostingResponseDto> postingList = postingService.get_postingList();
         //then
-        Assertions.assertEquals(3, postingList.size());
+        /*
+        * 현재 테스트 코드 내의 테스트 게시글 3개 +
+        * TestDataInit의 테스트 게시글 50개
+        * */
+        Assertions.assertEquals(53, postingList.size());
     }
 
     /*

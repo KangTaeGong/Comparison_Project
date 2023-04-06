@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/errors.css">
+    </head>
+    <body>
+        <div class="error_page">
+            <div class="image_area">
+                <img id="logo" th:src="@{/img/error_page_image.jpg}">
+            </div>
+            <div class="contents">
+                <p class="error_title">
+                    500 ERROR
+                </p>
+
+                <p class="error_info">
+                    서버에 문제가 있습니다.<br>
+                    시간이 지난 후에 다시 시도해주세요.
+                </p>
+
+                <p class="error_info">
+                    Things are a little unstable server<br>
+                    Please come back later
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/service_style.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+        <link rel="stylesheet" type="text/css" href="/css/footer_style.css">
+    </head>
+    <body>
+        <div th:replace="~{header :: header}"></div>
+            <div class = "service_page">
+                <div class = "service_form">
+                    <!--<div class="search_area">
+                        <form>
+                            <div class="search_function">
+                                <input type="search" id="search_block" placeholder="검색어를 입력하세요.">
+                                <input type="submit" id="search_btn" value="검색">
+                            </div>
+                        </form>
+                    </div>-->
+                    <div class="title"><h1 th:text="${movie.title}">검색어 제목</h1></div>
+                    <div class = "info_area">
+                        <img id="service_picture" th:src="${movie.image}">
+                        <div class = result_info>
+                            <div class = "info_since">
+                                <span>개봉 연도: </span>
+                                <b><span th:text="${movie.pubDate}"></span></b>
+                            </div>
+                            <div class = "info_director">
+                                <span>감독: </span>
+                                <b><span th:text="${movie.director}"></span></b>
+                            </div>
+                            <div class = "info_actor">
+                                <span>출연진: </span>
+                                <b><span th:text="${movie.actor}"></span></b>
+                            </div>
+                            <div class = "info_review">
+                                <span>평점: </span>
+                                <b><span th:text="${movie.userRating}"></span></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "review_area">
+                        <div class="score_board">
+                            <strong class="board">
+                                <span class="title">
+                                    <em class="blind">관람객 한줄평</em>
+                                </span>
+                                <span class="sp">|</span>
+                                <a th:href="${mainServiceDto.reviewLink}" class="link_more">더보기
+                                    <span class="ico_more"> ></span>
+                                </a>
+                            </strong>
+                        </div>
+                        <div class="score_result">
+                            <ul>
+                                <li th:each="review : ${mainServiceDto.reviewList}">
+                                    <!--점수에 대한 별점 이미지와 실제 점수 text 출력-->
+                                    <div class="star_score">
+                                        <img class="star_image" th:src="@{img/} + ${review.score} + '.jpg'">
+                                        <em th:text="${review.score}"></em>
+                                    </div>
+
+                                    <!--관람객이 남긴 한줄평 출력-->
+                                    <div class="score_reple">
+                                        <p th:text="${review.reple_text}"></p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--기자, 평론가 관련 html-->
+                        <div class="score_board">
+                            <Strong class="board">
+                                <span class="title">
+                                    <em class="blind">기자, 평론가 평점</em>
+                                </span>
+                            </Strong>
+                        </div>
+                        <div class="reporter">
+                            <script th:inline="javascript">
+                                document.write([[${mainServiceDto.reporter_html}]]);
+                            </script>
+                        </div>
+
+                        <!--기자, 평론가 사진X 리뷰-->
+                        <div th:if="${not #strings.isEmpty(mainServiceDto.noPic_reporterList)}">
+                            <div class="score_result">
+                                <ul>
+                                    <li th:each="reporter_Review : ${mainServiceDto.noPic_reporterList}">
+                                    <!--점수에 대한 별점 이미지와 실제 점수 text 출력-->
+                                        <div class="star_score">
+                                            <img class="star_image" th:src="@{img/} + ${reporter_Review.score} + '.jpg'">
+                                            <em th:text="${reporter_Review.score}"></em>
+                                        </div>
+
+                                        <!--관람객이 남긴 한줄평 출력-->
+                                        <div class="score_reple">
+                                            <p th:text="${reporter_Review.reple_text}"></p>
+                                            <dl>
+                                                <dt th:text="${reporter_Review.name}"></dt>
+                                            </dl>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div th:replace="~{footer :: footer}"></div>
+    </body>
+</html>

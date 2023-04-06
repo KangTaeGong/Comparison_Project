@@ -1,50 +1,50 @@
 package project.reviews.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 * 2022-09-15 생성
 * 회원 Entity
-* 회원가입 할 때 사용하기 위해 각각 조건을 달아둠
 * */
 @Entity
 @Getter
-public class User {
+@NoArgsConstructor
+public class User extends BaseTimeEntity{
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_PK")
     private Long id;
-
-    @NotBlank(message = "회원 이름은 필수 입력 값입니다.")
-    @Pattern(regexp = "^[가-힣a-zA-Z]{2,10}$",
-            message = "이름 형식이 올바르지 않습니다.")
     private String userName;
-
-    @NotBlank(message = "회원 아이디는 필수 입력 값입니다.")
-    @Pattern(regexp = "[a-z0-9]{2,9}",
-            message = "아이디는 5 ~ 20자의 영문 소문자, 숫자만 가능합니다.")
     private String userId;
-
-    @NotBlank(message = "비밀번호를 입력해 주세요")
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}",
-            message = "비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자 조합으로 가능합니다.")
     private String password;
 
-    @NotBlank(message = "2차 비밀번호를 입력해 주세요")
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}",
-            message = "비밀번호는 8 ~ 16자의 영문, 숫자, 특수문자 조합으로 가능합니다.")
-    private String check_password;  // 2차 비밀번호
+    @Enumerated(EnumType.STRING)
+    @Setter
+    private Role role;
 
-    public User(String userName, String userId, String password, String check_password) {
+    // 회원 정보가 삭제되면 작성한 게시글과 영화 정보도 같이 삭제
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    List<Movie> movies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    List<Posting> postings = new ArrayList<>();
+
+    public User(String userName, String userId, String password) {
         this.userName = userName;
         this.userId = userId;
         this.password = password;
-        this.check_password = check_password;
+    }
+
+    public User(String userName, String userId, String password, Role role) {
+        this.userName = userName;
+        this.userId = userId;
+        this.password = password;
+        this.role = role;
     }
 }

@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/community_write_style.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:replace="~{header :: header}">
+        </div>
+        <div class = "write_page">
+            <div class = "write_form">
+                <div class = "intro_text">게시글 작성</div>
+                <form th:action th:object="${postingForm}" method="post">
+                    <table class = "contents">
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td class="title_write">
+                                <input type="text" th:field="*{title}" class="info_form">
+                            </td>
+                        </tr>
+                        <tr class="content">
+                            <th scope="row">내용</th>
+                            <td id="write"><textarea th:field="*{content}" class="info_form"></textarea></td>
+                        </tr>
+                    </table>
+
+                    <div th:if="${#fields.hasErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.errors()}"
+                           th:text="${err}">오류 메시지</p>
+                    </div>
+
+                    <div class="check_password">
+                        비밀번호 : <input th:field="*{password}" type="password">
+                    </div>
+
+                    <div class = "btn_form">
+                        <input type="submit" value="저장" class="write_btn">
+
+                        <div class = "cancel_btn" th:onclick="|location.href = '@{/community/list}'|">
+                            취소
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -10,24 +10,24 @@
 .header{
     display: flex;
     width: 100%;
-    height: 60px;
-    margin: auto;
-    background: #202020;
+    height: 100px;
+    border-bottom: 1px solid rgba(226, 226, 226, 0.363);
+    background: #fff;
 }
 
 .logo{
+    margin-left: 80px;
+    padding-top: 10px;
+}
+
+#logo_image {
     width: 150px;
-    height: 60px;
-    margin:auto;
-    background: red;
+    height: 80px;
 }
 
 .nav{
     display: flex;
-    justify-content: flex-end;
     margin: auto;
-    line-height: 60px;
-    width:calc(100% - 300px);
     font-size: 18px;
 }
 
@@ -35,13 +35,51 @@
     margin-left: 84px;
 }
 
-.nav > li > a{
-    color:white
+.text_end {
+    margin-right: 120px;
 }
 
-.login_btn > a{
+.text_end > div {
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.login_btn, .sign-up_btn{
+    width: 95px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 37px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: rgb(208, 240, 240);
+}
+
+.sign-up_btn{
+    margin-left: 30px;
+    background-color: rgb(241, 200, 241);
+}
+
+#userName {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#userName:hover {
+    text-decoration: underline;
+}
+
+#logout_btn{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background: #c188da;
+    padding: 5px;
     color:white;
     text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
     cursor: pointer;
-    
+    margin-left: 30px;
 }

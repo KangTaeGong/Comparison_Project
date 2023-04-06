@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/community_modify_style.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <style>
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:replace="~{header :: header}">
+        </div>
+        <div class = "modify_page">
+            <div class = "modify_form">
+                <div class = "intro_text">게시글 수정/삭제</div>
+                <form th:action th:object="${postingModifyForm}" method="post">
+                    <table class = "contents">
+                        <tr>
+                            <th scope="row">제목</th>
+                            <td class="read" th:text="${posting.title}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">글쓴이</th>
+                            <td class="read" th:text="${posting.writer}"></td>
+                        </tr>
+                        <tr class="content">
+                            <th scope="row">내용</th>
+                            <td class="write"><textarea th:field="*{content}" class="info_form"></textarea></td>
+                        </tr>
+                    </table>
+
+                    <div th:if="${#fields.hasErrors()}">
+                        <p class="field-error" th:each="err : ${#fields.errors()}"
+                           th:text="${err}">오류 메시지</p>
+                    </div>
+
+                    <div class = "btn_form">
+                        <input type="submit" value="수정 완료" class = "modify_btn">
+
+                        <div class = "delete_btn" th:onclick="|location.href = '@{/community/{id}/delete (id=${posting.id})}'|">
+                            삭제 하기
+                        </div>
+
+                        <div class = "cancel_btn" th:onclick="|location.href = '@{/community/{id}/read (id=${posting.id})}'|">
+                            취소
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

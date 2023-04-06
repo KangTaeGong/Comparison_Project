@@ -1,0 +1,245 @@
+html, body{
+}
+
+body {
+    background-image: url('/img/movieService_background.jpg');
+    background-repeat: repeat;
+}
+
+.service_page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.service_form{
+    width: 80%;
+}
+
+.search_area {
+    margin-top: 10%;
+    height: 100px;
+}
+
+.search_function{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    line-height: 40px;
+}
+
+#search_block {
+    width: 70%;
+    height: 40px;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    font-size: 16px;
+    display: flex;
+    padding: 8px;
+}
+
+.search_btn {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#search_btn {
+    width: 85px;
+    height: 40px;
+    border: 1px solid #d0d0d0;
+    font-size: 16px;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.service_left{
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    float: left;
+    box-sizing: border-box;
+    margin-top: 30px;
+    border-right: 3px solid gray;
+}
+
+.left_picture{
+    width: 100px;
+    height: 100px;
+    border: 1px solid gray;
+}
+
+.service_picture{
+    width: 120px;
+    height: 150px;
+}
+
+.service_right{
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    margin-top: 30px;
+    float: right;
+    box-sizing: border-box;
+
+}
+
+.info_area{
+    display: flex;
+    padding: 50px 0px 40px 30px;
+    border-bottom: 1px solid gray;
+}
+
+.result_info{
+    margin-left: 20px;
+}
+
+.result_info > div {
+    font-size: 18px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.info_title{
+    font-size: 25px;
+}
+
+.review_area {
+    background: #ffffff;
+    margin-top: 20px;
+    padding: 0px 25px 20px 25px;
+}
+
+.score_board {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+}
+
+.board {
+    font-size: 15px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+.sp {
+    display: inline-block;
+    width: 1px;
+    padding: 0 11px 0 6px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #dedede;
+    vertical-align: top;
+}
+
+.ico_more {
+    font-size: 15px;
+    vertical-align: top;
+    color: #ff6633;
+}
+
+.score_result > ul > li {
+    position: relative;
+    float: none;
+    padding: 14px 0 13px 0;
+    margin: 10px 0px 20px 0px;
+    margin-bottom: 20px;
+}
+
+.star_score {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    float: left;
+    min-width: 94px;
+    height: 100%;
+    margin-right: 12px;
+}
+
+.star_image {
+    width: 80px;
+    height: 25px;
+}
+
+.star_score > em {
+    padding-right: 5px;
+    color: #333;
+    letter-spacing: -1px;
+    font-weight: bold;
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.score_reple {
+    margin-left: 8px;
+}
+
+.score_reple > p {
+    font-size: 14px;
+    color: #333;
+    line-height: 22px;
+    margin-top: -2px;
+}
+
+.reporter > ul > li {
+    padding: 20px 0 15px 0;
+    border-bottom: 1px dashed gray;
+}
+
+.thumb {
+    width: 48px;
+    height: 48px;
+    float: left;
+    margin-right: 10px;
+}
+
+.thumb > a {
+    height: 38px;
+}
+
+.p_review > dt {
+    font-size: 13px;
+    color: #333;
+    letter-spacing: -1px;
+}
+
+.p_review > dt > a {
+    margin-right: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.p_review > dd {
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.re_score_grp {
+    margin-top: 20px;
+    overflow: hidden;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 58px;
+}
+
+.tx_report {
+    margin-top: 2px;
+    font-size: 13px;
+    color: #333;
+    line-height: 24px;
+    margin-left: 58px;
+}
+
+.add_area {
+    height:100%;
+    background: #ffffff;
+}

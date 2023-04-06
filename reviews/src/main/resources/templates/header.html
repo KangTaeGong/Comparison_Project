@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="header" class = "header" id="category_header">
+        <div class="logo">
+            <img id="logo_image" src="/img/main_logo.png">
+        </div>
+        <ul class="nav">
+            <li><a th:href="@{/}">HOME</a></li>
+            <li><a th:href="@{/aboutPage}">About</a></li>
+            <li><a th:href="@{/servicePage}">Service</a></li>
+            <li><a th:href="@{/community/list}">Community</a></li>
+        </ul>
+
+        <div class="text_end">
+
+            <div class="login_btn" th:if="${user == null}" th:onclick="|location.href = '@{/login}'|" >
+                Login
+            </div>
+
+            <div class="sign-up_btn" th:if="${user == null}" th:onclick="|location.href = '@{/join}'|">
+                Sign-up
+            </div>
+
+            <div>
+                <a th:href="@{/memberInfo}">
+                    <label th:text="|${user.userName} 님|" th:if="${user != null}" id="userName">사용자 이름></label>
+                </a>
+            </div>
+
+            <div>
+                <form th:action="@{/logout}" method="post" th:if="${user != null}">
+                    <input type="submit" value="로그아웃" id="logout_btn"> <!-- th:if="${user != null}"-->
+                </form>
+            </div>
+
+            </li>
+        </div>
+    </div>
+</body>
+</html>

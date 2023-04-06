@@ -7,12 +7,11 @@ html, body{
     height: 100%;
     display: flex;
     justify-content: center;
-
 }
 
 .community_form{
-    width: 50%;
-    border: 1px solid gray;
+    width: 90%;
+    padding: 50px;
 }
 
 .intro_text{
@@ -21,47 +20,91 @@ html, body{
     text-align: center;
     line-height: 120px;
     font-size: 30px;
-    font: weight 5px;
+    font: weight 700;
+}
+
+.function_form > form{
+    display: flex;
+}
+
+.function{
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+    line-height: 60px;
+    width:calc(100% - 100px);
+    font-size: 18px;
+}
+
+.function > li > input{
+    line-height: 60px;
+}
+
+#search_text {
+    width: 250px;
+    height: 28px;
+    font-size: 17px ;
+}
+
+#search_button {
+    width: 80px;
+    height: 38px;
+    margin-left: 2px;
+    background: rgb(125, 164, 236);
+    font-size: 15px;
+    border: 1px solid rgb(125, 164, 236);
+    border-radius: 5px;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    color: #fff;
 }
 
 .create_btn{
     width: 100px;
     height: 40px;
-    border: 1px solid gray;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
-    /* float: right; */
+    margin-top: 12px;
+    background: rgb(125, 164, 236);
+    color: #fff;
 }
 
-.community_form > form{
-    margin-top: 30px;
-    border-top: 1px solid gray;
+.table_form{
+    margin-top: 20px;
+    border-top: 2px solid gray;
     height: 70%;
-
-}
-.community_main{
-    width: 100%;
 }
 
-.community_form > form > table{
+.table_form > table{
     width: 100%;
     text-align: center;
-    margin-top: 10px;
-    
 }
 
-.community_form > form > table > thead{
-    border-bottom: 2px solid gray;
+.table_form > table > thead{
+    border-bottom: 1px solid rgb(219, 212, 212);
     margin-bottom: 10px;
-}
-
-.community_form > form > table > thead > tr > th{
     height: 40px;
 }
 
-.community_form > form > table > tbody > tr > td{
+.table_form > table > tbody > tr > td{
     height: 35px;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(219, 212, 212);
+}
+
+.table_title {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.number{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.number > a, strong{
+    margin-right: 5px;
 }

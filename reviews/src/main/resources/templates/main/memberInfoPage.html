@@ -56,7 +56,7 @@
         </div>
 
         <div class="record_contents" th:if="${not #lists.isEmpty(postings)}" th:each="posting : ${postings}">
-            <a th:text="${posting.postingTitle}" th:href="@{/community/{postingId}/read (postingId = ${posting.postingId})}"></a>
+            <a th:text="${posting.postingTitle}" th:href="@{/community/read/{postingId} (postingId = ${posting.postingId})}"></a>
         </div>
     </div>
 

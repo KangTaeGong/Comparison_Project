@@ -48,7 +48,7 @@
                         </th:block>-->
                         <td th:text="${posting.id}"></td>
                         <td class="table_title">
-                            <a th:text="${posting.title}" th:href="@{/community/{id}/read (id=${posting.id})}"></a>
+                            <a th:text="${posting.title}" th:href="@{/community/read/{id} (id=${posting.id})}"></a>
                         </td>
                         <td th:text="${posting.writer}"></td>
                         <td th:text="${posting.createdDate}"></td>

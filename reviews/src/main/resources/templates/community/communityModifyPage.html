@@ -42,11 +42,11 @@
                     <div class = "btn_form">
                         <input type="submit" value="수정 완료" class = "modify_btn">
 
-                        <div class = "delete_btn" th:onclick="|location.href = '@{/community/{id}/delete (id=${posting.id})}'|">
+                        <div class = "delete_btn" th:onclick="|location.href = '@{/community/delete/{id} (id=${posting.id})}'|">
                             삭제 하기
                         </div>
 
-                        <div class = "cancel_btn" th:onclick="|location.href = '@{/community/{id}/read (id=${posting.id})}'|">
+                        <div class = "cancel_btn" th:onclick="|location.href = '@{/community/read/{id} (id=${posting.id})}'|">
                             취소
                         </div>
                     </div>

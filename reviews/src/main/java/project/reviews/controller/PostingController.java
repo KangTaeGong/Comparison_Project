@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /*
-* 2022-10-06
-* 커뮤니티 관련 컨트롤러
-* */
+ * 2022-10-06
+ * 커뮤니티 관련 컨트롤러
+ * */
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -29,11 +29,11 @@ import javax.validation.Valid;
 public class PostingController {
 
     private final PostingService postingService;
-
+    public static PostingResponseDto check_posting; // 게시글 수정/삭제 전에 패스워드 인증
     /*
-    * 게시판 메인 리스트 화면
-    * postingInfo : 사용자가 입력한 검색어
-    * */
+     * 게시판 메인 리스트 화면
+     * postingInfo : 사용자가 입력한 검색어
+     * */
     @GetMapping("/list")
     public String postingList(Model model, HttpServletRequest request,
                               @PageableDefault(page = 0, size = 15)Pageable pageable, String postingInfo) {
@@ -70,7 +70,7 @@ public class PostingController {
         if(bindingResult.hasErrors()) {
             return "community/communityWritePage";
         }
-        
+
 
         // 문제 없을 시 request, session을 통해서 회원 이름을 조회하고 저장 메소드로 값을 넘겨줌
         User session_user = LoginSessionCheck.check_loginUser(request);
@@ -82,16 +82,16 @@ public class PostingController {
         Long postingId = postingService.create_posting(form, session_user.getUserId());
 
         // 글 생성이 완료되면 읽기 페이지로 이동
-        String redirectUrl = "/community/" + postingId + "/read";
+        String redirectUrl = "/community/read/" + postingId;
         return "redirect:" + redirectUrl;
     }
 
     /*
-    * 게시글 읽어오기
-    * */
-    @GetMapping("/{postingId}/read")
+     * 게시글 읽어오기
+     * */
+    @GetMapping("/read/{postingId}")
     public String readPostingForm(@PathVariable("postingId") Long postingId, @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, Model model
-                                    , HttpServletRequest request) {
+            , HttpServletRequest request) {
 
         // postingId를 통해서 posting 조회 후 html에 posting 정보를 뿌려준다.
         PostingResponseDto posting = postingService.get_posting(postingId);
@@ -104,10 +104,10 @@ public class PostingController {
         return "community/communityReadPage";
     }
 
-    // 글 수정 및 삭제 시 동작하는 로직
-    @PostMapping("/{postingId}/read")
+    // 글 수정 및 삭제 화면 이동시 게시글 비밀번호 인증
+    @PostMapping("/read/{postingId}")
     public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, BindingResult bindingResult
-                                , Model model, HttpServletRequest request) {
+            , Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
 
         if(bindingResult.hasErrors()) {
@@ -119,38 +119,40 @@ public class PostingController {
          * 필드에 오류가 없을 시
          * getPosting_password()에 패스워드를 보내서 Service 로직에서 비교 후 게시글 정보 결과 반환
          * */
-        PostingResponseDto check_posting = postingService.getPosting_password(postingId, checkPasswordDto.getPassword());
+        check_posting = postingService.getPosting_password(postingId, checkPasswordDto.getPassword());
         if(check_posting == null) {
             bindingResult.reject("modifyFail", "비밀번호가 일치하지 않습니다.");
             model.addAttribute("posting", posting);
             LoginSessionCheck.check_loginUser(request, model);
             return "community/communityReadPage";
         }
-        
+
         // 글 수정/삭제 화면으로 이동
-        return "redirect:/community/" + postingId + "/modify";
+        return "redirect:/community/modify/" + postingId;
     }
 
     /*
-    * 게시글 수정, 삭제 form
-    * 수정 관련 로직
-    * */
-    @GetMapping("/{postingId}/modify")
+     * 게시글 수정, 삭제 form
+     * 수정 관련 로직
+     * */
+    @GetMapping("/modify/{postingId}")
     public String modifyPostingForm(@PathVariable("postingId") Long postingId, Model model, HttpServletRequest request) {
+        check_posting = null; // check_posting을 초기화 해주어 강제로 접속하는 것을 방지
+
         PostingResponseDto posting = postingService.get_posting(postingId);
         model.addAttribute("posting", posting);
         LoginSessionCheck.check_loginUser(request, model);
         /*
-        * 글 내용만 model에 따로 담아서 전달
-        * @PostMapping의 @ModelAttribute와 이름 동일
-        * */
+         * 글 내용만 model에 따로 담아서 전달
+         * @PostMapping의 @ModelAttribute와 이름 동일
+         * */
         PostingModifyForm postingModifyForm = new PostingModifyForm(postingId, posting.getContent());
         model.addAttribute("postingModifyForm", postingModifyForm);
 
         return "community/communityModifyPage";
     }
 
-    @PostMapping("/{postingId}/modify")
+    @PostMapping("/modify/{postingId}")
     public String modifyPosting(@PathVariable("postingId") Long postingId, @Valid @ModelAttribute("postingModifyForm") PostingModifyForm postingModifyForm,
                                 BindingResult bindingResult, Model model) {
         /*
@@ -165,19 +167,19 @@ public class PostingController {
         }
 
         /*
-        * 수정 성공시 결과를 DB에 반영하고 포스팅 읽기 페이지로 리다이렉트
-        * PostingModifyForm에 id값을 넣어서 비즈니스 로직으로 전달
-        * */
+         * 수정 성공시 결과를 DB에 반영하고 포스팅 읽기 페이지로 리다이렉트
+         * PostingModifyForm에 id값을 넣어서 비즈니스 로직으로 전달
+         * */
         PostingModifyForm modifyForm = new PostingModifyForm(postingId, postingModifyForm.getContent());
         postingService.update_posting(modifyForm);
 
-        String redirectUrl = "/community/" + postingId + "/read";
+        String redirectUrl = "/community/read/" + postingId;
 
         return "redirect:" + redirectUrl;
     }
 
     // 게시글 삭제
-    @GetMapping("/{postingId}/delete")
+    @GetMapping("/delete/{postingId}")
     public String deletePosting(@PathVariable("postingId") Long postingId, Model model) {
 
         postingService.delete_posting(postingId);

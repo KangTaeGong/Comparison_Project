@@ -1,7 +1,9 @@
 package project.reviews.login;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
+import project.reviews.controller.PostingController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +37,15 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             }
             response.sendRedirect("/login?redirectURI=" + requestURI);
             return false;
+        }
+
+        // 로그인 이후에 강제로 접속 시 list화면으로 내보냄
+        if(requestURI.contains("/modify") || requestURI.contains("/delete")) {
+            if (PostingController.check_posting == null) {
+                response.sendRedirect("/community/list");
+                return false;
+            }
+
         }
         return true;
     }

@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/community/**", "/memberInfo/**")
                 .excludePathPatterns(
                         "/", "/community/list", "/login", "/join",
-                        "/community/*/read"
+                        "/community/read/*"
                 );
     }
 }

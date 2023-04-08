@@ -19,7 +19,7 @@
             <div class="title">
                 <text>회원 탈퇴</text>
             </div>
-            <form th:action="@{/memberInfo/withdrawal_member}" th:object="${checkPassword}" method="post">
+            <form th:method="delete" th:action="@{/memberInfo/popup/withdrawal_member}" th:object="${checkPassword}">
                 <div class="txt_field">
                     <input type="password" required th:field="*{password}" th:errorclass="field-error">
                     <span></span>

@@ -22,7 +22,5 @@ Spring Boot를 이용한 영화 비교 사이트
 - **FrameWork** : SpringBoot(2.x)
 - **DataBase** : MySql DB
 - **ORM** : JPA
-- HTML5
-- CSS3
 
 ## 📌 주요 기능

@@ -1,6 +1,7 @@
-# SpringBoot Project - LeeSearch
-Spring Boot를 이용한 영화 비교 사이트
+# Project Description
 
+## SpringBoot Project - LeeSearch
+Spring Boot를 이용한 영화 비교 사이트
 
 ## 💻 프로젝트 소개
 **비교 검색 사이트**
@@ -13,14 +14,52 @@ Spring Boot를 이용한 영화 비교 사이트
 ## 🕑 개발 기간
 2022-09-17 ~ 2023-04-03
 
-### 🧑🏻 개발 인원
-이상민
+## 디렉토리 구조
 
-### 🔧 개발 환경
+```bash
+📦main
+ ┣ 📂java
+ ┃ ┗ 📂project
+ ┃ ┃ ┗ 📂reviews
+ ┃ ┃ ┃ ┣ 📂api -> 네이버 영화 API 관련 코드
+ ┃ ┃ ┃ ┣ 📂configuration -> Spring Batch, Scheduler 등의 설정
+ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┣ 📂domain
+ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┣ 📂login -> 로그인 관련 폼, 인증 등
+ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┣ 📂validation -> @GroupSequence
+ ┃ ┃ ┃ ┣ 📜ComparisonOfReviewsApplication.java
+ ┗ 📂resources
+ ┃ ┣ 📂static
+ ┃ ┃ ┣ 📂css
+ ┃ ┃ ┗ 📂img
+ ┃ ┣ 📂templates
+ ┃ ┃ ┣ 📂alert -> alert, popup
+ ┃ ┃ ┣ 📂community -> 게시판 관련
+ ┃ ┃ ┣ 📂error -> 에러 페이지
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂service -> 메인 서비스 관련
+ ┃ ┃ ┣ 📜footer.html
+ ┃ ┃ ┗ 📜header.html
+ ┃ ┣ 📜application.properties
+ ┃ ┗ 📜errors.properties
+```
+
+# Project Info
+
+## 🔧 개발 환경
 
 - `Java 11`
 - **FrameWork** : SpringBoot(2.x)
 - **DataBase** : MySql DB
 - **ORM** : JPA
+- HTML5, CSS3, Thymeleaf
+
+# 결과물
+
 
 ## 📌 주요 기능

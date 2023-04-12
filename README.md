@@ -1,18 +1,32 @@
-# Project Description
+# SpringBoot Project - LeeSearch
 
-## SpringBoot Project - LeeSearch
-Spring Boot를 이용한 영화 비교 사이트
+<p align="center">
+<img src="https://user-images.githubusercontent.com/97094897/231406722-a7f65454-2c80-4b64-a144-61f28a711bbb.png" width="300" height="150">
+</p>
+
 
 ## 💻 프로젝트 소개
-**비교 검색 사이트**
-검색어를 통해 영화를 검색, 비교할 수 있는 웹 사이트 입니다.
 
-**제공하는 기능**
-- 영화 제목 검색을 통한 정보 검색 및 두 영화의 정보 및 리뷰 비교.
-- 자유 게시판
+Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니다.<br>
+
+**Main Service**<br>
+메인 화면에서 검색창을 통해 기본적으로 영화에 대한 정보를 검색할 수 있는 기능을 제공합니다.<br>
+영화의 제목을 각각의 검색창을 통해 검색하게 되면, 두 영화의 정보를 한 페이지에서 동시에 비교할 수 있습니다.
+
+**Serve Service**<br>
+간단한 회원가입과 로그인을 통해 게시판에 게시글을 남길 수 있습니다.<br>
+또한, MyPage에서 자신이 작성한 게시글 목록과, 검색했던 영화 제목들을 확인해 볼 수 있습니다.
 
 ## 🕑 개발 기간
 2022-09-17 ~ 2023-04-03
+
+## 🔧 개발 환경
+
+- `Java 11`
+- **FrameWork** : SpringBoot(2.x)
+- **DataBase** : MySql DB
+- **ORM** : JPA
+- HTML5, CSS3, Thymeleaf
 
 ## 디렉토리 구조
 
@@ -49,15 +63,13 @@ Spring Boot를 이용한 영화 비교 사이트
  ┃ ┗ 📜errors.properties
 ```
 
-# Project Info
+# 시작 가이드
 
-## 🔧 개발 환경
+**요구사항**<br>
 
-- `Java 11`
-- **FrameWork** : SpringBoot(2.x)
-- **DataBase** : MySql DB
-- **ORM** : JPA
-- HTML5, CSS3, Thymeleaf
+- MySQL 설치 필요.
+
+
 
 # 결과물
 

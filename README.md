@@ -24,7 +24,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 - `Java 11`
 - **FrameWork** : SpringBoot(2.x)
-- **DataBase** : MySql DB
+- **DataBase** : MySQL
 - **ORM** : JPA
 - HTML5, CSS3, Thymeleaf
 
@@ -65,13 +65,14 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 # 시작 가이드
 
-**요구사항**<br>
+### 요구사항
 
 - MySQL 설치 필요.
 - Query DSL 사용을 위한 Q 클래스 생성
    - `gradle` -> `reviews` -> `Tasks` -> `other` -> `compileJava`
+<br>
 
-**네이버 API 관련**<br>
+### 네이버 API 관련
 
 네이버 영화 API를 사용하기 위해서 아이디 발급이 필요합니다.<br>
 Link : [네이버 오픈 API](https://developers.naver.com/docs/serviceapi/search/blog/blog.md#%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%93%B1%EB%A1%9D)
@@ -84,12 +85,49 @@ public class NaverApiClientInfo {
     public static final String client_secret = "";
 }
 ```
+<br>
 
-** DB 관련**<br>
+### DB 관련
 
+`application.properties`
+```properties
+# DB Setting(MySQL)
+# 생성한 DB이름과 사용자 id, password 입력
+spring.datasource.url=jdbc:mysql://localhost:3306/DB Name?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
 
+# 기술 스택
 
-# 결과물
+### Environment
+
+<div>
+<img src="https://img.shields.io/badge/IntelliJ IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/Sourcetree-0052CC?style=for-the-badge&logo=sourcetree&logoColor=white">
+</div>
+
+### Development
+
+#### FrontEnd
+
+<div>
+ <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+ <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+ <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
+<div>
+
+#### BackEnd
+
+<div>
+ <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+ <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+ <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+ <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white">
+ 
+</div>
 
 
 ## 📌 주요 기능

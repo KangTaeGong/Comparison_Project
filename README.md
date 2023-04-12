@@ -68,6 +68,24 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 **요구사항**<br>
 
 - MySQL 설치 필요.
+- Query DSL 사용을 위한 Q 클래스 생성
+   - `gradle` -> `reviews` -> `Tasks` -> `other` -> `compileJava`
+
+**네이버 API 관련**<br>
+
+네이버 영화 API를 사용하기 위해서 아이디 발급이 필요합니다.<br>
+Link : [네이버 오픈 API](https://developers.naver.com/docs/serviceapi/search/blog/blog.md#%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%93%B1%EB%A1%9D)
+
+`NaverApiClientInfo.java`
+```java
+public class NaverApiClientInfo {
+    // 발급받은 id, secert 코드에 추가
+    public static final String client_id = "";
+    public static final String client_secret = "";
+}
+```
+
+** DB 관련**<br>
 
 
 

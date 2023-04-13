@@ -28,41 +28,6 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 - **ORM** : JPA
 - HTML5, CSS3, Thymeleaf
 
-## 디렉토리 구조
-
-```bash
-📦main
- ┣ 📂java
- ┃ ┗ 📂project
- ┃ ┃ ┗ 📂reviews
- ┃ ┃ ┃ ┣ 📂api -> 네이버 영화 API 관련 코드
- ┃ ┃ ┃ ┣ 📂configuration -> Spring Batch, Scheduler 등의 설정
- ┃ ┃ ┃ ┣ 📂controller
- ┃ ┃ ┃ ┣ 📂domain
- ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┣ 📂exception
- ┃ ┃ ┃ ┣ 📂login -> 로그인 관련 폼, 인증 등
- ┃ ┃ ┃ ┣ 📂repository
- ┃ ┃ ┃ ┣ 📂service
- ┃ ┃ ┃ ┣ 📂validation -> @GroupSequence
- ┃ ┃ ┃ ┣ 📜ComparisonOfReviewsApplication.java
- ┗ 📂resources
- ┃ ┣ 📂static
- ┃ ┃ ┣ 📂css
- ┃ ┃ ┗ 📂img
- ┃ ┣ 📂templates
- ┃ ┃ ┣ 📂alert -> alert, popup
- ┃ ┃ ┣ 📂community -> 게시판 관련
- ┃ ┃ ┣ 📂error -> 에러 페이지
- ┃ ┃ ┣ 📂login
- ┃ ┃ ┣ 📂main
- ┃ ┃ ┣ 📂service -> 메인 서비스 관련
- ┃ ┃ ┣ 📜footer.html
- ┃ ┃ ┗ 📜header.html
- ┃ ┣ 📜application.properties
- ┃ ┗ 📜errors.properties
-```
-
 # 시작 가이드
 
 ### 요구사항
@@ -99,6 +64,8 @@ spring.datasource.password=
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
+<br>
+
 # 기술 스택
 
 ### Environment
@@ -126,8 +93,68 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
  <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
  <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white">
- 
 </div>
 
+<div>
+ <img src="https://user-images.githubusercontent.com/97094897/231717269-de996cee-c349-4389-b9b6-2ef8a33ae8f9.png" width="110" height="30">
+ <img src="https://user-images.githubusercontent.com/97094897/231717286-53d371b6-1a55-4f47-99ad-81652a625522.png" width="140" height="30">
+ <img src="https://user-images.githubusercontent.com/97094897/231715498-d296ee61-60f3-48bb-b954-d5e576d3efb5.png" width="110" height="30">
+</div>
+
+<br>
+
+---
+## 화면 구성
+
+| 메인 페이지  |  소개 페이지   |  설명 페이지   |
+| :------------: | :------------: | :------------: |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231722955-871da1ba-7954-4e45-9a85-447b3fa52387.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725420-2541cf77-bd07-4848-9e8e-3788e5e4c67d.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725559-9de888bf-a944-4c94-b795-098896c468aa.png"> |
+| 로그인 페이지  |  회원가입 페이지   |  사용자 페이지   |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231726518-ec8af65b-4d41-4433-8d81-60d88b3b4f86.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726526-2516a387-c15f-4fba-806c-421f8bf42b74.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726536-b232b7d2-4305-4d6d-8891-c0d5b3b665c6.png">
+| 게시판 페이지  |  게시글 작성   |  게시글 읽기   |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231727496-cc0eea32-d297-49de-a2d3-3a51f6d0b79e.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727493-3f4e94a4-1b82-49e1-a791-0fe7b94b0c18.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727486-2d1c7040-3466-4373-8248-828538647125.png">
+| 영화 검색 결과 페이지  |  영화 비교 페이지   |     |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231728197-ccbc9720-661b-482d-bee7-558e6d99e759.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727948-bc914f07-a07e-4a8b-8b90-b7828e9a0fce.png"> |  |
+
+## API 주소
+---
+
+
+## 아키텍쳐
+
+### 디렉토리 구조
+
+```bash
+📦main
+ ┣ 📂java
+ ┃ ┗ 📂project
+ ┃ ┃ ┗ 📂reviews
+ ┃ ┃ ┃ ┣ 📂api -> 네이버 영화 API 관련 코드
+ ┃ ┃ ┃ ┣ 📂configuration -> Spring Batch, Scheduler 등의 설정
+ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┣ 📂domain
+ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┣ 📂login -> 로그인 관련 폼, 인증 등
+ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┣ 📂validation -> @GroupSequence
+ ┃ ┃ ┃ ┣ 📜ComparisonOfReviewsApplication.java
+ ┗ 📂resources
+ ┃ ┣ 📂static
+ ┃ ┃ ┣ 📂css
+ ┃ ┃ ┗ 📂img
+ ┃ ┣ 📂templates
+ ┃ ┃ ┣ 📂alert -> alert, popup
+ ┃ ┃ ┣ 📂community -> 게시판 관련
+ ┃ ┃ ┣ 📂error -> 에러 페이지
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂service -> 메인 서비스 관련
+ ┃ ┃ ┣ 📜footer.html
+ ┃ ┃ ┗ 📜header.html
+ ┃ ┣ 📜application.properties
+ ┃ ┗ 📜errors.properties
+```
 
 ## 📌 주요 기능

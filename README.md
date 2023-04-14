@@ -168,4 +168,33 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
  ┃ ┗ 📜errors.properties
 ```
 
-## 📌 주요 기능
+<br>
+
+# 📌 주요 기능
+
+#### 회원가입
+
+- ID 중복 체크
+- Bean Validation 적용
+
+#### 로그인
+
+- Bean Validation 적용
+- DB값 검증
+- 로그인 시 세션(Session) 생성
+
+#### 마이 페이지
+- 게시글, 영화 검색어를 연관관계 매핑으로 가져옴
+- 회원 탈퇴
+
+#### 게시판
+- CRUD(작성, 읽기, 수정, 삭제)
+- 페이징
+- 수정/삭제 시 게시글 비밀번호 인증
+
+#### 메인 페이지
+- 영화 검색어 개수에 따른 다른 결과 창 제공
+- 네이버 영화 API 연동
+- autoSearch 기능
+- 네이버 정보 크롤링
+

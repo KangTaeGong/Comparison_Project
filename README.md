@@ -103,8 +103,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 <br>
 
----
-## 화면 구성
+# 화면 구성
 
 | 메인 페이지  |  소개 페이지   |  설명 페이지   |
 | :------------: | :------------: | :------------: |
@@ -116,8 +115,20 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 | 영화 검색 결과 페이지  |  영화 비교 페이지   |     |
 | <img width="300" src="https://user-images.githubusercontent.com/97094897/231728197-ccbc9720-661b-482d-bee7-558e6d99e759.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727948-bc914f07-a07e-4a8b-8b90-b7828e9a0fce.png"> |  |
 
-## API 주소
+## API 설계
+![user_api](https://user-images.githubusercontent.com/97094897/231987922-2d6d4839-f2f8-4aeb-af38-a781437f6979.png)
+
 ---
+
+![main_api](https://user-images.githubusercontent.com/97094897/231987930-4a6afa32-00c6-4ca7-a8fc-c37466737f71.png)
+
+---
+
+![my_api](https://user-images.githubusercontent.com/97094897/231987933-f749c5d6-a9dc-4896-8ed9-4933edfa7305.png)
+
+---
+
+![community_api](https://user-images.githubusercontent.com/97094897/231987935-b6b4e0ac-4187-455f-bcc2-e506ee9f5f61.png)
 
 
 ## 아키텍쳐

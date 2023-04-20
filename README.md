@@ -204,9 +204,11 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 - 페이징
 - 수정/삭제 시 게시글 비밀번호 인증
 
-#### 메인 페이지
-- 영화 검색어 개수에 따른 다른 결과 창 제공
-- 네이버 영화 API 연동
-- autoSearch 기능
-- 네이버 정보 크롤링
+#### 메인 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89)"><상세보기></a>
 
+- 네이버 영화 API 연동
+- 검색어 개수에 따른 다른 결과 창 제공
+- Ajax를 이용한 AutoSearch 기능 제공
+- 네이버 정보 크롤링
+- 로그인된 회원이라면 영화 검색 정보 저장 후 제공
+- Spring Batch, @Scheduled를 통해 DB 정보 관리

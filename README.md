@@ -180,22 +180,26 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 # 📌 주요 기능
 
-#### 회원가입
+#### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
 
 - ID 중복 체크
 - Bean Validation 적용
+- PW 암호화
 
-#### 로그인
-
+#### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
+   
 - Bean Validation 적용
 - DB값 검증
 - 로그인 시 세션(Session) 생성
+- Interceptor를 통해 페이지 강제 접근 방지
 
-#### 마이 페이지
+#### 마이 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-mypage%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4"><상세보기></a>
+   
 - 게시글, 영화 검색어를 연관관계 매핑으로 가져옴
 - 회원 탈퇴
 
-#### 게시판
+#### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(Posting)"><상세보기></a>
+   
 - CRUD(작성, 읽기, 수정, 삭제)
 - 페이징
 - 수정/삭제 시 게시글 비밀번호 인증

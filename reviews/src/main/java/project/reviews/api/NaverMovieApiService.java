@@ -23,7 +23,6 @@ import java.util.Map;
 * 2022-11-04
 * 네이버 영화 검색 API
 * */
-@Slf4j
 @Service
 public class NaverMovieApiService {
 
@@ -102,7 +101,6 @@ public class NaverMovieApiService {
             rtnObj.put("result", itemList);
         } catch (ParseException e) {
             e.printStackTrace();
-            log.info("getResult Error -> " + "Parsing Error, " + e.getMessage());
         }
         return rtnObj;
     }

@@ -62,7 +62,6 @@ public class LoginController {
         // 세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_USER, loginUser_entity);
 
-        log.info("redirectURI = {}", redirectURI);
         return "redirect:" + redirectURI;
     }
 

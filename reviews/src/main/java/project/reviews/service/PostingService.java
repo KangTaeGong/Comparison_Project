@@ -21,7 +21,6 @@ import java.util.List;
 * 게시판 비즈니스 로직
 * */
 @Service
-@Slf4j
 @Transactional
 @RequiredArgsConstructor
 public class PostingService {

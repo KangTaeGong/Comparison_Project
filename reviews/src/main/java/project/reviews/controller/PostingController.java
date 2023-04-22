@@ -23,7 +23,6 @@ import javax.validation.Valid;
  * 커뮤니티 관련 컨트롤러
  * */
 @Controller
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/community")
 public class PostingController {

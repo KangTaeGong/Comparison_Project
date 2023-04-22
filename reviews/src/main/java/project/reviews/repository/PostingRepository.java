@@ -27,4 +27,3 @@ public interface PostingRepository {
 
     void delete_Posting(Long postingId);
 }
-

@@ -10,14 +10,6 @@
         <div th:replace="~{header :: header}"></div>
             <div class = "service_page">
                 <div class = "service_form">
-                    <!--<div class="search_area">
-                        <form>
-                            <div class="search_function">
-                                <input type="search" id="search_block" placeholder="검색어를 입력하세요.">
-                                <input type="submit" id="search_btn" value="검색">
-                            </div>
-                        </form>
-                    </div>-->
                     <div class="title"><h1 th:text="${movie.title}">검색어 제목</h1></div>
                     <div class = "info_area">
                         <img id="service_picture" th:src="${movie.image}">

@@ -26,7 +26,6 @@ import java.util.Map;
  * 2022-11-09
  * 메인 서비스(검색시 정보 출력 및 리뷰 비교) Controller
  * */
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MainServiceController {

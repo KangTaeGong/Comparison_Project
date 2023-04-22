@@ -25,7 +25,6 @@ import java.util.*;
 * */
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class MainService {
 
     private final NaverMovieApiService naverMovieApiService;

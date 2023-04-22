@@ -13,18 +13,15 @@ import javax.servlet.http.HttpSession;
 * 2022-10-18
 * 인증된(Login된) 사용자인지 체크하는 인터셉터
 * */
-@Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
     
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestURI = request.getRequestURI();
-//        log.info("Login 체크 인터셉터 실행 {}", requestURI);
 
         HttpSession session = request.getSession(false);
         
         if(session == null || session.getAttribute(SessionConst.LOGIN_USER) == null) {
-//            log.info("미인증 사용자 요청");
 
             /*
             * 인증이 필요한 페이지를 URL로 직접 접근시 LoginForm으로 이동

@@ -23,7 +23,6 @@ import java.util.List;
 * */
 @Configuration
 @EnableBatchProcessing
-@Slf4j
 public class BatchConfig {
 
     @Autowired

@@ -25,7 +25,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/memberInfo")
-@Slf4j
 public class MemberInfoController {
 
     private final RecordService recordService;

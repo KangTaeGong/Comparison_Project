@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 * */
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class HomeController {
 
     /*

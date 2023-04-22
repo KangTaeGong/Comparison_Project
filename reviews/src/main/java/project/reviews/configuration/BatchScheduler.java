@@ -19,7 +19,6 @@ import java.util.Map;
 * 2023-03-10
 * @Scheduled
 * */
-@Slf4j
 @Component
 public class BatchScheduler {
 
@@ -48,7 +47,7 @@ public class BatchScheduler {
         } catch (JobInstanceAlreadyCompleteException | JobExecutionAlreadyRunningException
                 | JobParametersInvalidException | JobRestartException e) {
 
-            log.error(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

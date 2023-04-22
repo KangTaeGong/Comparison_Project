@@ -28,10 +28,6 @@ public class JoinController {
 
     private final UserService userService;
 
-    /*
-     * 2022-09-23
-     * 회원가입 관련 로직
-     * */
     @GetMapping("/join")
     public String joinForm(@ModelAttribute("joinForm") JoinForm form) {
         return "login/joinPage";
@@ -62,5 +58,4 @@ public class JoinController {
         model.addAttribute("data", new Message("회원 가입이 완료되었습니다.", "/login"));
         return "alert/message";
     }
-
 }

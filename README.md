@@ -102,12 +102,12 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 #### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
 
 - ID 중복 체크
-- Bean Validation 적용
+- 유효성 검사(Bean Validation 적용)
 - PW 암호화
 
 #### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
    
-- Bean Validation 적용
+- 유효성 검사(Bean Validation 적용)
 - DB값 검증
 - 로그인 시 세션(Session) 생성
 - Interceptor를 통해 페이지 강제 접근 방지
@@ -120,7 +120,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 #### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(Posting)"><상세보기></a>
    
 - CRUD(작성, 읽기, 수정, 삭제)
-- 페이징
+- 페이징 및 검색 처리
 - 수정/삭제 시 게시글 비밀번호 인증
 
 #### 메인 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89)"><상세보기></a>

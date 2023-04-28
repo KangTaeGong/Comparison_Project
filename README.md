@@ -17,61 +17,11 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 간단한 회원가입과 로그인을 통해 게시판에 게시글을 남길 수 있습니다.<br>
 또한, MyPage에서 자신이 작성한 게시글 목록과, 검색했던 영화 제목들을 확인해 볼 수 있습니다.
 
-## 🕑 개발 기간
-2022-09-17 ~ 2023-04-03
+## 🕑 개발 기간 / 참여 인원
+- 2022-09-17 ~ 2023-03-13
+- 개인 프로젝트
 
-## 🔧 개발 환경
-
-- `Java 11`
-- **FrameWork** : SpringBoot(2.x)
-- **DataBase** : MySQL
-- **ORM** : JPA
-- HTML5, CSS3, Thymeleaf
-
-<br>
-
-# 🧾 시작 가이드
-
-> ※ 2023-03-31기준 네이버 영화 서비스 API 지원 종료에 따라 서비스 이용 불가능.
-
-### 요구사항
-
-- MySQL 설치 필요.
-- Query DSL 사용을 위한 Q 클래스 생성
-   - `gradle` -> `reviews` -> `Tasks` -> `other` -> `compileJava`
-<br>
-
-### 네이버 API 관련
-
-네이버 영화 API를 사용하기 위해서 아이디 발급이 필요합니다.<br>
-Link : [네이버 오픈 API](https://developers.naver.com/docs/serviceapi/search/blog/blog.md#%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%93%B1%EB%A1%9D)
-
-`NaverApiClientInfo.java`
-```java
-public class NaverApiClientInfo {
-    // 발급받은 id, secert 코드에 추가
-    public static final String client_id = "";
-    public static final String client_secret = "";
-}
-```
-
-<br>
-
-### DB 관련
-
-`application.properties`
-```properties
-# DB Setting(MySQL)
-# 생성한 DB이름과 사용자 id, password 입력
-spring.datasource.url=jdbc:mysql://localhost:3306/DB Name?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-spring.datasource.username=
-spring.datasource.password=
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-```
-
-<br>
-
-# 📖 기술 스택
+## 📖 사용 기술
 
 ### Environment
 
@@ -108,21 +58,29 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 <br>
 
-# 📺 화면 구성
+## 🔧 개발 환경
 
-| 메인 페이지  |  소개 페이지   |  설명 페이지   |
-| :------------: | :------------: | :------------: |
-| <img width="300" src="https://user-images.githubusercontent.com/97094897/231722955-871da1ba-7954-4e45-9a85-447b3fa52387.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725420-2541cf77-bd07-4848-9e8e-3788e5e4c67d.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725559-9de888bf-a944-4c94-b795-098896c468aa.png"> |
-| 로그인 페이지  |  회원가입 페이지   |  사용자 페이지   |
-| <img width="300" src="https://user-images.githubusercontent.com/97094897/231726518-ec8af65b-4d41-4433-8d81-60d88b3b4f86.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726526-2516a387-c15f-4fba-806c-421f8bf42b74.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726536-b232b7d2-4305-4d6d-8891-c0d5b3b665c6.png">
-| 게시판 페이지  |  게시글 작성   |  게시글 읽기   |
-| <img width="300" src="https://user-images.githubusercontent.com/97094897/231727496-cc0eea32-d297-49de-a2d3-3a51f6d0b79e.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727493-3f4e94a4-1b82-49e1-a791-0fe7b94b0c18.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727486-2d1c7040-3466-4373-8248-828538647125.png">
-| 영화 검색 결과 페이지  |  영화 비교 페이지   |     |
-| <img width="300" src="https://user-images.githubusercontent.com/97094897/231728197-ccbc9720-661b-482d-bee7-558e6d99e759.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727948-bc914f07-a07e-4a8b-8b90-b7828e9a0fce.png"> |  |
+- `Java 11`
+- **FrameWork** : SpringBoot 2.7.3
+- **DataBase** : MySQL, H2
+- **ORM** : JPA, Spring Data JPA, QueryDSL
+- **API, Library** : Naver Movie API, JQuery, Jsoup, json-simple
 
 <br>
-   
-# 📜 API 설계
+
+## 흐름도
+
+![흐름도](https://user-images.githubusercontent.com/97094897/235105930-e0e436e8-27c0-4de7-b6d6-fea4672a106f.png)
+
+<br>
+
+## ERD 설계
+
+![erd](https://user-images.githubusercontent.com/97094897/235106036-e96d1958-48f4-4562-b60a-9716bc900d8c.png)
+
+<br>
+
+## 📜 API 설계
 ![user_api](https://user-images.githubusercontent.com/97094897/231987922-2d6d4839-f2f8-4aeb-af38-a781437f6979.png)
 
 ---
@@ -138,8 +96,59 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ![community_api](https://user-images.githubusercontent.com/97094897/231987935-b6b4e0ac-4187-455f-bcc2-e506ee9f5f61.png)
 
 <br>
+
+## 📌 주요 기능
+
+#### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
+
+- ID 중복 체크
+- Bean Validation 적용
+- PW 암호화
+
+#### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
    
-# 📑 아키텍쳐
+- Bean Validation 적용
+- DB값 검증
+- 로그인 시 세션(Session) 생성
+- Interceptor를 통해 페이지 강제 접근 방지
+
+#### 마이 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-mypage%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4"><상세보기></a>
+   
+- 게시글, 영화 검색어를 연관관계 매핑으로 가져옴
+- 회원 탈퇴
+
+#### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(Posting)"><상세보기></a>
+   
+- CRUD(작성, 읽기, 수정, 삭제)
+- 페이징
+- 수정/삭제 시 게시글 비밀번호 인증
+
+#### 메인 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89)"><상세보기></a>
+
+- 네이버 영화 API 연동
+- 검색어 개수에 따른 다른 결과 창 제공
+- Ajax를 이용한 AutoSearch 기능 제공
+- 네이버 정보 크롤링
+- 로그인된 회원이라면 영화 검색 정보 저장 후 제공
+- Spring Batch, @Scheduled를 통해 DB 정보 관리
+
+<br>
+
+## 📺 화면 구성
+
+| 메인 페이지  |  소개 페이지   |  설명 페이지   |
+| :------------: | :------------: | :------------: |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231722955-871da1ba-7954-4e45-9a85-447b3fa52387.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725420-2541cf77-bd07-4848-9e8e-3788e5e4c67d.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231725559-9de888bf-a944-4c94-b795-098896c468aa.png"> |
+| 로그인 페이지  |  회원가입 페이지   |  사용자 페이지   |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231726518-ec8af65b-4d41-4433-8d81-60d88b3b4f86.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726526-2516a387-c15f-4fba-806c-421f8bf42b74.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231726536-b232b7d2-4305-4d6d-8891-c0d5b3b665c6.png">
+| 게시판 페이지  |  게시글 작성   |  게시글 읽기   |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231727496-cc0eea32-d297-49de-a2d3-3a51f6d0b79e.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727493-3f4e94a4-1b82-49e1-a791-0fe7b94b0c18.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727486-2d1c7040-3466-4373-8248-828538647125.png">
+| 영화 검색 결과 페이지  |  영화 비교 페이지   |     |
+| <img width="300" src="https://user-images.githubusercontent.com/97094897/231728197-ccbc9720-661b-482d-bee7-558e6d99e759.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727948-bc914f07-a07e-4a8b-8b90-b7828e9a0fce.png"> |  |
+
+<br>
+   
+## 📑 아키텍쳐
 
 ### 디렉토리 구조
 
@@ -178,37 +187,41 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 <br>
 
-# 📌 주요 기능
+## 🧾 시작 가이드
 
-#### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
+> ※ 2023-03-31기준 네이버 영화 서비스 API 지원 종료에 따라 서비스 이용 불가능.
 
-- ID 중복 체크
-- Bean Validation 적용
-- PW 암호화
+### 요구사항
 
-#### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
-   
-- Bean Validation 적용
-- DB값 검증
-- 로그인 시 세션(Session) 생성
-- Interceptor를 통해 페이지 강제 접근 방지
+- MySQL 설치 필요.
+- Query DSL 사용을 위한 Q 클래스 생성
+   - `gradle` -> `reviews` -> `Tasks` -> `other` -> `compileJava`
+<br>
 
-#### 마이 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-mypage%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4"><상세보기></a>
-   
-- 게시글, 영화 검색어를 연관관계 매핑으로 가져옴
-- 회원 탈퇴
+### 네이버 API 관련
 
-#### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(Posting)"><상세보기></a>
-   
-- CRUD(작성, 읽기, 수정, 삭제)
-- 페이징
-- 수정/삭제 시 게시글 비밀번호 인증
+네이버 영화 API를 사용하기 위해서 아이디 발급이 필요합니다.<br>
+Link : [네이버 오픈 API](https://developers.naver.com/docs/serviceapi/search/blog/blog.md#%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%93%B1%EB%A1%9D)
 
-#### 메인 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89)"><상세보기></a>
+`NaverApiClientInfo.java`
+```java
+public class NaverApiClientInfo {
+    // 발급받은 id, secert 코드에 추가
+    public static final String client_id = "";
+    public static final String client_secret = "";
+}
+```
 
-- 네이버 영화 API 연동
-- 검색어 개수에 따른 다른 결과 창 제공
-- Ajax를 이용한 AutoSearch 기능 제공
-- 네이버 정보 크롤링
-- 로그인된 회원이라면 영화 검색 정보 저장 후 제공
-- Spring Batch, @Scheduled를 통해 DB 정보 관리
+<br>
+
+### DB 관련
+
+`application.properties`
+```properties
+# DB Setting(MySQL)
+# 생성한 DB이름과 사용자 id, password 입력
+spring.datasource.url=jdbc:mysql://localhost:3306/DB Name?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```

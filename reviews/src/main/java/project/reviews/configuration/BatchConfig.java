@@ -32,9 +32,6 @@ public class BatchConfig {
     public StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    private RecordService recordService;
-
-    @Autowired
     private RecordRepository recordRepository;
 
     @Bean
@@ -57,7 +54,7 @@ public class BatchConfig {
 
                     if(limitedMovies.size() > 0) {
                         for(Movie movie : limitedMovies) {
-                            recordService.deleteMovieRecord(movie);
+                            recordRepository.delete(movie);
                         }
                     }
                     return RepeatStatus.FINISHED;

@@ -78,11 +78,15 @@ public class MainServiceController {
             Map<String, Object> movieInfo2 = mainService.movieSearchService(searchItem2, itemLink2);
 
             itemLink1 = String.valueOf(movieInfo1.get("link"));
-            error = check_serviceError(itemLink1); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+
+            // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+            error = check_serviceError(itemLink1);
             if (error != null) return error;
 
             itemLink2 = String.valueOf(movieInfo2.get("link"));
-            error = check_serviceError(itemLink2); // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+
+            // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+            error = check_serviceError(itemLink2);
             if (error != null) return error;
 
             MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);

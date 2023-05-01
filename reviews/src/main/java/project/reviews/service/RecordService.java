@@ -10,6 +10,7 @@ import project.reviews.dto.RecordPostingDto;
 import project.reviews.repository.RecordRepository;
 import project.reviews.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,4 +79,5 @@ public class RecordService {
     public void deleteMovieRecord(Movie movie) {
         recordRepository.delete(movie);
     }
+
 }

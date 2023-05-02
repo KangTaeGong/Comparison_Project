@@ -89,7 +89,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 ---
 
-![my_api](https://user-images.githubusercontent.com/97094897/231987933-f749c5d6-a9dc-4896-8ed9-4933edfa7305.png)
+![myPageAPI](https://user-images.githubusercontent.com/97094897/235611657-57bc8f15-2b27-41d1-b927-339fe1c27fe3.png)
 
 ---
 

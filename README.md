@@ -108,7 +108,6 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 #### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
    
 - 유효성 검사(Bean Validation 적용)
-- DB값 검증
 - 로그인 시 세션(Session) 생성
 - Interceptor를 통해 페이지 강제 접근 방지
 

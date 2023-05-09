@@ -89,7 +89,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 ---
 
-![my_api](https://user-images.githubusercontent.com/97094897/231987933-f749c5d6-a9dc-4896-8ed9-4933edfa7305.png)
+![myPageAPI](https://user-images.githubusercontent.com/97094897/235611657-57bc8f15-2b27-41d1-b927-339fe1c27fe3.png)
 
 ---
 
@@ -108,7 +108,6 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 #### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
    
 - 유효성 검사(Bean Validation 적용)
-- DB값 검증
 - 로그인 시 세션(Session) 생성
 - Interceptor를 통해 페이지 강제 접근 방지
 
@@ -127,7 +126,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 - 네이버 영화 API 연동
 - 검색어 개수에 따른 다른 결과 창 제공
-- Ajax를 이용한 AutoSearch 기능 제공
+- JQuery를 이용한 AutoSearch 기능 제공
 - 네이버 정보 크롤링
 - 로그인된 회원이라면 영화 검색 정보 저장 후 제공
 - Spring Batch, @Scheduled를 통해 DB 정보 관리

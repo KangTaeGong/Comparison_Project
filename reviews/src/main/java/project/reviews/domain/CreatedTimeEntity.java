@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -23,5 +24,6 @@ public abstract class CreatedTimeEntity {
 
     // Entity가 생성되서 저장될 때 시간이 자동 저장
     @CreatedDate
+    @Column(nullable = false)
     private LocalDateTime createdDate;
 }

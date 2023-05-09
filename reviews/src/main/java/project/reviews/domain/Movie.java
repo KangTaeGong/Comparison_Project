@@ -15,11 +15,14 @@ import javax.persistence.*;
 public class Movie extends CreatedTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_pk")
     private Long id;
+
+    @Column(length = 70, nullable = false)
     private String movie_title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_PK")
+    @JoinColumn(name = "USER_PK", nullable = false)
     private User user;
 
     public Movie(String movie_title, User user) {

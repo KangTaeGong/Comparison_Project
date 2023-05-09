@@ -20,12 +20,19 @@ public class User extends BaseTimeEntity{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_PK")
     private Long id;
+
+    @Column(length = 40, nullable = false)
     private String userName;
+
+    @Column(length = 40, nullable = false)
     private String userId;
+
+    @Column(length = 50, nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Setter
+    @Column(length = 20)
     private Role role;
 
     // 회원 정보가 삭제되면 작성한 게시글과 영화 정보도 같이 삭제

@@ -126,7 +126,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 - 네이버 영화 API 연동
 - 검색어 개수에 따른 다른 결과 창 제공
-- Ajax를 이용한 AutoSearch 기능 제공
+- JQuery를 이용한 AutoSearch 기능 제공
 - 네이버 정보 크롤링
 - 로그인된 회원이라면 영화 검색 정보 저장 후 제공
 - Spring Batch, @Scheduled를 통해 DB 정보 관리

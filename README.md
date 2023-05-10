@@ -97,40 +97,52 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 <br>
 
-## 📌 주요 기능
+## 📌 기능
 
-#### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
+#### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
 
 - ID 중복 체크
 - 유효성 검사(Bean Validation 적용)
 - PW 암호화
 
-#### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
+#### 로그인 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8"><상세보기></a>
    
 - 유효성 검사(Bean Validation 적용)
 - 로그인 시 세션(Session) 생성
 - Interceptor를 통해 페이지 강제 접근 방지
 
-#### 마이 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(User)#-mypage%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4"><상세보기></a>
+#### 마이 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/MyPage"><상세보기></a>
    
 - 게시글, 영화 검색어를 연관관계 매핑으로 가져옴
-- 회원 탈퇴
 
-#### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5(Posting)"><상세보기></a>
+#### 회원 탈퇴 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%ED%9A%8C%EC%9B%90-%ED%83%88%ED%87%B4"><상세보기></a>
+
+- 회원 탈퇴를 위한 팝업창 제공
+- 유효성 검사(Bean Validation)
+- `BCryptPasswordEncoder`를 이용해 패스워드 일치 여부 확인
+ 
+#### 게시판 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EA%B2%8C%EC%8B%9C%ED%8C%90"><상세보기></a>
    
 - CRUD(작성, 읽기, 수정, 삭제)
 - 페이징 및 검색 처리
 - 수정/삭제 시 게시글 비밀번호 인증
 
-#### 메인 페이지 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C(%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89)"><상세보기></a>
+#### 메인 페이지(영화 검색) <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89"><상세보기></a>
 
 - 네이버 영화 API 연동
 - 검색어 개수에 따른 다른 결과 창 제공
-- JQuery를 이용한 AutoComplete Search 기능 제공
 - 네이버 정보 크롤링
 - 로그인된 회원이라면 영화 검색 정보 저장 후 제공
-- Spring Batch, @Scheduled를 통해 DB 정보 관리
 
+#### 메인 페이지(영화 검색 - AutoComplete) <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%EC%98%81%ED%99%94-%EA%B2%80%EC%83%89(AutoComplete)"><상세보기></a>
+
+- 네이버 영화 API 연동
+- JQuery를 이용한 AutoComplete Search 기능 제공
+
+#### DB 관리
+ 
+ - Spring Batch, @Scheduled를 통해 DB 정보 관리
+ 
 <br>
 
 ## 📺 화면 구성

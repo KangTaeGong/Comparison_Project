@@ -139,7 +139,7 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 - 네이버 영화 API 연동
 - JQuery를 이용한 AutoComplete Search 기능 제공
 
-#### DB 관리
+ #### DB 관리 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/DB-%EA%B4%80%EB%A6%AC"><상세보기></a>
  
  - Spring Batch, @Scheduled를 통해 DB 정보 관리
  

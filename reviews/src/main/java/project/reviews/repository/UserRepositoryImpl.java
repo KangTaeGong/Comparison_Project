@@ -14,7 +14,6 @@ import java.util.Optional;
 * 2022-09-16 생성
 * 회원 관련 Repository
 * */
-@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {

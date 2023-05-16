@@ -60,7 +60,7 @@ public class MemberInfoController {
     /*
     * 팝업창에서 진행하는 회원탈퇴 처리 로직
     * */
-    @DeleteMapping("/popup/withdrawal_member")
+    @DeleteMapping("/popup")
     public String membership_withdrawal(@ModelAttribute("checkPassword") CheckPasswordDto passwordDto, HttpServletRequest request,
                                         BindingResult bindingResult, Model model) {
         User session_user = LoginSessionCheck.check_loginUser(request);

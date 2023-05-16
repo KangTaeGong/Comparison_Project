@@ -194,8 +194,8 @@ public class MainService {
              * reporterHtml : 기자, 평론가의 리뷰에 대한 정보(사진 포함)
              * noPic_reporterList: 기자, 평론가의 리뷰에 대한 정보(사진 미포함)
              * */
-            MainServiceDto mainServiceDto = new MainServiceDto(reviewLink, reviewList, reporterHtml, noPic_reporterList);
-            return mainServiceDto;
+            return new MainServiceDto(reviewLink, reviewList, reporterHtml, noPic_reporterList);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

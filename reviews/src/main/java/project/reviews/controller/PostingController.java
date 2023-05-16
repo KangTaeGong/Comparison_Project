@@ -29,6 +29,7 @@ public class PostingController {
 
     private final PostingService postingService;
     public static PostingResponseDto check_posting; // 게시글 수정/삭제 전에 패스워드 인증
+
     /*
      * 게시판 메인 리스트 화면
      * postingInfo : 사용자가 입력한 검색어
@@ -105,8 +106,8 @@ public class PostingController {
 
     // 글 수정 및 삭제 화면 이동시 게시글 비밀번호 인증
     @PostMapping("/read/{postingId}")
-    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto, BindingResult bindingResult
-            , Model model, HttpServletRequest request) {
+    public String readPosting(@PathVariable("postingId") Long postingId, @Validated @ModelAttribute("postingPasswordForm") CheckPasswordDto checkPasswordDto,
+                              BindingResult bindingResult, Model model, HttpServletRequest request) {
         PostingResponseDto posting = postingService.get_posting(postingId);
 
         if(bindingResult.hasErrors()) {

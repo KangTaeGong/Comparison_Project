@@ -33,7 +33,9 @@ public class PostingService {
     * 생성된 id를 Controller로 반환
     * */
     public Long create_posting(PostingForm form, String userId) {
-        Posting posting = new Posting(form.getTitle(), form.getContent(), form.getWriter(), form.getPassword(), 1, userRepository.loadUserByUserId(userId));
+        Posting posting = new Posting(
+                form.getTitle(), form.getContent(), form.getWriter(), form.getPassword(), 1, userRepository.loadUserByUserId(userId)
+        );
         return postingRepository.create(posting);
     }
 

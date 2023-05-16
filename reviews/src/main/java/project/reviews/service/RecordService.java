@@ -76,8 +76,11 @@ public class RecordService {
 
     }
 
+    public List<Movie> findMovieRecord(LocalDateTime aWeekAgo) {
+        return recordRepository.findByCreatedDateLessThan(aWeekAgo);
+    }
+
     public void deleteMovieRecord(Movie movie) {
         recordRepository.delete(movie);
     }
-
 }

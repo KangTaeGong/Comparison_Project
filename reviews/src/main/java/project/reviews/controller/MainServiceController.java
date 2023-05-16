@@ -74,41 +74,7 @@ public class MainServiceController {
             return "error/notFoundError";
         } else if (!searchItem1.equals("") && !searchItem2.equals("")) {
             // 두개의 검색어로 검색했을 시 동작
-            Map<String, Object> movieInfo1 = mainService.movieSearchService(searchItem1, itemLink1);
-            Map<String, Object> movieInfo2 = mainService.movieSearchService(searchItem2, itemLink2);
-
-            itemLink1 = String.valueOf(movieInfo1.get("link"));
-
-            // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
-            error = check_serviceError(itemLink1);
-            if (error != null) return error;
-
-            itemLink2 = String.valueOf(movieInfo2.get("link"));
-
-            // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
-            error = check_serviceError(itemLink2);
-            if (error != null) return error;
-
-            MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);
-            MainServiceDto movieInfoDto2 = mainService.reviewCrawlLogic(itemLink2);
-            
-            /*
-            * 검색한 영화의 제목과 사용자 정보를 같이 저장
-            * 회원 정보 조회시 최근 검색어에서 사용
-            * */
-            if (loginUser != null) {
-                String searchItem = (searchItem1 + ", " + searchItem2); // 두 개인 검색 결과를 하나의 문자열로 합쳐서 저장
-                recordService.saveMovie(searchItem, loginUser);
-            }
-
-            LoginSessionCheck.check_loginUser(request, model);
-
-            model.addAttribute("movieInfo1", movieInfo1);
-            model.addAttribute("movieInfo2", movieInfo2);
-            model.addAttribute("movieInfoDto1", movieInfoDto1);
-            model.addAttribute("movieInfoDto2", movieInfoDto2);
-
-            return "service/compareServicePage";
+            return compare_movies(searchItem1, searchItem2, itemLink1, itemLink2, model, request, loginUser);
         }
 
         /*
@@ -116,6 +82,11 @@ public class MainServiceController {
         * searchItem1, searchItem2 중 어디로 들어올지 모르기 때문에 하나로 합쳐줌(itemLink1, itemLink2도 마찬가지)
         * 여기서 searchItem은 값이 무조건 들어가지만, itemLink는 autoSearch 사용 여부에 따라 값이 들어가지 않을 수도 있다.
         * */
+        return offer_movieInfo(searchItem1, searchItem2, itemLink1, itemLink2, model, request, loginUser);
+    }
+
+    private String offer_movieInfo(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model, HttpServletRequest request, User loginUser) {
+        String error;
         String searchItem, itemLink;
         if(!searchItem1.equals("")) {
             searchItem = searchItem1;
@@ -146,6 +117,45 @@ public class MainServiceController {
         model.addAttribute("mainServiceDto", mainServiceDto);
 
         return "service/servicePage";
+    }
+
+    private String compare_movies(String searchItem1, String searchItem2, String itemLink1, String itemLink2, Model model, HttpServletRequest request, User loginUser) {
+        String error;
+        Map<String, Object> movieInfo1 = mainService.movieSearchService(searchItem1, itemLink1);
+        Map<String, Object> movieInfo2 = mainService.movieSearchService(searchItem2, itemLink2);
+
+        itemLink1 = String.valueOf(movieInfo1.get("link"));
+
+        // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+        error = check_serviceError(itemLink1);
+        if (error != null) return error;
+
+        itemLink2 = String.valueOf(movieInfo2.get("link"));
+
+        // 검색된 결과에서 정상적인 link값이 들어있지 않고, MainService에서 넘겨준 에러 메시지가 담겨 있다면 error 페이지로 리턴
+        error = check_serviceError(itemLink2);
+        if (error != null) return error;
+
+        MainServiceDto movieInfoDto1 = mainService.reviewCrawlLogic(itemLink1);
+        MainServiceDto movieInfoDto2 = mainService.reviewCrawlLogic(itemLink2);
+
+        /*
+        * 검색한 영화의 제목과 사용자 정보를 같이 저장
+        * 회원 정보 조회시 최근 검색어에서 사용
+        * */
+        if (loginUser != null) {
+            String searchItem = (searchItem1 + ", " + searchItem2); // 두 개인 검색 결과를 하나의 문자열로 합쳐서 저장
+            recordService.saveMovie(searchItem, loginUser);
+        }
+
+        LoginSessionCheck.check_loginUser(request, model);
+
+        model.addAttribute("movieInfo1", movieInfo1);
+        model.addAttribute("movieInfo2", movieInfo2);
+        model.addAttribute("movieInfoDto1", movieInfoDto1);
+        model.addAttribute("movieInfoDto2", movieInfoDto2);
+
+        return "service/compareServicePage";
     }
 
     // MainService에서 넘겨준 에러를 확인

@@ -32,7 +32,7 @@ public class BatchConfig {
     public StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    private RecordRepository recordRepository;
+    private RecordService recordService;
 
     @Bean
     public Job job() {
@@ -50,11 +50,11 @@ public class BatchConfig {
                     // 업데이트 날짜가 일주일 이전인 문서 목록을 가져옴
                     LocalDateTime now = LocalDateTime.now();
                     LocalDateTime aWeekAgo = now.minusDays(7);
-                    List<Movie> limitedMovies = recordRepository.findByCreatedDateLessThan(aWeekAgo);
+                    List<Movie> limitedMovies = recordService.findMovieRecord(aWeekAgo);
 
                     if(limitedMovies.size() > 0) {
                         for(Movie movie : limitedMovies) {
-                            recordRepository.delete(movie);
+                            recordService.deleteMovieRecord(movie);
                         }
                     }
                     return RepeatStatus.FINISHED;

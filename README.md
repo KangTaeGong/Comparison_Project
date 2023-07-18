@@ -236,3 +236,15 @@ spring.datasource.username=
 spring.datasource.password=
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
+
+<br>
+
+## 트러블 슈팅
+
+> 프로젝트 관련 트러블 슈팅 글 : https://kangtaegong.github.io/project/Project_Report_19/
+
+<br>
+
+## 회고 / 느낀점
+
+> 프로젝트 개발 회고 글 : https://kangtaegong.github.io/project/Project_Report_20/

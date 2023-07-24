@@ -97,6 +97,12 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 
 <br>
 
+## WBS
+
+![wbs](https://github.com/KangTaeGong/Comparison_Project/assets/97094897/b66cbd02-2335-4648-8c39-c17419e08607)
+
+<br>
+
 ## 📌 기능
 
 #### 회원가입 <a href="https://github.com/KangTaeGong/Comparison_Project/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85"><상세보기></a>
@@ -157,6 +163,16 @@ Spring Boot를 이용하여 개발한 영화 검색/비교 웹 페이지 입니�
 | 영화 검색 결과 페이지  |  영화 비교 페이지   |     |
 | <img width="300" src="https://user-images.githubusercontent.com/97094897/231728197-ccbc9720-661b-482d-bee7-558e6d99e759.png"> | <img width="300" src="https://user-images.githubusercontent.com/97094897/231727948-bc914f07-a07e-4a8b-8b90-b7828e9a0fce.png"> |  |
 
+<br>
+
+## Git Flow
+
+![branch](https://github.com/KangTaeGong/Comparison_Project/assets/97094897/a194d149-e614-4770-b8cf-cf8be72e6954)
+
+- develop branch를 통해 주로 개발을 하고, 새로운 기능을 추가할 때 마다 feature/{..} branch를 생성하여 코드 작성 후 develop branch로 병합하였습니다.
+- 어느정도 진행 되었다면 중간 중간 main branch로 병합하였습니다.
+- 커밋을 자주 하는 것이 좋다고 하여, 커밋을 세세하게 작업 단위로 여러번 나누어서 진행하였습니다.
+  
 <br>
    
 ## 📑 아키텍쳐
